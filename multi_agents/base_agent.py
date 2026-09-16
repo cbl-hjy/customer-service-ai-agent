@@ -114,6 +114,29 @@ class BaseAgent(ABC):
 
         return base_prompt + context_instruction
 
+    def _prior_kb_fallback(self, state: Dict[str, Any]) -> str:
+        """追问轮检索 miss 时的前序轮知识回退（检索注入多轮化，2026-09-16 方案 E）。
+
+        返回前序轮引用条目全文（作为 matched_info 替代，走各 agent 正常注入
+        路径），非追问轮/无前序引用/条目缺失返回 ""（退回 _no_answer 升级）。
+        动机（persona-correct 实证）：追问轮 query 单轮化检索 miss → 误升级
+        人工，而前轮注入的事实就躺在对话历史里——"不是，我根本还没买"价保
+        追问本可基于前轮价保条目正常回答。与升级态追问豁免（A4）同族：
+        追问不重复升级，先找上下文里的既有事实。注入侧与脚注侧
+        （citations._prior_cited_titles）同源，A6 契约在回退路径上闭环。
+        """
+        try:
+            from citations import _is_followup_query, _prior_cited_context
+            if not _is_followup_query(state.get("customer_query", ""), state):
+                return ""
+            ctx = _prior_cited_context(state)
+            if ctx:
+                state.setdefault("tools_used", []).append("prior_kb_fallback")
+            return ctx
+        except Exception as e:  # noqa: BLE001  回退失败退回升级路径
+            logger.warning("前序轮知识回退失败（退回升级）: %s", e)
+            return ""
+
     def _no_answer(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """无答案不硬答（C5，负向边界）：知识库无匹配信息 → 标记升级人工，不调 LLM 编造。
 

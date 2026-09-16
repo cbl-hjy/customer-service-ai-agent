@@ -36,6 +36,9 @@ class ProductAgent(BaseAgent):
 
         # 从产品数据库中匹配相关信息
         matched_products = self._match_products(customer_query)
+        # 检索注入多轮化（2026-09-16）：追问轮 miss 回退前序轮引用条目（走正常注入）
+        if not matched_products:
+            matched_products = self._prior_kb_fallback(state)
 
         # 构建系统提示并增强对话上下文说明
         base_system_prompt = f"""你是{self.name}，专门负责{self.role}。

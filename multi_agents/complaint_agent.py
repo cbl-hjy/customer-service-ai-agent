@@ -54,6 +54,9 @@ class ComplaintAgent(BaseAgent):
 
         # 从投诉数据库中匹配相关信息
         matched_info = self._match_complaint_info(customer_query)
+        # 检索注入多轮化（2026-09-16）：追问轮 miss 回退前序轮引用条目（走正常注入）
+        if not matched_info:
+            matched_info = self._prior_kb_fallback(state)
 
         # 构建系统提示并增强对话上下文说明
         base_system_prompt = f"""你是{self.name}，专门负责{self.role}。
