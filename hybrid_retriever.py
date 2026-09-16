@@ -36,6 +36,15 @@ from dense_retriever import DenseRetriever  # noqa: E402
 # bge-reranker-v2-m3 本地快照路径（环境变量注入，不入库；2026-08-16 smoke：加载 4.0s / 20 候选 0.63s）
 BGE_RERANKER_PATH = os.getenv("BGE_RERANKER_PATH", "")
 
+# reranker fp16（2026-09-16 P2 落地，A/B 实测见 eval/kb_v2/fp16_ab_test.py）：
+#   速度 3.3x（541ms→~164ms/请求，检索串行天花板 1.8→5+ QPS）；
+#   质量 217 金标 HIT@1 -0.5pp（压线，W4 门禁过带）；BAAI 官方背书 use_fp16；
+#   ST 5.7.0 半精度 CrossEncoder bug 未在本模型复现（唯一分数数/排序一致率正常）。
+#   仅 CUDA 生效（CPU fp16 反慢）。回滚 = 环境变量 RERANKER_FP16=0（回 fp32）。
+#   bge-m3（dense）侧不落：14ms/请求收益 <10ms，却需全量重编码 npz + 重校准
+#   DENSE_OOD_FLOOR，风险收益倒挂（同 A/B 结论）。
+RERANKER_FP16 = os.getenv("RERANKER_FP16", "1") == "1"
+
 # 稠密向量缓存（KB 未变时复用，避免每次重启重编码）
 DENSE_CACHE_PATH = os.path.join(_HERE, "data", "knowledge_base_v2_bge_m3_vectors.npz")
 
@@ -133,7 +142,13 @@ class HybridRetriever:
                     from sentence_transformers import CrossEncoder
                     import torch
                     device = "cuda" if torch.cuda.is_available() else "cpu"
-                    self._reranker = CrossEncoder(BGE_RERANKER_PATH, device=device)
+                    if device == "cuda" and RERANKER_FP16:
+                        self._reranker = CrossEncoder(
+                            BGE_RERANKER_PATH, device=device,
+                            model_kwargs={"torch_dtype": torch.float16},
+                        )
+                    else:
+                        self._reranker = CrossEncoder(BGE_RERANKER_PATH, device=device)
         return self._reranker
 
     # ---- 主入口 ----

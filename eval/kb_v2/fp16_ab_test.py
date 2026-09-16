@@ -34,7 +34,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DETAILS = os.path.join(HERE, "eval_retrieval_rerank_details.json")
-KB_PATH = os.path.join(HERE, "knowledge_base_v2.json")
+KB_PATH = os.path.join(PACKAGE_ROOT, "data", "knowledge_base_v2.json")  # 单源化：canonical=data/
 
 RERANK_CONF_FLOOR = 0.07
 DENSE_OOD_FLOOR = 0.55

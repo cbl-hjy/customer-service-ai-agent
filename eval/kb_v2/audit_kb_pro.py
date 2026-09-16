@@ -17,7 +17,8 @@ import sys
 from collections import defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-KB = os.path.join(HERE, "knowledge_base_v2.json")
+PACKAGE_ROOT = os.path.dirname(os.path.dirname(HERE))
+KB = os.path.join(PACKAGE_ROOT, "data", "knowledge_base_v2.json")  # 单源化：canonical=data/
 FACTS = os.path.join(HERE, "policy_facts.json")
 
 if hasattr(sys.stdout, "reconfigure"):

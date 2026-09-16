@@ -510,7 +510,9 @@ def run_chat_sync(user_message: str, client_session_id: Optional[str] = None) ->
 
     try:
         result = get_app().invoke(
-            {"customer_query": user_message.strip()},
+            # session_id 注入 state（= thread_id）：trace 聚合键 + billing/complaint
+            # agent 会话上下文回退键（此前缺省 "default" 池跨线程共享，w8 挂账修复）
+            {"customer_query": user_message.strip(), "session_id": tid},
             {"configurable": {"thread_id": tid}},
         )
         _current_thread_local.thread_id = tid
@@ -544,7 +546,7 @@ def run_chat_once_events(user_message: str, client_session_id: Optional[str] = N
 
     try:
         result = get_app().invoke(
-            {"customer_query": user_message.strip()},
+            {"customer_query": user_message.strip(), "session_id": tid},
             {"configurable": {"thread_id": tid}},
         )
         _current_thread_local.thread_id = tid
@@ -609,7 +611,7 @@ def run_chat_stream_events(user_message: str, client_session_id: Optional[str] =
         set_sink(sink)
         try:
             result = get_app().invoke(
-                {"customer_query": user_message.strip()},
+                {"customer_query": user_message.strip(), "session_id": tid},
                 {"configurable": {"thread_id": tid}},
             )
             q.put(("done", {

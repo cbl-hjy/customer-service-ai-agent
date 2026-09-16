@@ -14,7 +14,7 @@ import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 GOLDEN = os.path.join(HERE, "golden_retrieval_golden.csv")
-V2_KB = os.path.join(os.path.dirname(os.path.dirname(HERE)), "eval", "kb_v2", "knowledge_base_v2.json")
+V2_KB = os.path.join(os.path.dirname(os.path.dirname(HERE)), "data", "knowledge_base_v2.json")  # 单源化：canonical=data/
 OUT = os.path.join(HERE, "golden_retrieval_golden_v2.csv")
 
 # query → (domain, v2_titles 分号分隔, difficulty)

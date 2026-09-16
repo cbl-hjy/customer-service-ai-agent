@@ -7,7 +7,7 @@ from typing import Dict, List, Any
 from langchain_core.messages import HumanMessage, SystemMessage
 from .base_agent import BaseAgent
 from kb_retriever import retrieve as kb_retrieve
-from llm.stream_sink import call_llm  # P1 流式：正文生成统一入口（未注册 sink 时行为零变化）
+from llm.stream_sink import call_llm, call_llm_with_tools  # P1 流式：正文生成统一入口（未注册 sink 时行为零变化）
 
 import logging
 
@@ -45,7 +45,7 @@ class GeneralAgent(BaseAgent):
         }
 
     def process(self, state: Dict[str, Any]) -> Dict[str, Any]:
-        """处理一般咨询查询"""
+        """处理一般咨询查询（T1：带订单工具调用能力，2026-09-16 单域试点）"""
         customer_query = state["customer_query"]
         session_id = state.get("session_id", "default")
 
@@ -64,6 +64,16 @@ class GeneralAgent(BaseAgent):
         2. 提供准确、有用的信息
         3. 如果问题超出你的专业范围，建议转接给相关专家
         4. 确保客户得到满意的答复
+
+        【订单工具使用规则】
+        - 涉及具体订单（查订单/查物流/改地址）时，优先调用工具获取真实数据，
+          严格依据工具返回结果作答，不得编造订单状态、物流或金额。
+        - 调用工具时直接调用，不要在调用前输出任何说明文字。
+        - 改地址：用户给出订单号和新地址（含省/市/区与路名门牌即视为完整）时，
+          直接调用 update_order_address 执行，不要再次向用户确认。
+        - 信息不全（如缺订单号）时，先用文本向用户询问，不要猜测参数。
+        - 工具返回"未找到/修改失败"时，如实转述原因，不硬答。
+        - 与订单无关的咨询正常依据服务信息回答。
 
         回答要友好、专业，体现良好的服务态度。如果问题复杂或需要专业知识，请说明并建议转接给相应的专业智能体。"""
 
@@ -84,30 +94,83 @@ class GeneralAgent(BaseAgent):
 请基于以上对话历史和当前查询，提供连贯的咨询。"""
             messages.append(HumanMessage(content=context_message))
 
-        # 如果有匹配的服务信息，添加到上下文中
-        if matched_info:
-            service_context = f"""服务信息：
+        # T1 工具决策（2026-09-16）：KB 命中与否都先进带 tools 的首轮——
+        # ① 命中：检索文本 + 工具双事实来源；② 未命中：订单类查询仍可走工具
+        # （C5 语义扩展：工具结果也是事实来源）；首轮无 tool_calls 且无 KB 命中 → _no_answer。
+        # 完整 loop（2026-09-16 首跑 mt-605 实测教训）：终答轮也带 tools——模型在
+        # 拿到首轮工具结果后可能还需二次调工具（如先查单确认状态、再执行改地址），
+        # 堵死通道会迫使模型把工具调用指令当文本输出（DSML 标记泄漏 + 假执行）。
+        # 上限 3 轮工具交互防死循环；超限走确定性兜底（基于已执行结果，不硬答）。
+        # 代价：纯咨询轮（首轮无 tool_calls）为非流式直出，流式退化挂账优化。
+        _MAX_TOOL_ROUNDS = 3
+        first = None
+        try:
+            from tools.orders import TOOL_SCHEMAS, execute_tool_call
+            loop_msgs = messages + self._query_message(matched_info, customer_query)
+            for _round in range(_MAX_TOOL_ROUNDS):
+                r = call_llm_with_tools(self.llm, loop_msgs, TOOL_SCHEMAS)
+                if first is None:
+                    first = r
+                if not getattr(r, "tool_calls", None):
+                    break  # 无工具调用 → 本轮 content 即终答
+                loop_msgs.append({
+                    "role": "assistant", "content": r.content or "", "tool_calls": r.tool_calls,
+                })
+                for tc in r.tool_calls:
+                    result = execute_tool_call(tc["function"]["name"], tc["function"]["arguments"])
+                    loop_msgs.append({"role": "tool", "tool_call_id": tc["id"], "content": result})
+                    state["tools_used"].append(tc["function"]["name"])
+            else:
+                # 轮次耗尽仍有工具调用需求：确定性兜底（不硬答、不假装执行）
+                state["response"] = (
+                    "抱歉，该请求需要多步系统操作，线上处理已达步数上限，"
+                    "已为您转接人工客服跟进处理，请保持关注。"
+                )
+                state["current_agent"] = self.name
+                state["tools_used"].append(f"{self.name}_processing")
+                return state
+        except Exception as e:
+            logger.warning(f"综合客服工具决策调用失败: {e}")
+            if not matched_info:
+                return self._no_answer(state)
+            first = None
+
+        # loop 正常结束：末轮响应即终答（break 出来的 r 必无 tool_calls）
+        if first is not None:
+            _ORDER_TOOLS = ("query_order", "query_logistics", "update_order_address")
+            used_tool = any(t in _ORDER_TOOLS for t in state["tools_used"])
+            if not used_tool and not matched_info:
+                # 全程无工具调用且无 KB 事实来源 → C5 兜底升级（不硬答）
+                return self._no_answer(state)
+            response_content = r.content
+        else:
+            # 服务信息命中路径（工具决策通道故障降级）：原纯文本链路
+            messages.append(HumanMessage(content=f"""服务信息：
 {matched_info}
 
-当前查询：{customer_query}"""
-            messages.append(HumanMessage(content=service_context))
-        else:
-            # C5：无答案不硬答——知识库无匹配，升级人工而非编造（负向边界）
-            return self._no_answer(state)
-
-        # 调用LLM（P1：call_llm——web 流式请求时逐 token 推送，其余场景零变化）
-        try:
-            response = call_llm(self.llm, messages)
-            response_content = response.content
-        except Exception as e:
-            logger.warning(f"综合客服调用 LLM 失败: {e}")
-            response_content = "抱歉，处理您的咨询时遇到系统错误，请稍后重试。"
+当前查询：{customer_query}"""))
+            try:
+                response = call_llm(self.llm, messages)
+                response_content = response.content
+            except Exception as e:
+                logger.warning(f"综合客服调用 LLM 失败: {e}")
+                response_content = "抱歉，处理您的咨询时遇到系统错误，请稍后重试。"
 
         state["response"] = response_content
         state["current_agent"] = self.name
         state["tools_used"].append(f"{self.name}_processing")
 
         return state
+
+    @staticmethod
+    def _query_message(matched_info: str, customer_query: str) -> list:
+        """构造当前查询消息（有检索命中时附带服务信息，供首轮统一消息构造）。"""
+        if matched_info:
+            return [HumanMessage(content=f"""服务信息：
+{matched_info}
+
+当前查询：{customer_query}""")]
+        return [HumanMessage(content=f"当前查询：{customer_query}")]
 
     def _match_service_info(self, query: str) -> str:
         """匹配查询中的服务信息（统一知识库 BM25 检索，输出格式与旧版兼容）。"""

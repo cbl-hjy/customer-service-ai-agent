@@ -23,7 +23,7 @@ import requests  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BATCH_DIR = os.path.join(HERE, "batches")
-OUT_KB = os.path.join(HERE, "knowledge_base_v2.json")
+OUT_KB = os.path.join(PACKAGE_ROOT, "data", "knowledge_base_v2.json")  # 单源化：直接写生产 KB（canonical=data/）
 MODEL = "qwen3.7-max-2026-05-20"
 
 REPAIR_PROMPT = """你是资深企业客服知识库工程师，为电商企业『星环数码』撰写一条客服知识库条目。

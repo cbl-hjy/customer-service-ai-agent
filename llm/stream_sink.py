@@ -70,8 +70,37 @@ def call_llm(llm, messages):
     return _AggregatedResponse("".join(parts))
 
 
-class _AggregatedResponse:
-    """流式聚合结果：与 CustomResponse 同构（.content），调用方无感知。"""
+def call_llm_with_tools(llm, messages, tools):
+    """T1 工具感知的正文生成入口（2026-09-16）：返回 .content + .tool_calls。
 
-    def __init__(self, content: str):
+    - sink 未注册（评估/单测/CLI）→ llm.invoke(messages, tools)（与 T1 首版行为一致）；
+    - sink 注册（web 流式）→ invoke_stream_tools：纯文本轮打字机直推，
+      工具轮前导抑制 + tool_calls 分片聚合（三层策略见 _ToolStream docstring）；
+    - 客户端无 invoke_stream_tools（mock/旧实现）→ 回退 invoke（兼容）；
+    - 零产出失败回退非流式（与 call_llm 同兜底纪律；已产出或已聚合则不可重放）。
+    """
+    if get_sink() is None:
+        return llm.invoke(messages, tools=tools)
+    stream_factory = getattr(llm, "invoke_stream_tools", None)
+    if stream_factory is None:
+        return llm.invoke(messages, tools=tools)
+    ts = stream_factory(messages, tools)
+    parts = []
+    try:
+        for token in ts:
+            parts.append(token)
+            push("token", token)
+    except LLMServiceUnavailable:
+        if parts or ts.tool_calls:
+            raise  # 已交付内容/工具分片，不可重放
+        logger.warning("工具流式调用零产出失败，回退非流式 invoke")
+        return llm.invoke(messages, tools=tools)
+    return _AggregatedResponse("".join(parts), tool_calls=ts.tool_calls)
+
+
+class _AggregatedResponse:
+    """流式聚合结果：与 CustomResponse 同构（.content + .tool_calls），调用方无感知。"""
+
+    def __init__(self, content, tool_calls=None):
         self.content = content
+        self.tool_calls = tool_calls

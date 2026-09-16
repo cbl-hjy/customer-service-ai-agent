@@ -15,7 +15,8 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-KB = os.path.join(HERE, "knowledge_base_v2.json")
+PACKAGE_ROOT = os.path.dirname(os.path.dirname(HERE))
+KB = os.path.join(PACKAGE_ROOT, "data", "knowledge_base_v2.json")  # 单源化：canonical=data/
 FACTS = os.path.join(HERE, "policy_facts.json")
 
 # 数字同义对（政策事实 → 允许的表述变体）

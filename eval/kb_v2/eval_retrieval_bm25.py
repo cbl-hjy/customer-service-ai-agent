@@ -24,7 +24,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 GOLDEN_V2 = os.path.join(os.path.dirname(HERE), "golden_retrieval", "golden_retrieval_golden_v2.csv")
-V2_KB = os.path.join(HERE, "knowledge_base_v2.json")
+V2_KB = os.path.join(PACKAGE_ROOT, "data", "knowledge_base_v2.json")  # 单源化：canonical=data/
 
 # 需要 top-K 列表 → 直接调用内部方法（与 retrieve() 同判定）
 from kb_retriever import _expand_query  # noqa: E402

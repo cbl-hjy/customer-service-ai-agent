@@ -1,0 +1,131 @@
+{
+ "name": "t1_order_tools_golden_v1",
+ "version": "1.0.0",
+ "description": "T1 订单工具能力金标（2026-09-16）：验证 tool 层最小闭环——查订单/查物流/改地址（政策代码化：仅待发货可改+每单限1次）+ 多轮信息收集 + 订单不存在兜底。断言三层：expected_tools（工具调用正确性）/ must_contain_any（回复含真实订单数据锚点）/ db_expect（写副作用）。非 ECD 语料，为本项目 T1 能力验证专用；评估走 GOLDEN_PATH 独立运行，不并入主金标基线口径。",
+ "isolated": true,
+ "cases": [
+  {
+   "id": "mt-601",
+   "persona": "查订单进度（已发货）",
+   "objective": "验证 T1 查订单工具：用户提供订单号询问进度，agent 调用 query_order 返回真实订单数据",
+   "source": "T1 工具能力金标（2026-09-16 新增，非 ECD）",
+   "turns": [
+    {
+     "user": "帮我查一下订单 XH202609010001 到哪了",
+     "rationale": "已发货订单，query_order 应返回状态/单号/地址；回复须含真实物流单号（确定性锚点防幻觉）",
+     "expect_decision": "answer",
+     "answer_checks": {
+      "must_contain_any": ["SF1234567890"]
+     },
+     "expected_tools": ["query_order"],
+     "judge_orders": ["XH202609010001"]
+    }
+   ]
+  },
+  {
+   "id": "mt-602",
+   "persona": "查物流轨迹（派送中）",
+   "objective": "验证 T1 查物流工具：用户问快递进度，agent 调用 query_logistics 返回单号与轨迹",
+   "source": "T1 工具能力金标（2026-09-16 新增，非 ECD）",
+   "turns": [
+    {
+     "user": "订单 XH202609010006 的快递到哪了",
+     "rationale": "派送中订单，query_logistics 应返回 JD 单号与轨迹；回复须含真实单号",
+     "expect_decision": "answer",
+     "answer_checks": {
+      "must_contain_any": ["JD5550001111"]
+     },
+     "expected_tools": ["query_logistics"],
+     "judge_orders": ["XH202609010006"]
+    }
+   ]
+  },
+  {
+   "id": "mt-603",
+   "persona": "改收货地址（待发货，成功路径）",
+   "objective": "验证 T1 写操作：用户提供订单号+新地址，agent 执行 update_order_address 且订单库真实生效",
+   "source": "T1 工具能力金标（2026-09-16 新增，非 ECD）",
+   "turns": [
+    {
+     "user": "帮我把订单 XH202609010002 的收货地址改成 北京市海淀区中关村大街1号",
+     "rationale": "待发货+首次修改=政策允许；断言三层：工具调用+回复确认+DB 副作用（address_contains 中关村）",
+     "expect_decision": "answer",
+     "answer_checks": {
+      "must_contain_any": ["修改成功", "已修改", "已更新", "成功", "改好", "已改"]
+     },
+     "expected_tools": ["update_order_address"],
+     "db_expect": {
+      "order_id": "XH202609010002",
+      "address_contains": "中关村"
+     },
+     "judge_orders": ["XH202609010002"]
+    }
+   ]
+  },
+  {
+   "id": "mt-604",
+   "persona": "改收货地址（已发货，拒绝路径）",
+   "objective": "验证政策代码化边界：已发货订单改地址被拒，agent 如实告知（与 KB「未发货改地址」口径一致）",
+   "source": "T1 工具能力金标（2026-09-16 新增，非 ECD）",
+   "turns": [
+    {
+     "user": "把订单 XH202609010001 的收货地址改成 上海市黄浦区南京东路100号",
+     "rationale": "已发货订单：无论模型先查单自行判断、还是调 update 被工具拒绝，最终都应明确告知无法修改（双路径都合法，故不断言 expected_tools）",
+     "expect_decision": "answer",
+     "answer_checks": {
+      "must_contain_any": ["无法", "不能", "失败", "不支持", "不可", "未能", "没有成功", "没能"]
+     },
+     "judge_orders": ["XH202609010001"]
+    }
+   ]
+  },
+  {
+   "id": "mt-605",
+   "persona": "多轮改地址（先询问再执行）",
+   "objective": "验证多轮工具协作：首轮信息不全时文本询问（不猜参数），次轮信息齐备后执行写操作",
+   "source": "T1 工具能力金标（2026-09-16 新增，非 ECD）",
+   "turns": [
+    {
+     "user": "帮我改一下收货地址",
+     "rationale": "缺订单号与新地址：模型应文本询问而非猜测参数调用工具",
+     "expect_decision": "answer",
+     "answer_checks": {
+      "must_contain_any": ["订单号", "单号", "地址"]
+     }
+    },
+    {
+     "user": "订单号 XH202609010008，改成 厦门市集美区杏林湾路1号",
+     "rationale": "信息齐备：执行 update_order_address，DB 断言地址已改为集美区",
+     "expect_decision": "answer",
+     "answer_checks": {
+      "must_contain_any": ["修改成功", "已修改", "已更新", "成功", "改好", "已改"]
+     },
+     "expected_tools": ["update_order_address"],
+     "db_expect": {
+      "order_id": "XH202609010008",
+      "address_contains": "集美区"
+     },
+     "judge_orders": ["XH202609010008"]
+    }
+   ]
+  },
+  {
+   "id": "mt-606",
+   "persona": "订单不存在",
+   "objective": "验证 C5 延伸：工具返回未找到时如实转述，不编造订单信息",
+   "source": "T1 工具能力金标（2026-09-16 新增，非 ECD）",
+   "turns": [
+    {
+     "user": "查下订单 XH202609019999 发了没",
+     "rationale": "订单号不存在：query_order 返回未找到，回复须如实告知。「未找到」措辞空间开放（未找到/没查到/没有查到/未能找到…子串不可枚举，四轮实测四种变体），改用确定性锚点：must_contain=复述订单号（防张冠李戴）+ must_not_contain=编造状态词（防幻觉）；查询行为由 expected_tools 验证，事实一致性由 judge 验证",
+     "expect_decision": "answer",
+     "answer_checks": {
+      "must_contain": ["XH202609019999"],
+      "must_not_contain": ["已发货", "待发货", "已签收", "运输中"]
+     },
+     "expected_tools": ["query_order"]
+    }
+   ]
+  }
+ ]
+}

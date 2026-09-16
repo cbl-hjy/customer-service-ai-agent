@@ -405,7 +405,13 @@ tmp/
 # 评估产物（可再生成；持久指标落 eval/baselines.json，含 model 字段可追溯）
 eval/reports/
 
-# KB 生成中间批次（eval/kb_v2/knowledge_base_v2.json 为真相源）
+# 压测产物（GPU 采样含机器环境信息，不入库；脚本本身入库）
+bench/reports/
+
+# KB 回滚备份件（A3 试点本地保留，不入库）
+*.bak_pilot
+
+# KB 生成中间批次（2026-09-16 单源化：data/knowledge_base_v2.json 为唯一真相源）
 eval/kb_v2/batches/
 
 # 本地调试产物（含机器环境信息，不入库）

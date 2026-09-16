@@ -356,14 +356,19 @@ def _run_case(app, case):
             # 内部泄漏由下方 no_internal_leak 维度统一检查（正则匹配【XXX's Response】模式）。
             # 不向 must_not_contain 注入 "【"，否则会误拦正文中的【退款政策】等合法用法。
             res = _score_answer_checks(response, checks)
+            # T1 工具轮判定（2026-09-16）：tools_used 含订单工具 = 该轮事实来源含订单库。
+            # 口径：① A6 引用脚注不适用（事实来源不是 KB 检索，豁免防假阳性）；
+            # ② judge 核对基座需补订单快照（金标 turn 用 judge_orders 声明涉及订单）。
+            _ORDER_TOOLS = ("query_order", "query_logistics", "update_order_address")
+            tool_turn = any(t in _ORDER_TOOLS for t in tools_used)
             # A6 引用溯源（本轮 agent 应答必须带引用脚注；升级/拒答轮不适用——
             # tools_used 跨轮累积，升级轮需显式排除 escalated 再判定）
             f_pass, f_detail = _score_faithfulness(
-                response, retrieval_hit, bool(state.get("escalated"))
+                response, retrieval_hit and not tool_turn, bool(state.get("escalated"))
             )
             res["faithfulness"] = f_pass
             res["_faithfulness_detail"] = f_detail
-            if retrieval_hit:
+            if retrieval_hit and not tool_turn:
                 ct["faithfulness_total"] += 1
                 if f_pass:
                     ct["faithfulness_pass"] += 1
@@ -378,6 +383,13 @@ def _run_case(app, case):
                 else:
                     _domain = _AGENT_DISPLAY2DOMAIN.get(state.get("current_agent", ""), "")
                     _kb_ctx = _kb_context_for_judge(_domain, user_text, _cited)
+                # T1：工具轮基座补订单快照（回复事实来自订单库，纯 KB 基座缺依据会误判）
+                if tool_turn:
+                    from tools.orders import query_order as _qo
+                    _oids = turn.get("judge_orders") or []
+                    _snap = "\n\n".join(_qo(o) for o in _oids if o)
+                    _kb_ctx = (f"{_kb_ctx}\n\n【订单系统数据】\n{_snap}".strip()
+                               if str(_kb_ctx).strip() else f"【订单系统数据】\n{_snap}")
                 j_pass, j_detail = _judge_faithfulness(response, _kb_ctx, get_llm())
                 if _kb_ctx.strip():
                     ct["judge_total"] += 1
@@ -385,6 +397,19 @@ def _run_case(app, case):
                         ct["judge_pass"] += 1
             res["judge_faithfulness"] = j_pass
             res["_judge_detail"] = j_detail
+            # T1 确定性断言（2026-09-16）：expected_tools=工具调用正确性；
+            # db_expect=写副作用（改地址后订单库状态）——两项都计入答案分
+            if "expected_tools" in turn:
+                _missing = set(turn["expected_tools"]) - set(tools_used)
+                res["tool_calls"] = not _missing
+                res["_tool_detail"] = f"expected={turn['expected_tools']} actual={tools_used}"
+            if "db_expect" in turn:
+                from tools.orders import query_order as _qo
+                _de = turn["db_expect"]
+                _snapshot = _qo(_de.get("order_id", ""))
+                _want = _de.get("address_contains", "")
+                res["db_effect"] = bool(_want) and (_want in _snapshot)
+                res["_db_detail"] = f"want_address~{_want!r} snapshot={_snapshot[:150]}"
             a_pass = all(v is True for k, v in res.items() if not k.startswith("_"))
             answer = {"checked": True, "pass": a_pass, "detail": res}
             ct["answer_total"] += 1
@@ -411,6 +436,7 @@ def _run_case(app, case):
             "retrieval_attempted": retrieval_attempted,
             "retrieval_hit": retrieval_hit,
             "retrieval_miss": retrieval_miss,
+            "tools_used": tools_used,  # T1：工具调用留痕（审计 + expected_tools 断言依据）
             "answer_checked": answer["checked"],
             "answer_pass": answer["pass"],
             "answer_detail": answer["detail"],
@@ -442,6 +468,18 @@ def main():
     if os.path.exists(EVAL_DB):
         os.remove(EVAL_DB)
         print(f"🧹 已清空上次评估库：{EVAL_DB}")
+
+    # T1 订单工具评估隔离（2026-09-16）：评估进程用独立订单库，每次运行删除重建
+    # （种子幂等播种；写操作 case 可重复复现）。生产 data/orders.db 不受影响（同进程隔离纪律）。
+    EVAL_ORDERS_DB = os.path.join(EVAL_DIR, "eval_data", "orders_eval.db")
+    os.environ["ORDERS_DB_PATH"] = EVAL_ORDERS_DB
+    if os.path.exists(EVAL_ORDERS_DB):
+        os.remove(EVAL_ORDERS_DB)
+        print(f"🧹 已清空上次评估订单库：{EVAL_ORDERS_DB}")
+
+    # T2 trace 隔离（2026-09-16）：评估轮不写入生产 trace.db（回流池纯净；
+    # 历史 999 条 eval- 污染由 trace_replay 过滤兜底，不删库保持可审计）。
+    os.environ["TRACE_DB_PATH"] = os.path.join(EVAL_DIR, "eval_data", "trace_eval.db")
 
     t0 = time.time()
     reset_token_usage()  # 跑前清零，保证 token/成本可归因到本次运行
@@ -540,6 +578,9 @@ def main():
             totals["judge_pass"] / totals["judge_total"]
             if totals["judge_total"] else 0, 4
         ),
+        # 口径标记（2026-09-16）：judge 关闭时 judge 维度空真（自动 pass）、answer_rate
+        # 退化为仅确定性检查——下游必须能判别数字来自哪种口径，防"44/44"式误读。
+        "judge_enabled": _JUDGE_ENABLED,
         "correct_escalate": totals["correct_escalate"],
         "false_escalate": totals["false_escalate"],
         "miss_escalate": totals["miss_escalate"],
@@ -621,8 +662,12 @@ def main():
     print(f"  检索命中率：{totals['retrieval_hit']}/{totals['retrieval_attempted']} = {retrieval_hit_rate:.1%}")
     print(f"  引用溯源：{totals['faithfulness_pass']}/{totals['faithfulness_total']} = "
           f"{(totals['faithfulness_pass'] / totals['faithfulness_total'] if totals['faithfulness_total'] else 0):.1%}")
-    print(f"  judge 事实一致性：{totals['judge_pass']}/{totals['judge_total']} = "
-          f"{(totals['judge_pass'] / totals['judge_total'] if totals['judge_total'] else 0):.1%}")
+    if _JUDGE_ENABLED:
+        print(f"  judge 事实一致性：{totals['judge_pass']}/{totals['judge_total']} = "
+              f"{(totals['judge_pass'] / totals['judge_total'] if totals['judge_total'] else 0):.1%}")
+    else:
+        # 空真防误读（2026-09-16 教训）：judge 关闭时全部自动 pass，"44/44"是假全绿
+        print("  judge 事实一致性：N/A（JUDGE_ENABLED=0，本维度未评估，answer_rate 仅含确定性检查）")
     print(f"  升级决策：精确率={esc_precision:.1%} 召回率={esc_recall:.1%}"
           f"（误升级={totals['false_escalate']} 漏升级={totals['miss_escalate']}）")
     print(f"  全部 case 通过：{'是' if all_pass else '否'}")
@@ -695,6 +740,7 @@ def _persist_baseline(summary: dict) -> None:
         "retrieval_hit_rate": summary["retrieval_hit_rate"],
         "faithfulness_rate": summary.get("faithfulness_rate", 0),
         "judge_rate": summary.get("judge_rate", 0),
+        "judge_enabled": summary.get("judge_enabled", True),
         "escalation_precision": summary["escalation_precision"],
         "escalation_recall": summary["escalation_recall"],
         "latency_p50_s": summary["latency_p50_s"],
@@ -719,11 +765,19 @@ def _report_baseline_diff(prev: dict, cur: dict) -> None:
                 warns.append(f"{key} 上升 {ratio:.2f}x")
     for key in _BASELINE_QUALITY:
         if prev.get(key) is not None and cur.get(key) is not None:
+            # judge 口径守卫（2026-09-16）：任一侧 judge 关闭则该维度空真，不可比
+            if key == "judge_rate" and not (prev.get("judge_enabled", True) and cur.get("judge_enabled", True)):
+                print(f"  judge_rate: 跳过（口径不同：prev judge_enabled="
+                      f"{prev.get('judge_enabled', True)}, cur judge_enabled={cur.get('judge_enabled', True)}）")
+                continue
             delta = cur[key] - prev[key]
             flag = " ⚠️ 下降" if delta < 0 else ""
             print(f"  {key}: {prev[key]:.3f} → {cur[key]:.3f}（{delta:+.3f}）{flag}")
             if delta < 0:
                 warns.append(f"{key} 下降 {delta:.3f}")
+    # answer_rate 跨口径提示：judge 开/关决定其是否含 faithfulness 维度
+    if prev.get("judge_enabled", True) != cur.get("judge_enabled", True):
+        print("  ⚠️ answer_rate 口径不同（一侧 judge 关闭，该维度仅确定性检查），对比仅供参考")
     if prev.get("cost_yuan") is not None:
         print(f"  cost_yuan: {prev['cost_yuan']} → {cur['cost_yuan']}（+{cur['cost_yuan'] - prev['cost_yuan']:.4f}）")
     if warns:

@@ -64,11 +64,14 @@ def _traced(node_name: str, fn):
             if run_id:
                 add_step(run_id, node_name, round(elapsed_ms, 2), (p1 - p0) + (c1 - c0), detail)
                 # 出口节点：回填 run 汇总（总耗时/token = run 起点到完成）+ 清理 run_id
+                # T2（2026-09-16）：response/tools_used 一并落库——生产对话回流评估的数据源
                 if node_name == "final_response":
                     run_start = getattr(_trace_local, "run_start", t0)
                     total_ms = (time.perf_counter() - run_start) * 1000
                     ps, cs = getattr(_trace_local, "run_start_tokens", (p0, c0))
-                    finish_run(run_id, round(total_ms, 2), p1 - ps, c1 - cs, detail)
+                    finish_run(run_id, round(total_ms, 2), p1 - ps, c1 - cs, detail,
+                               response=str(src.get("response", "") or ""),
+                               tools_used=list(src.get("tools_used") or []))
                     _trace_local.run_id = None
                     _trace_local.run_start = None
                     _trace_local.run_start_tokens = None

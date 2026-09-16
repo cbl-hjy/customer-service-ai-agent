@@ -14,11 +14,14 @@
 表结构：
     trace_runs(run_id TEXT PK, thread_id TEXT, user_query TEXT, ts TEXT,
                total_ms REAL, prompt_tokens INT, completion_tokens INT,
-               decision TEXT)          -- decision = JSON（query_type/confidence/escalated/reason/agent）
+               decision TEXT,          -- decision = JSON（query_type/confidence/escalated/reason/agent）
+               response TEXT,          -- T2（2026-09-16）：本轮 agent 回复原文（回流评估数据源）
+               tools_used TEXT)        -- T2：本轮工具调用 JSON 数组（订单工具等）
     trace_steps(id INTEGER PK AUTOINCREMENT, run_id TEXT, node_name TEXT,
                 duration_ms REAL, token_delta INT, detail TEXT)   -- detail = JSON
 
 保留策略：demo 场景量小，保留全部（不清理）；若需清理后续按 V13 惰性模式加。
+历史行 response/tools_used 为 NULL（T2 之前未采集，不可找回）——回流侧兼容。
 """
 
 import json
@@ -46,9 +49,17 @@ def _connect() -> sqlite3.Connection:
             total_ms        REAL,
             prompt_tokens   INTEGER DEFAULT 0,
             completion_tokens INTEGER DEFAULT 0,
-            decision        TEXT
+            decision        TEXT,
+            response        TEXT,
+            tools_used      TEXT
         )"""
     )
+    # T2 迁移（2026-09-16）：旧库补列（幂等）——response/tools_used 为回流评估数据源
+    cols = {r[1] for r in conn.execute("PRAGMA table_info(trace_runs)")}
+    if "response" not in cols:
+        conn.execute("ALTER TABLE trace_runs ADD COLUMN response TEXT")
+    if "tools_used" not in cols:
+        conn.execute("ALTER TABLE trace_runs ADD COLUMN tools_used TEXT")
     conn.execute(
         """CREATE TABLE IF NOT EXISTS trace_steps (
             id          INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -79,14 +90,17 @@ def start_run(run_id: str, thread_id: str, user_query: str, ts: str) -> None:
             conn.close()
 
 
-def finish_run(run_id: str, total_ms: float, prompt_tokens: int, completion_tokens: int, decision: Dict[str, Any]) -> None:
-    """结束一次工单 trace：回填耗时/token/决策结果。"""
+def finish_run(run_id: str, total_ms: float, prompt_tokens: int, completion_tokens: int,
+               decision: Dict[str, Any], response: str = "", tools_used: Optional[List[str]] = None) -> None:
+    """结束一次工单 trace：回填耗时/token/决策结果/回复原文（T2 回流数据源）。"""
     with _lock:
         conn = _connect()
         try:
             conn.execute(
-                "UPDATE trace_runs SET total_ms=?, prompt_tokens=?, completion_tokens=?, decision=? WHERE run_id=?",
-                (total_ms, prompt_tokens, completion_tokens, json.dumps(decision, ensure_ascii=False), run_id),
+                "UPDATE trace_runs SET total_ms=?, prompt_tokens=?, completion_tokens=?, decision=?, "
+                "response=?, tools_used=? WHERE run_id=?",
+                (total_ms, prompt_tokens, completion_tokens, json.dumps(decision, ensure_ascii=False),
+                 response or "", json.dumps(tools_used or [], ensure_ascii=False), run_id),
             )
             conn.commit()
         finally:

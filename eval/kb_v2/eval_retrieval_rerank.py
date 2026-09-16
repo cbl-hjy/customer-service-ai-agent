@@ -21,7 +21,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 GOLDEN_V2 = os.path.join(os.path.dirname(HERE), "golden_retrieval", "golden_retrieval_golden_v2.csv")
-V2_KB = os.path.join(HERE, "knowledge_base_v2.json")
+V2_KB = os.path.join(PACKAGE_ROOT, "data", "knowledge_base_v2.json")  # 单源化：canonical=data/
 
 from kb_retriever import KBRetriever, _expand_query  # noqa: E402
 from dense_retriever import build_dense_index, DenseRetriever  # noqa: E402
@@ -107,8 +107,15 @@ def main() -> None:
 
     from sentence_transformers import CrossEncoder
     import torch
-    reranker = CrossEncoder(BGE_RERANKER_PATH,
-                            device="cuda" if torch.cuda.is_available() else "cpu")
+    # dtype 与生产同口径（hybrid_retriever.RERANKER_FP16，2026-09-16 P2）：
+    # 评估必须复刻生产精度，否则排序指标无法归因到参数变更。
+    _device = "cuda" if torch.cuda.is_available() else "cpu"
+    _fp16 = os.getenv("RERANKER_FP16", "1") == "1"
+    if _device == "cuda" and _fp16:
+        reranker = CrossEncoder(BGE_RERANKER_PATH, device=_device,
+                                model_kwargs={"torch_dtype": torch.float16})
+    else:
+        reranker = CrossEncoder(BGE_RERANKER_PATH, device=_device)
 
     # domain 内 title → entry 映射（reranker 打分需要完整条目文本）
     title2entry = {}

@@ -34,7 +34,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SKELETON = os.path.join(HERE, "skeleton.json")
 FACTS = os.path.join(HERE, "policy_facts.json")
 BATCH_DIR = os.path.join(HERE, "batches")
-OUT_KB = os.path.join(HERE, "knowledge_base_v2.json")
+OUT_KB = os.path.join(PACKAGE_ROOT, "data", "knowledge_base_v2.json")  # 单源化：直接写生产 KB（canonical=data/）
 
 MODEL = "qwen3.7-max-2026-05-17"
 MAX_RETRIES = 5

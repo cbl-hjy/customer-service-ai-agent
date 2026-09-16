@@ -86,14 +86,15 @@
      "user": "能早点发吗，我下周就要用",
      "expect_decision": "answer",
      "label_hint": "general_inquiry",
-     "rationale": "加急需求，知识库有紧急处理条款。must_contain 纳入语义等价同义词（复现5次：LLM 用 最快/尽早/优先/加急 替代 尽快）",
+     "rationale": "加急需求，知识库有紧急处理条款。must_contain 纳入语义等价同义词（复现5次：LLM 用 最快/尽早/优先/加急 替代 尽快）。2026-09-16 补「提前」：A3 原子条目（预售商品能不能提前发货）使规范答案为「可以提前发」，该词为语义直接命中（审计注）",
      "answer_checks": {
       "must_contain_any": [
        "尽快",
        "加急",
        "尽早",
        "优先",
-       "最快"
+       "最快",
+       "提前"
       ]
      }
     }

@@ -12,7 +12,7 @@ from collections import Counter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 GOLDEN = os.path.join(HERE, "golden_retrieval_golden_v2.csv")
-KB = os.path.join(os.path.dirname(HERE), "kb_v2", "knowledge_base_v2.json")
+KB = os.path.join(os.path.dirname(os.path.dirname(HERE)), "data", "knowledge_base_v2.json")  # 单源化：canonical=data/
 OUT = os.path.join(HERE, "kb_v2_titles.json")
 
 rows = list(csv.DictReader(open(GOLDEN, encoding="utf-8-sig")))

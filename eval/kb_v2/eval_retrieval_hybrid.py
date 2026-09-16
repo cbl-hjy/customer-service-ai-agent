@@ -24,7 +24,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 GOLDEN_V2 = os.path.join(os.path.dirname(HERE), "golden_retrieval", "golden_retrieval_golden_v2.csv")
-V2_KB = os.path.join(HERE, "knowledge_base_v2.json")
+V2_KB = os.path.join(PACKAGE_ROOT, "data", "knowledge_base_v2.json")  # 单源化：canonical=data/
 
 from kb_retriever import KBRetriever, _expand_query, SCORE_THRESHOLD  # noqa: E402
 from dense_retriever import build_dense_index  # noqa: E402

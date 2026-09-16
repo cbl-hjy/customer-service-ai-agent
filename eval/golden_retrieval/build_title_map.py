@@ -14,7 +14,7 @@ import sys
 PACKAGE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 HERE = os.path.dirname(os.path.abspath(__file__))
 V1 = os.path.join(PACKAGE_ROOT, "data", "knowledge_base.json")
-V2 = os.path.join(PACKAGE_ROOT, "eval", "kb_v2", "knowledge_base_v2.json")
+V2 = os.path.join(PACKAGE_ROOT, "data", "knowledge_base_v2.json")  # 单源化：canonical=data/
 OUT = os.path.join(HERE, "title_map_v1_to_v2.json")
 
 if hasattr(sys.stdout, "reconfigure"):

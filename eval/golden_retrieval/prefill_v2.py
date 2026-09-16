@@ -21,7 +21,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-V2_KB = os.path.join(PACKAGE_ROOT, "eval", "kb_v2", "knowledge_base_v2.json")
+V2_KB = os.path.join(PACKAGE_ROOT, "data", "knowledge_base_v2.json")  # 单源化：canonical=data/
 GOLDEN = os.path.join(HERE, "golden_retrieval_golden.csv")
 PREFILL_V1 = os.path.join(HERE, "golden_retrieval_prefill.csv")
 OUT = os.path.join(HERE, "golden_retrieval_prefill_v2.csv")

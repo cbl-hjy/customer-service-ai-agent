@@ -33,8 +33,113 @@ logger = logging.getLogger(__name__)
 
 
 class CustomResponse:
-    def __init__(self, content):
+    def __init__(self, content, tool_calls=None):
         self.content = content
+        # T1 工具调用（2026-09-16）：invoke(tools=...) 时携带模型返回的 tool_calls
+        # 原始结构（list[{id, type, function:{name, arguments}}]），None=无工具调用。
+        # 默认 None 保证现有调用方（分类/改写/拆解/正文）行为零变化。
+        self.tool_calls = tool_calls
+
+
+# ASCII 前导缓冲上限：工具调用前导（英文独白，如 "I'll look up..."）通常 <16 字符；
+# 纯英文正文超过此长度即按正文 flush（客服回复必含中文，中文一出现立即 flush）。
+_LEAD_BUF_MAX = 16
+
+
+class _ToolStream:
+    """带 tools 的流式包装（T1）：迭代产出面向用户的 content token，聚合 tool_calls 分片。
+
+    用法：迭代耗尽后读 .tool_calls（None=模型未调工具，此时迭代产出的就是完整正文）。
+
+    前导抑制（三层策略，防工具轮的英文前导泄漏到用户视图）：
+    ① prompt 指令（agent 侧："调用工具时直接调用，不要输出说明文字"）；
+    ② 一旦收到 tool_delta 即入工具模式——缓冲丢弃、后续 content 静默不产出；
+    ③ ASCII 前导缓冲：未见 tool_delta 前的纯 ASCII token 缓冲 ≤16 字符，
+       出现非 ASCII（中文正文信号）或超限即 flush 判定为正文。
+    残余窗口：英文正文头 16 字符延迟一个缓冲期产出（不丢失）；前导 >16 字符
+    且后跟 tool_calls 的罕见形态会泄漏前 16 字符（可接受，V1）。
+    """
+
+    def __init__(self, client, messages, tools):
+        self._events = client._stream_events(messages, None, tools)
+        self.tool_calls = None
+        self._done = False
+        self._tool_mode = False
+        self._text_mode = False  # 正文确认后直通（防英文标点/数字二次入缓冲）
+        self._buf = []
+        self._buf_len = 0
+        self._aggregating = {}  # index -> {"id":…, "name":…, "arguments": str}
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> str:
+        while True:
+            if self._done:
+                raise StopIteration
+            try:
+                ev = next(self._events)
+            except StopIteration:
+                self._done = True
+                self._finalize()
+                if self._buf and not self._tool_mode:
+                    # 流结束仍无 tool_delta：缓冲是正文开头（短英文正文），补产出
+                    out = "".join(self._buf)
+                    self._buf, self._buf_len = [], 0
+                    return out
+                raise
+            if ev["kind"] == "tool_delta":
+                self._tool_mode = True
+                self._buf, self._buf_len = [], 0  # 丢弃前导缓冲
+                self._aggregate(ev["delta"])
+                continue
+            # token 事件
+            text = ev["text"]
+            if self._tool_mode:
+                continue  # 工具模式：content 静默丢弃
+            if self._text_mode:
+                return text  # 正文已确认：直通
+            if not text.isascii():
+                # 缓冲期出现中文/中文标点：正文确认，连同缓冲一起 flush
+                self._buf.append(text)
+                out = "".join(self._buf)
+                self._buf, self._buf_len = [], 0
+                self._text_mode = True
+                return out
+            self._buf.append(text)
+            self._buf_len += len(text)
+            if self._buf_len > _LEAD_BUF_MAX:
+                # 纯英文超限：按正文兜底 flush（英文正文罕见但不可丢）
+                out = "".join(self._buf)
+                self._buf, self._buf_len = [], 0
+                self._text_mode = True
+                return out
+            continue  # ASCII 前导缓冲中（等中文信号 / tool_delta / 超限 / 流结束）
+
+    def _aggregate(self, td: dict) -> None:
+        """聚合 OpenAI 风格 tool_calls 分片：index 分组，arguments 字符串拼接。"""
+        idx = td.get("index", 0)
+        slot = self._aggregating.setdefault(idx, {"id": "", "name": "", "arguments": ""})
+        if td.get("id"):
+            slot["id"] = td["id"]
+        fn = td.get("function") or {}
+        if fn.get("name"):
+            slot["name"] = fn["name"]
+        if fn.get("arguments"):
+            slot["arguments"] += fn["arguments"]
+
+    def _finalize(self) -> None:
+        """流转结束：把聚合分片定稿为与 invoke 同构的 tool_calls 结构。"""
+        if not self._aggregating:
+            return
+        self.tool_calls = [
+            {
+                "id": slot["id"],
+                "type": "function",
+                "function": {"name": slot["name"], "arguments": slot["arguments"]},
+            }
+            for _, slot in sorted(self._aggregating.items())
+        ]
 
 
 # OpenAI兼容API客户端类
@@ -60,9 +165,18 @@ class OpenAICompatibleClient:
         self.inheritable_metadata = {}
 
     def _format_messages(self, messages) -> list:
-        """LangChain 消息对象 → OpenAI 格式（供 invoke / invoke_stream 共用）。"""
+        """LangChain 消息对象 → OpenAI 格式（供 invoke / invoke_stream 共用）。
+
+        T1（2026-09-16）：支持原生 dict 消息透传（含 "role" 键即视为 OpenAI 格式）——
+        工具调用循环第二轮需回填 assistant(tool_calls) 与 role:"tool" 消息，这两种
+        形态没有 LangChain 消息对象对应，由调用方直接构造 dict 传入。
+        """
         formatted_messages = []
         for msg in messages:
+            # 原生 OpenAI 格式 dict（tool loop 回填消息）→ 直接透传
+            if isinstance(msg, dict) and "role" in msg:
+                formatted_messages.append(msg)
+                continue
             if hasattr(msg, 'content'):
                 # 处理LangChain消息对象
                 if hasattr(msg, 'type'):
@@ -83,8 +197,8 @@ class OpenAICompatibleClient:
                 formatted_messages.append({"role": "user", "content": str(msg)})
         return formatted_messages
 
-    def _build_payload(self, formatted_messages: list, response_format=None) -> dict:
-        """构造请求 payload（思考模式开关 + response_format，供两条路径共用）。"""
+    def _build_payload(self, formatted_messages: list, response_format=None, tools=None, tool_choice=None) -> dict:
+        """构造请求 payload（思考模式开关 + response_format + tools，供两条路径共用）。"""
         payload = {
             "model": self.model,
             "messages": formatted_messages
@@ -103,12 +217,20 @@ class OpenAICompatibleClient:
             payload["enable_thinking"] = False
         if response_format is not None:
             payload["response_format"] = response_format
+        # T1 工具调用（2026-09-16，官方 Chat Completion 协议，协议冒烟 4/4 验证）：
+        # tools=OpenAI function schema 列表；tool_choice 可选（"none"/"auto"/指定函数）。
+        # 流式路径不传 tools（工具轮走非流式 invoke，终答轮不带 tools 走流式）。
+        if tools:
+            payload["tools"] = tools
+            if tool_choice is not None:
+                payload["tool_choice"] = tool_choice
         return payload
 
-    def invoke(self, messages, response_format=None):
-        """调用OpenAI兼容API（response_format 可选：通义千问 JSON 结构化输出）"""
+    def invoke(self, messages, response_format=None, tools=None, tool_choice=None):
+        """调用OpenAI兼容API（response_format 可选：通义千问 JSON 结构化输出；
+        tools 可选：OpenAI function calling——返回 .tool_calls（None=模型未调工具））"""
         formatted_messages = self._format_messages(messages)
-        payload = self._build_payload(formatted_messages, response_format)
+        payload = self._build_payload(formatted_messages, response_format, tools, tool_choice)
 
         # 添加调试信息
         # V9：请求日志只记元信息，不记消息内容（消息含用户输入与系统提示词，属敏感信息）
@@ -161,9 +283,12 @@ class OpenAICompatibleClient:
                     if "choices" in result and len(result["choices"]) > 0:
                         message = result["choices"][0].get("message", {})
                         content = message.get("content", "")
+                        # T1 工具调用：finish_reason=tool_calls 时 message.tool_calls 非空，
+                        # 原样透传给调用方执行（content 可能含前导文本，回填时须一并保留）
+                        tool_calls = message.get("tool_calls") or None
                         _record_token_usage(result.get("usage"))
                         _circuit_breaker.record_success()
-                        return CustomResponse(content)
+                        return CustomResponse(content, tool_calls=tool_calls)
                     else:
                         _circuit_breaker.record_success()
                         return CustomResponse("API response format error")
@@ -203,20 +328,19 @@ class OpenAICompatibleClient:
                 wait = 2 ** attempt + random.uniform(0, 0.3 * 2 ** attempt)
                 time.sleep(wait)
 
-    def invoke_stream(self, messages, response_format=None):
-        """流式调用 OpenAI 兼容 API：逐 token yield（P1 真流式 SSE）。
+    def _stream_events(self, messages, response_format=None, tools=None):
+        """SSE 流事件生成器（内部核心，2026-09-16 从 invoke_stream 抽取）：
+        yield {"kind": "token", "text": str} 或 {"kind": "tool_delta", "delta": dict}。
 
-        与 invoke 同一韧性契约（拆解见 invoke 内注释，此处只列流式差异）：
-        - 重试仅发生在首 token 之前——已 yield 的内容无法撤回，中途失败直接抛；
+        韧性契约与原 invoke_stream 完全一致（拆解见 invoke 内注释）：
+        - 重试仅发生在首事件之前——已交付的 token/tool_delta 无法撤回，中途失败直接抛；
         - 信号量在流消费期间持续持有（连接占用即并发占用）；
         - token 计量：stream_options.include_usage（末 chunk 携带 usage），
           服务端不返回 usage 则不记（不估算，防污染成本基线）。
-
-        调用方约束：仅正文生成走本接口（llm.stream_sink.call_llm），
-        分类/改写/拆解等结构化中间产物继续走 invoke（response_format=json）。
+        T1 扩展：delta.tool_calls 分片以 tool_delta 事件透传（由 _ToolStream 聚合）。
         """
         formatted_messages = self._format_messages(messages)
-        payload = self._build_payload(formatted_messages, response_format)
+        payload = self._build_payload(formatted_messages, response_format, tools)
         payload["stream"] = True
         payload["stream_options"] = {"include_usage": True}
 
@@ -279,7 +403,10 @@ class OpenAICompatibleClient:
                         token = delta.get("content") or ""
                         if token:
                             yielded = True
-                            yield token
+                            yield {"kind": "token", "text": token}
+                        for td in (delta.get("tool_calls") or []):
+                            yielded = True
+                            yield {"kind": "tool_delta", "delta": td}
 
                     # 流正常读完：熔断记成功（token 已按 usage chunk 计量）
                     _circuit_breaker.record_success()
@@ -324,6 +451,26 @@ class OpenAICompatibleClient:
                 # 指数退避 + jitter（±30% 随机，防多实例同时重试形成惊群）
                 wait = 2 ** attempt + random.uniform(0, 0.3 * 2 ** attempt)
                 time.sleep(wait)
+
+    def invoke_stream(self, messages, response_format=None):
+        """流式调用（P1 真流式 SSE）：逐 token yield——_stream_events 的薄包装，行为零变化。
+
+        调用方约束：仅正文生成走本接口（llm.stream_sink.call_llm），
+        分类/改写/拆解等结构化中间产物继续走 invoke（response_format=json）。
+        带 tools 的流式（tool_calls 聚合）走 invoke_stream_tools。
+        """
+        for ev in self._stream_events(messages, response_format):
+            if ev["kind"] == "token":
+                yield ev["text"]
+
+    def invoke_stream_tools(self, messages, tools):
+        """带 tools 的流式调用（T1，2026-09-16）：返回 _ToolStream 迭代器。
+
+        - 迭代产出面向用户的 content token（可直接推 sink，打字机效果保留）；
+        - 迭代耗尽后 .tool_calls 持有聚合结果（None=模型未调工具）；
+        - 前导抑制：见 _ToolStream docstring（三层策略）。
+        """
+        return _ToolStream(self, messages, tools)
 
     def chat(self, messages):
         """兼容LangChain的chat方法"""
