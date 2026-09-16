@@ -1,0 +1,218 @@
+id,query,domain,expected_titles,difficulty,source,suggest,candidates,note
+gr-001,2拍下什么时候发货,general,发货时效,easy,ecd,KEEP,general:缺货补货通知(3.043) | general:物流跟踪(2.199) | general:地址修改规则(2.173) | complaint:配送延迟(2.07) | product:手机(0.0) | product:电脑(0.0),
+gr-002,534597270770拍了很多东西,general,满赠活动规则,hard,ecd,KEEP,general:满赠规则(2.272) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0) | tech:系统卡顿(0.0),
+gr-003,三号可以到吗大概,general,指定日期送达,hard,ecd,KEEP,billing:退款流程(2.957) | general:物流跟踪(1.769) | general:补发/少件(1.18) | general:以旧换新(1.154) | product:手机(0.0) | product:电脑(0.0),2026-09-16修正:原标物流单号查询为ecd标注噪声(实验C归因),问具体日期能否到应为指定日期送达
+gr-004,上次发的快递太慢了，这次能换个快递吗,general,快递选择,easy,golden_mt,KEEP,general:物流跟踪(7.847) | general:自提柜与签收(4.13) | general:地址修改规则(2.638) | complaint:配送延迟(2.526) | complaint:配送错误(2.299) | tech:保修条款(2.038),
+gr-005,买耳机送什么？是拍一个还是拍两个？,general,满赠活动规则,easy,golden_mt,KEEP,general:满赠规则(9.433) | general:收藏送礼(3.244) | product:耳机(1.461) | product:手机(0.0) | product:电脑(0.0) | tech:无法开机(0.0),
+gr-006,什么时候发货啊,general,发货时效,easy,golden_mt,KEEP,general:缺货补货通知(3.043) | general:物流跟踪(2.199) | general:地址修改规则(2.173) | complaint:配送延迟(2.07) | product:手机(0.0) | product:电脑(0.0),
+gr-007,今天不到退了什么鬼快递,general,物流信息更新延迟,hard,ecd,KEEP,general:物流跟踪(2.824) | billing:7天无理由退款(2.278) | billing:退货运费(2.053) | general:自提柜与签收(1.747) | general:地址修改规则(1.116) | product:手机(0.0),
+gr-008,今天做活动的是这种吗,general,节日大促规则,easy,ecd,KEEP,general:活动参与规则(2.169) | general:地址修改规则(1.411) | general:满赠规则(1.151) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0),
+gr-009,优惠耳机也参与满赠活动吗,general,满赠活动规则;节日大促规则,ambiguous,golden_mt,KEEP,general:活动参与规则(7.936) | general:满赠规则(6.036) | general:会员服务(4.273) | product:耳机(1.461) | product:手机(0.0) | product:电脑(0.0),
+gr-010,会送东西吗,general,满赠活动规则;收藏送礼活动,ambiguous,ecd,KEEP,general:收藏送礼(3.244) | general:满赠规则(2.618) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0),
+gr-011,你们地址发我退还你们怎么,billing,退货运费承担,hard,ecd,KEEP,general:地址修改规则(4.973) | complaint:配送错误(3.462) | general:物流跟踪(2.199) | general:补发/少件(1.467) | product:手机(0.0) | product:电脑(0.0),
+gr-012,你们客服太敷衍了，气死我了，我要投诉！,complaint,客服态度差投诉,easy,golden_mt,KEEP,complaint:服务态度差(4.982) | tech:保修条款(4.076) | general:微信客服(3.293) | general:自提柜与签收(1.988) | general:在线客服(1.847) | complaint:配送错误(1.137),
+gr-013,你们家在聚划算还什么时候做活动呢,general,节日大促规则,easy,ecd,KEEP,general:缺货补货通知(3.043) | general:活动参与规则(2.169) | general:地址修改规则(1.411) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0),
+gr-014,你们的补偿标准是什么,complaint,补偿标准说明,easy,golden_mt,KEEP,complaint:补偿标准(2.824) | complaint:外观瑕疵(0.505) | complaint:包装破损(0.505) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0),
+gr-015,几天可以到,general,发货时效,hard,ecd,KEEP,billing:退款流程(5.008) | general:物流跟踪(1.769) | general:补发/少件(1.18) | general:以旧换新(1.154) | product:手机(0.0) | product:电脑(0.0),2026-09-16修正:原标物流单号查询为ecd标注噪声(实验C归因),时效问法应为发货时效
+gr-016,分期手续费怎么算的,billing,分期付款,easy,golden_mt,KEEP,billing:分期付款(6.007) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0) | tech:系统卡顿(0.0),
+gr-017,刚买的耳机有一边突然没声音了，能退吗,billing,质量问题退款;7天无理由退款,hard,golden_mt,KEEP,tech:声音问题(5.128) | billing:7天无理由退款(2.669) | billing:退货运费(2.384) | tech:保修条款(2.038) | product:耳机(1.461) | tech:无法开机(1.426),
+gr-018,别啰嗦了，直接给我转人工客服！,general,在线客服入口,hard,golden_mt,KEEP,general:微信客服(2.533) | complaint:服务态度差(2.491) | tech:保修条款(2.038) | general:在线客服(1.847) | general:在线客服(1.772) | complaint:配送错误(0.568),
+gr-019,发前一个地址,general,发货后修改地址,easy,ecd,KEEP,general:地址修改规则(4.973) | general:满赠规则(2.272) | complaint:配送错误(1.731) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0),
+gr-020,可以78号在发货吗,general,发货时效,easy,ecd,KEEP,general:微信客服(3.424) | general:物流跟踪(2.199) | general:地址修改规则(2.173) | complaint:配送延迟(2.07) | product:手机(0.0) | product:电脑(0.0),
+gr-021,可以开发票吗？我要公司抬头,billing,发票抬头修改;电子发票开具,ambiguous,golden_mt,KEEP,billing:发票抬头(5.985) | general:物流跟踪(2.819) | billing:电子发票(2.191) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0),
+gr-022,后天能到吗,general,指定日期送达,hard,ecd,KEEP,billing:退款流程(2.957) | general:物流跟踪(1.769) | general:补发/少件(1.18) | general:以旧换新(1.154) | product:手机(0.0) | product:电脑(0.0),2026-09-16修正:原标物流单号查询为ecd标注噪声(实验C归因),问具体日期能否到应为指定日期送达
+gr-023,哦哦今天消费69不能送了是么,general,满赠活动规则,hard,ecd,KEEP,general:收藏送礼(3.244) | general:满赠规则(2.618) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0),
+gr-024,因为是江西但是我要寄到江苏的江西的运费要贵点呢,billing,退货运费承担,easy,ecd,KEEP,billing:退货运费(2.318) | general:补发/少件(1.881) | complaint:配送延迟(1.459) | complaint:配送错误(1.219) | product:手机(0.0) | product:电脑(0.0),
+gr-025,地址我可以改的您把地址给我下吧,general,修改订单信息,easy,ecd,KEEP,general:地址修改规则(13.377) | complaint:配送错误(3.462) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0),
+gr-026,好吧，那耳机没声音了怎么办,tech,耳机单侧无声,easy,golden_mt,KEEP,tech:声音问题(5.128) | tech:保修条款(2.038) | product:耳机(1.461) | tech:无法开机(1.426) | general:收藏送礼(0.806) | general:满赠规则(0.765),
+gr-027,好的石家庄几天到,general,发货时效,hard,ecd,KEEP,billing:退款流程(5.008) | general:物流跟踪(1.769) | general:补发/少件(1.18) | general:以旧换新(1.154) | product:手机(0.0) | product:电脑(0.0),2026-09-16修正:原标物流单号查询为ecd标注噪声(实验C归因),时效问法应为发货时效
+gr-028,就平时打电话刷视频用，哪款合适？,product,星环 X1 标准版手机规格,hard,golden_mt,KEEP,tech:保修条款(2.038) | product:手机(1.944) | general:收藏送礼(0.806) | general:满赠规则(0.765) | general:微信客服(0.76) | complaint:服务态度差(0.605),
+gr-029,帮我看看这个订单耳机一共订了几个,general,订单查询,easy,golden_mt,KEEP,general:订单查询(3.424) | general:满赠规则(2.272) | general:地址修改规则(2.173) | billing:开具时间(1.734) | billing:电子发票(1.577) | product:耳机(1.461),
+gr-030,怎么说第一次有漏发吗,general,少件处理,hard,ecd,KEEP,general:补发/少件(2.908) | complaint:配送错误(1.731) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0),
+gr-031,怎么还没物流信息你这是要拖到快递放假再来给我发吗,general,物流信息更新延迟,ambiguous,ecd,KEEP,general:物流跟踪(13.371) | general:节假日安排(3.143) | billing:退款流程(2.957) | complaint:配送延迟(2.07) | general:自提柜与签收(1.747) | tech:声音问题(1.556),
+gr-032,怎么还要运费,billing,退货运费承担,easy,ecd,KEEP,billing:退货运费(2.318) | general:补发/少件(1.881) | complaint:配送延迟(1.459) | complaint:配送错误(1.219) | product:手机(0.0) | product:电脑(0.0),
+gr-033,想给家里老人买台手机，帮我推荐下,product,星环 X1 Lite 入门手机规格,easy,golden_mt,KEEP,product:手机(2.207) | tech:保修条款(2.038) | general:收藏送礼(0.806) | general:满赠规则(0.765) | general:微信客服(0.76) | complaint:服务态度差(0.605),
+gr-034,我不想发邮政能换别的么,general,快递选择,hard,ecd,KEEP,general:物流跟踪(2.199) | complaint:配送错误(1.731) | general:补发/少件(1.467) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0),
+gr-035,我买了两份送一份怎么就给我发了一盒什么情况,general,少件处理;满赠活动规则,hard,ecd,KEEP,general:收藏送礼(5.685) | general:满赠规则(2.618) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0),
+gr-036,我刚拍的耳机地址选错了，能改吗,general,未发货改地址,easy,golden_mt,KEEP,general:地址修改规则(8.81) | general:满赠规则(3.037) | complaint:配送错误(2.299) | tech:保修条款(2.038) | product:耳机(1.461) | general:收藏送礼(0.806),
+gr-037,我去不早说发韵达能到我家那儿我就能拿到,general,快递选择,hard,ecd,KEEP,general:活动参与规则(3.085) | billing:退款流程(2.957) | general:物流跟踪(1.769) | tech:系统卡顿(1.679) | tech:接口故障(1.585) | general:地址修改规则(1.388),
+gr-038,我已经关注了，赠品需要备注吗,general,收藏送礼活动,hard,golden_mt,KEEP,general:收藏送礼(8.012) | general:满赠规则(3.383) | general:微信客服(2.853) | billing:所需材料(2.351) | tech:保修条款(2.038) | complaint:服务态度差(0.605),
+gr-039,我打算让淘宝来介入我是也卖家淘宝的规则我懂我看你怎么收场我做淘宝11年了只有十分钟等你答复妈的B不发飚当老娘好欺负吗,complaint,处理流程繁琐投诉,hard,ecd,KEEP,billing:在线支付(2.242) | complaint:专业能力不足(2.122) | general:自提柜与签收(1.779) | general:活动参与规则(1.447) | general:满赠规则(1.151) | product:手机(0.0),
+gr-040,我要退货，运费谁出,billing,退货运费承担,easy,golden_mt,KEEP,billing:退货运费(7.282) | general:售后服务(4.935) | general:补发/少件(2.309) | tech:保修条款(2.038) | complaint:配送延迟(1.914) | complaint:配送错误(1.788),
+gr-041,我退回去的邮费你们也承担吗,billing,退货运费承担,easy,golden_mt,KEEP,billing:退货运费(3.536) | general:补发/少件(1.881) | general:自提柜与签收(1.779) | complaint:配送错误(1.731) | billing:纸质发票(1.613) | product:手机(0.0),
+gr-042,拍十份可以吗不同地址,general,修改订单信息,easy,ecd,KEEP,general:地址修改规则(4.973) | general:满赠规则(2.272) | complaint:配送错误(1.731) | tech:接口故障(1.585) | tech:声音问题(1.556) | product:手机(0.0),
+gr-043,按你说的做了，还是黑屏,tech,手机黑屏,easy,golden_mt,KEEP,tech:无法开机(3.962) | tech:保修条款(2.038) | general:收藏送礼(0.806) | general:满赠规则(0.765) | general:微信客服(0.76) | complaint:服务态度差(0.605),
+gr-044,支持分期付款吗,billing,分期付款,easy,golden_mt,KEEP,billing:分期付款(2.834) | complaint:专业能力不足(2.122) | general:邮箱支持(1.404) | general:物流跟踪(1.139) | product:平板(0.87) | billing:企业采购(0.849),
+gr-045,收到的耳机少了一个配件，能补发吗,general,补发流程,easy,golden_mt,KEEP,general:补发/少件(10.638) | tech:保修条款(3.3) | general:满赠规则(3.037) | complaint:配送错误(2.299) | product:耳机(1.461) | general:收藏送礼(0.806),
+gr-046,收到的耳机有瑕疵，要求补偿,complaint,外观瑕疵投诉;补偿标准说明,ambiguous,golden_mt,KEEP,complaint:外观瑕疵(3.669) | billing:质量问题退款(2.62) | tech:保修条款(2.038) | product:耳机(1.461) | complaint:补偿标准(1.209) | complaint:服务态度差(1.02),
+gr-047,收藏你们店铺有送什么吗,general,收藏送礼活动,easy,golden_mt,KEEP,general:收藏送礼(10.729) | general:满赠规则(2.618) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0),
+gr-048,有货了能通知我吗,general,缺货通知,easy,golden_mt,KEEP,general:缺货补货通知(3.689) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0) | tech:系统卡顿(0.0),
+gr-049,有送什么吗,general,满赠活动规则;收藏送礼活动,ambiguous,ecd,KEEP,general:收藏送礼(3.244) | general:满赠规则(2.618) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0),
+gr-050,朋友买的那款降噪耳机好用吗,product,星环 AirBuds 3 Pro 降噪耳机规格,hard,golden_mt,KEEP,product:耳机(2.725) | product:手机(0.0) | product:电脑(0.0) | tech:无法开机(0.0) | tech:系统卡顿(0.0) | tech:网络连接(0.0),
+gr-051,活动期间不能改吗,general,发货后修改地址,hard,golden_mt,KEEP,general:地址修改规则(7.015) | general:节假日安排(2.453) | general:活动参与规则(2.169) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0),
+gr-052,淘宝为什么没有传照片功能,complaint,功能缺陷投诉,hard,ecd,KEEP,tech:电池优化(2.244) | complaint:功能缺陷(2.122) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0),
+gr-053,满199可以减十元是吧还送啥,general,满赠活动规则,easy,ecd,KEEP,general:满赠规则(7.161) | general:收藏送礼(3.244) | tech:存储管理(2.288) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0),
+gr-054,然后你送一盒,general,满赠活动规则,hard,ecd,KEEP,general:收藏送礼(3.244) | general:满赠规则(2.618) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0),
+gr-055,现在买手机有满赠活动吗，送什么,general,满赠活动规则;节日大促规则,ambiguous,golden_mt,KEEP,general:满赠规则(7.646) | general:活动参与规则(5.05) | general:收藏送礼(4.05) | tech:保修条款(2.038) | complaint:服务态度差(0.605) | complaint:配送错误(0.568),
+gr-056,电脑开不了机怎么回事,tech,电脑无法开机,easy,golden_mt,KEEP,tech:无法开机(5.942) | billing:电子发票(2.191) | product:电脑(1.4) | product:手机(0.0) | product:耳机(0.0) | tech:系统卡顿(0.0),
+gr-057,真不知道这样快递搞什么小区有自取箱不给我放非给放私人那,general,自提柜取件,hard,ecd,KEEP,general:活动参与规则(3.085) | general:物流跟踪(2.824) | general:地址修改规则(2.504) | tech:系统卡顿(1.679) | tech:接口故障(1.585) | complaint:专业能力不足(0.456),
+gr-058,算了，还是留着吧，就是屏幕有点花,tech,手机屏幕碎裂,easy,golden_mt,KEEP,tech:保修条款(4.076) | tech:屏幕问题(2.3) | tech:电池优化(1.615) | general:收藏送礼(1.613) | general:满赠规则(1.53) | general:微信客服(1.521),
+gr-059,纸质发票邮寄费谁出？,billing,纸质发票开具,easy,golden_mt,KEEP,billing:纸质发票(4.807) | billing:退货运费(2.966) | billing:发票抬头(0.758) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0),
+gr-060,耳机不参与买二送一活动吗,general,满赠活动规则;节日大促规则,ambiguous,golden_mt,KEEP,general:活动参与规则(11.66) | general:满赠规则(6.468) | general:地址修改规则(2.798) | tech:系统卡顿(1.679) | tech:接口故障(1.585) | product:耳机(1.461),
+gr-061,耳机什么时候能补货,general,缺货通知,easy,golden_mt,KEEP,general:缺货补货通知(6.733) | product:耳机(1.461) | product:手机(0.0) | product:电脑(0.0) | tech:无法开机(0.0) | tech:系统卡顿(0.0),
+gr-062,耳机左边没声音，能换货吗,tech,耳机单侧无声,hard,golden_mt,KEEP,tech:声音问题(5.128) | general:售后服务(4.935) | tech:保修条款(2.038) | product:耳机(1.461) | tech:无法开机(1.426) | general:收藏送礼(0.806),
+gr-063,能开纸质发票吗,billing,纸质发票开具,easy,golden_mt,KEEP,billing:纸质发票(4.807) | billing:电子发票(2.929) | tech:无法开机(1.981) | billing:发票抬头(0.758) | product:手机(0.0) | product:电脑(0.0),
+gr-064,能改下运费吗,billing,退货运费承担,easy,ecd,KEEP,billing:退货运费(2.318) | general:补发/少件(1.881) | complaint:配送延迟(1.459) | complaint:配送错误(1.219) | product:手机(0.0) | product:电脑(0.0),
+gr-065,能早点发吗，我下周就要用,general,发货时效,hard,golden_mt,KEEP,complaint:配送错误(2.299) | general:物流跟踪(2.199) | tech:保修条款(2.038) | general:补发/少件(1.896) | general:收藏送礼(0.806) | complaint:服务态度差(0.605),
+gr-066,补发的运费谁出？,general,补发流程,hard,golden_mt,KEEP,general:补发/少件(5.882) | billing:退货运费(5.284) | complaint:配送错误(2.95) | complaint:配送延迟(1.459) | product:手机(0.0) | product:电脑(0.0),
+gr-067,订单地址填错了能改吗,general,未发货改地址,easy,golden_mt,KEEP,general:地址修改规则(12.356) | general:订单查询(3.424) | billing:开具时间(1.734) | complaint:配送错误(1.731) | billing:电子发票(1.577) | product:手机(0.0),
+gr-068,还另外送湿巾吗,general,满赠活动规则,hard,ecd,KEEP,general:收藏送礼(3.244) | general:满赠规则(2.618) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0),
+gr-069,还是一次付款吧可以领5元优惠券呢,billing,在线支付方式,hard,ecd,KEEP,general:满赠规则(2.272) | billing:退款流程(2.051) | billing:在线支付(1.613) | billing:分期付款(1.508) | product:耳机(0.064) | product:平板(0.061),
+gr-070,这个平板我要退了,billing,7天无理由退款,hard,golden_mt,KEEP,billing:7天无理由退款(2.278) | billing:退货运费(2.053) | product:平板(1.559) | product:手机(0.0) | product:电脑(0.0) | tech:无法开机(0.0),
+gr-071,送的那罐一起拍下系统自动减价的哦,general,满赠活动规则,hard,ecd,KEEP,general:满赠规则(4.889) | general:缺货补货通知(3.99) | general:收藏送礼(3.244) | billing:电子发票(2.191) | tech:系统卡顿(1.679) | tech:软件崩溃(1.585),
+gr-072,那个平板多少钱来着,product,星环 Pad 11 平板规格,easy,golden_mt,KEEP,complaint:补偿标准(2.07) | product:平板(1.559) | product:手机(0.0) | product:电脑(0.0) | tech:无法开机(0.0) | tech:系统卡顿(0.0),
+gr-073,那几天能到呢,general,发货时效,hard,ecd,KEEP,billing:退款流程(5.008) | general:物流跟踪(1.769) | general:补发/少件(1.18) | general:以旧换新(1.154) | product:手机(0.0) | product:电脑(0.0),2026-09-16修正:原标物流单号查询为ecd标注噪声(实验C归因),时效问法应为发货时效
+gr-074,那到底是发什么快递？,general,快递选择,easy,golden_mt,KEEP,general:物流跟踪(5.023) | general:自提柜与签收(1.747) | complaint:配送错误(1.731) | general:补发/少件(1.467) | product:手机(0.0) | product:电脑(0.0),
+gr-075,那哪些产品参与呢,general,节日大促规则,hard,golden_mt,KEEP,general:活动参与规则(3.537) | billing:质量问题退款(2.142) | general:满赠规则(1.773) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0),
+gr-076,那大概最快能多久啊因为我比较着急,general,发货时效,hard,ecd,KEEP,tech:保修条款(2.038) | billing:开具时间(1.734) | billing:退款流程(1.476) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0),2026-09-16修正:原标物流单号查询为ecd标注噪声(实验C归因),时效问法应为发货时效
+gr-077,那它退货运费谁出,billing,退货运费承担,easy,golden_mt,KEEP,billing:退货运费(7.872) | billing:7天无理由退款(2.278) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0),
+gr-078,那换货一般要多久能到？,general,退换货总流程,hard,golden_mt,KEEP,billing:退款流程(4.434) | general:售后服务(4.218) | tech:保修条款(2.038) | general:缺货补货通知(1.995) | general:物流跟踪(1.769) | billing:开具时间(1.734),
+gr-079,那款能七天无理由退货吗,billing,7天无理由退款,easy,golden_mt,KEEP,general:售后服务(7.361) | billing:7天无理由退款(4.91) | billing:退货运费(2.735) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0),
+gr-080,那现在下单能明天发货吗,general,发货时效,hard,golden_mt,KEEP,general:收藏送礼(2.441) | general:物流跟踪(2.199) | general:地址修改规则(2.173) | complaint:配送延迟(2.07) | product:手机(0.0) | product:电脑(0.0),
+gr-081,那退款一般几天到账？,billing,退款到账时效,easy,golden_mt,KEEP,billing:退款流程(8.678) | general:缺货补货通知(1.995) | complaint:性能不达标(1.973) | general:物流跟踪(1.769) | general:补发/少件(1.18) | billing:质量问题退款(0.795),
+gr-082,那退的这个能开票吗,billing,电子发票开具,easy,golden_mt,KEEP,billing:电子发票(2.191) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0) | tech:系统卡顿(0.0),
+gr-083,那退货运费谁出？,billing,退货运费承担,easy,golden_mt,KEEP,billing:退货运费(5.819) | product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0) | tech:无法开机(0.0) | tech:系统卡顿(0.0),
+gr-084,为什么有运费,general,运费计算规则,easy,ecd,KEEP,,
+gr-085,买多少斤包邮,general,包邮条件,easy,ecd,KEEP,,
+gr-086,价格可以有优惠吗,billing,会员价规则,hard,ecd,KEEP,,
+gr-087,发中通圆通吗,general,快递选择,easy,ecd,KEEP,,
+gr-088,取消重新加双袜子重新拍你说不用,general,订单取消,hard,ecd,KEEP,,
+gr-089,我买5个单套合一个三层套合有优惠吗,billing,批量采购折扣,hard,ecd,KEEP,,
+gr-090,我买的有点多有没有什么优惠,billing,批量采购折扣,hard,ecd,KEEP,,
+gr-091,我前几天加入购物车了今天看失效了,general,订单查询,hard,ecd,KEEP,,
+gr-092,能发顺丰吗？我上次等太久了,general,快递选择;顺丰加急,hard,golden_mt,KEEP,,
+gr-093,行退多少,billing,退款金额计算,hard,ecd,KEEP,,
+gr-094,那老客户还是原价,general,老客回馈,hard,ecd,KEEP,,
+gr-095,顺便问下现在有什么优惠券吗,billing,优惠券使用规则,hard,golden_mt,KEEP,,
+gr-096,X1 Pro 拍照怎么样,product,X1 Pro 摄像头配置,easy,ecd,KEEP,,口语直问
+gr-097,玩游戏选哪个手机好,product,游戏手机推荐,easy,人工构造,KEEP,,字面命中
+gr-098,AirBuds 3 和 Pro 有什么不一样,product,AirBuds 3 与 Pro 区别,easy,人工构造,KEEP,,型号对比字面
+gr-099,有没有适合学生用的笔记本,product,笔记本选购-学生用,easy,人工构造,KEEP,,字面命中
+gr-100,Pad 支持手写笔吗,product,Pad 手写笔兼容,easy,人工构造,KEEP,,字面命中
+gr-101,100W 移动电源是哪个,product,星环 100W 移动电源,easy,人工构造,KEEP,,字面命中
+gr-102,我就想找个待机时间长的，别一天三充,product,长续航手机推荐,hard,ecd,KEEP,,ECD 问法模式改写
+gr-103,上班要经常带电脑跑客户，选哪个合适,product,笔记本选购-办公用,hard,ecd,KEEP,,ECD 问法模式改写
+gr-104,给爸妈买台省心的，字大声音大,product,老人机选购指南,hard,ecd,KEEP,,ECD 问法模式改写
+gr-105,想送女朋友一个惊喜，不知道送啥数码好,product,礼物推荐-送女友,hard,ecd,KEEP,,ECD 问法模式改写
+gr-106,戴耳机跑步会不会掉,product,运动耳机推荐,hard,ecd,KEEP,,场景→品类（跑步→运动）
+gr-107,坐地铁通勤想安静点，有没有隔音好的,product,降噪耳机推荐,hard,ecd,KEEP,,口语诉求→功能（隔音→降噪）
+gr-108,小孩上网课用，别伤眼睛,product,Pad 护眼认证,hard,ecd,KEEP,,ECD 问法模式改写
+gr-109,画插画用哪个平板合适,product,平板选购-绘画用,hard,ecd,KEEP,,用途→选购
+gr-110,做设计的电脑配置要高点,product,笔记本选购-设计师用,hard,人工构造,KEEP,,角色→选购
+gr-111,两台手机有啥差别，就屏幕大小吗,product,X1 与 X1 Pro 区别,hard,ecd,KEEP,,口语指代对比
+gr-112,这耳机戴久了耳朵疼，有没有舒服点的,product,头戴耳机推荐,hard,ecd,KEEP,,舒适诉求→形态
+gr-113,想看直播带货用的全套设备,product,直播开播装备推荐,hard,ecd,KEEP,,场景→方案
+gr-114,学生党预算不多，怎么配最划算,product,学生党性价比方案,hard,ecd,KEEP,,人群+预算→方案
+gr-115,白天开会晚上加班，买台电脑主要写报表做PPT,product,笔记本选购-办公用,hard,人工构造,KEEP,,场景改写（语义不重叠）
+gr-116,3000 块钱能买到啥好手机,product,3000元内手机推荐;星环 X1 Lite 入门手机规格,ambiguous,ecd,KEEP,,预算→推荐与入门款皆沾边
+gr-117,打电话多还要续航久，选哪个,product,长续航手机推荐;商务手机推荐,ambiguous,ecd,KEEP,,续航与商务双意图
+gr-118,X1 和 Fold1 怎么选，都想要,product,X1 Pro 与 Fold1 怎么选;X1 与 X1 Pro 区别,ambiguous,ecd,KEEP,,折叠与直板对比纠缠
+gr-119,想换台电脑，办公和游戏都想要,product,笔记本选购-办公用;星环 GameBook 15 游戏本规格,ambiguous,ecd,KEEP,,办公游戏双需求
+gr-120,屏幕好点的笔记本有推荐吗,product,笔记本屏幕分辨率;星环 Book Pro 14 笔记本规格,ambiguous,ecd,KEEP,,屏幕素质与整机规格皆相关
+gr-121,给小孩买平板，学习还是娱乐,product,平板选购-学习用;Pad 儿童模式,ambiguous,ecd,KEEP,,ECD 问法模式改写
+gr-122,AirBuds 和 HeadBuds 哪个好,product,AirBuds 3 Pro 与 HeadBuds 5 怎么选;头戴耳机推荐,ambiguous,ecd,KEEP,,品牌线对比与形态推荐皆沾边
+gr-123,耳机要不要买带降噪的,product,降噪耳机推荐;半入耳与入耳式区别,ambiguous,ecd,KEEP,,ECD 问法模式改写
+gr-124,充电器和充电宝都要，出门省事,product,星环 65W 氮化镓充电器;星环 磁吸充电宝,ambiguous,ecd,KEEP,,ECD 问法模式改写
+gr-125,手机电脑一起买有优惠吗,product,办公全家桶推荐;学生党性价比方案,ambiguous,ecd,KEEP,,套装方案双条目
+gr-126,安卓平板还是专用学习机好,product,Pad 适用人群;平板选购-学习用,ambiguous,人工构造,KEEP,,人群与用途皆相关
+gr-127,给老人买手机还是平板,product,老人机选购指南;Pad Mini 便携场景,ambiguous,ecd,KEEP,,两类设备取舍
+gr-128,拍照好看和打游戏爽能兼得吗,product,拍照手机推荐;游戏手机推荐,ambiguous,ecd,KEEP,,双卖点对比
+gr-129,轻薄本和游戏本到底买哪个,product,Book Air 与 Book Pro 区别;星环 GameBook 15 游戏本规格,ambiguous,ecd,KEEP,,形态对比跨条目
+gr-130,平板拿来画画和追剧选哪个尺寸,product,平板选购-绘画用;平板选购-追剧用,ambiguous,人工构造,KEEP,,双用途选购
+gr-131,无线充和有线充哪个快,product,星环 30W 无线充电器;星环 65W 氮化镓充电器,ambiguous,ecd,KEEP,,两类充电对比
+gr-132,手机黑屏了怎么办,tech,手机黑屏,easy,人工构造,KEEP,,字面命中
+gr-133,电脑蓝屏怎么处理,tech,电脑蓝屏,easy,人工构造,KEEP,,字面命中
+gr-134,耳机一边没声音,tech,耳机单侧无声,easy,人工构造,KEEP,,字面命中
+gr-135,平板触屏没反应,tech,平板屏幕触控失灵,easy,人工构造,KEEP,,字面命中
+gr-136,手机怎么备份数据,tech,手机数据备份,easy,人工构造,KEEP,,字面命中
+gr-137,换新机怎么把旧手机数据弄过来,tech,数据迁移到新手机,easy,人工构造,KEEP,,字面命中
+gr-138,手机摔了一下，屏幕花了,tech,手机屏幕碎裂,hard,ecd,KEEP,,症状描述
+gr-139,用着用着就卡死了，半天没反应,tech,手机死机无响应,hard,ecd,KEEP,,ECD 问法模式改写
+gr-140,充了一个小时还是百分之二,tech,手机充不进电,hard,ecd,KEEP,,ECD 问法模式改写
+gr-141,听筒有杂音，说话对方听不清,tech,手机麦克风失灵,hard,ecd,KEEP,,症状描述
+gr-142,电池半天就没电，一天两充,tech,手机电池续航差,hard,ecd,KEEP,,症状描述
+gr-143,开机一直转圈进不去桌面,tech,电脑系统崩溃,hard,ecd,KEEP,,症状描述
+gr-144,游戏打着打着就闪退,tech,电脑软件闪退,hard,ecd,KEEP,,场景描述
+gr-145,耳机连上手机一会就断了,tech,耳机连接频繁断开,hard,ecd,KEEP,,症状描述
+gr-146,耳机沙沙响有电流声,tech,耳机底噪大,hard,ecd,KEEP,,症状描述
+gr-147,平板画画笔没反应了,tech,平板手写笔没反应,hard,ecd,KEEP,,症状描述
+gr-148,手机昨天还能用今天打不开了,tech,手机无法开机,hard,ecd,KEEP,,口语症状
+gr-149,电脑触摸板点了没反应,tech,电脑触控板无响应,hard,ecd,KEEP,,症状描述
+gr-150,买的耳机能修吗，还在保修期,tech,保修期内维修流程,hard,人工构造,KEEP,,保修场景
+gr-151,手机老是发热，是不是坏了,tech,手机发热严重;X1 Pro 发热优化建议,ambiguous,ecd,KEEP,,症状与优化建议皆沾边
+gr-152,屏幕碎了能保修吗,tech,保修范围;不在保修范围的场景,ambiguous,ecd,KEEP,,保修边界正反条目
+gr-153,手机数据怎么备份到新机,tech,手机数据备份;数据迁移到新手机,ambiguous,ecd,KEEP,,备份与迁移双条目
+gr-154,怎么把手机里的照片导到电脑,tech,数据迁移服务;数据备份方式对比,ambiguous,人工构造,KEEP,,服务与方式对比皆相关
+gr-155,WiFi 老自动断，是路由器问题还是手机问题,tech,手机WiFi自动断开;手机无法连接WiFi,ambiguous,ecd,KEEP,,断开与连接失败皆相关
+gr-156,耳机丢了能单独配一只吗,tech,耳机单耳丢失购买;耳机丢失找回,ambiguous,ecd,KEEP,,配单耳与找回双诉求
+gr-157,系统更新以后还能退回去吗,tech,系统更新回退;手机系统更新失败,ambiguous,ecd,KEEP,,回退与失败处理皆相关
+gr-158,账号被盗了怎么办,tech,账号异地登录提醒;远程锁定与清除,ambiguous,ecd,KEEP,,提醒与处置双条目
+gr-159,重装系统会不会丢东西,tech,电脑系统重装;电脑文件误删恢复,ambiguous,ecd,KEEP,,重装与文件恢复皆相关
+gr-160,手机可以自己拆开修吗，还是寄回去,tech,寄修流程;官方维修与第三方对比,ambiguous,ecd,KEEP,,寄修与自行维修对比
+gr-161,保修期怎么算，延保值得买吗,tech,产品保修期;延保服务,ambiguous,人工构造,KEEP,,保修与延保皆相关
+gr-162,修手机要多久，能不能加急,tech,维修周期;维修进度短信通知,ambiguous,ecd,KEEP,,周期与进度通知皆相关
+gr-163,旧手机能抵钱吗,tech,以旧换新流程;数据迁移服务,ambiguous,ecd,KEEP,,抵钱与迁移服务皆相关
+gr-164,清理手机垃圾用什么办法,tech,手机存储空间不足;手机恢复出厂设置,ambiguous,人工构造,KEEP,,清理与恢复皆相关
+gr-165,指纹和面容哪个安全,tech,手机指纹解锁失效;手机面部识别失败,ambiguous,人工构造,KEEP,,双生物识别故障
+gr-166,平板总闪退是系统问题吗,tech,平板App闪退;平板存储不足,ambiguous,ecd,KEEP,,闪退根因双条目
+gr-167,客服半天不回消息，我要投诉,complaint,客服响应慢投诉,easy,人工构造,KEEP,,字面命中
+gr-168,收到的手机屏幕有划痕,complaint,外观瑕疵投诉,easy,人工构造,KEEP,,字面命中
+gr-169,赠品是坏的，我要投诉,complaint,赠品质量问题投诉,easy,人工构造,KEEP,,字面命中
+gr-170,快递给我送错地方了，气死,complaint,配送错误投诉,easy,人工构造,KEEP,,字面命中
+gr-171,你们赔偿标准是什么,complaint,补偿标准说明,easy,人工构造,KEEP,,字面命中
+gr-172,态度恶劣，爱答不理的,complaint,客服态度差投诉,hard,ecd,KEEP,,情绪化描述
+gr-173,问啥啥不懂，换个客服又问一遍,complaint,客服专业不足投诉,hard,ecd,KEEP,,行为描述
+gr-174,就退个货来回折腾了三次还没搞定,complaint,处理流程繁琐投诉,hard,ecd,KEEP,,经历描述
+gr-175,打了三次电话每次都说稍等，结果就没下文,complaint,反复转接投诉,hard,ecd,KEEP,,经历描述
+gr-176,买的时候说七天到，现在十天了影子都没有,complaint,配送延迟投诉,hard,ecd,KEEP,,承诺对比
+gr-177,收到的盒子都瘪了，里面的东西还能好？,complaint,包装破损投诉,hard,ecd,KEEP,,外观描述
+gr-178,明明没收到说签收了，骗谁呢,complaint,物流信息造假投诉,hard,ecd,KEEP,,失信描述
+gr-179,不经同意就扔驿站，我腿脚不方便咋取,complaint,擅自放驿站投诉,hard,ecd,KEEP,,服务不满
+gr-180,宣传说 5000 万像素，拍出来糊得跟马赛克似的,complaint,宣传与实物不符投诉,hard,ecd,KEEP,,对比描述
+gr-181,换了一台还是有问题，是不是卖次品,complaint,质量问题重复出现投诉,hard,ecd,KEEP,,经历描述
+gr-182,说好今天回复我，结果又放鸽子,complaint,承诺未兑现投诉,hard,ecd,KEEP,,失信描述
+gr-183,你们的人工怎么老是排队等半天,complaint,客服电话难接通投诉,hard,ecd,KEEP,,体验描述
+gr-184,快递破损了你们不赔，就一句按流程,complaint,快递损坏拒赔投诉,hard,ecd,KEEP,,维权描述
+gr-185,延迟发货到底赔不赔，赔多少,complaint,延迟补偿标准,hard,ecd,KEEP,,补偿咨询口语
+gr-186,客服答应的事转头就不认，算谁的问题,complaint,客服承诺不认账投诉;承诺未兑现投诉,ambiguous,ecd,KEEP,,两投诉条目皆沾边
+gr-187,开箱发现是别人用过的，是不是翻新机,complaint,二手充新投诉;新机开机异常投诉,ambiguous,ecd,KEEP,,翻新与开机异常皆相关
+gr-188,东西有毛病，是想退货还是让赔钱,complaint,质量问题补偿标准;质量问题重复出现投诉,ambiguous,ecd,KEEP,,补偿与投诉双意图
+gr-189,这手机发热烫手，用起来卡，投诉有用吗,complaint,性能不达标投诉;功能缺陷投诉,ambiguous,人工构造,KEEP,,性能与功能缺陷皆相关
+gr-190,投诉了多久能给答复,complaint,投诉处理时限;投诉处理结果反馈,ambiguous,ecd,KEEP,,时限与反馈皆相关
+gr-191,处理结果我不满意还能再投诉吗,complaint,投诉处理结果不满意;投诉升级条件,ambiguous,ecd,KEEP,,不满与升级皆相关
+gr-192,快递员态度差还扔件，找谁投诉,complaint,快递员服务投诉;配送错误投诉,ambiguous,ecd,KEEP,,服务与配送双投诉
+gr-193,少发了一个赠品，是补发还是补偿,complaint,赠品缺失补偿标准;漏发补偿标准,ambiguous,人工构造,KEEP,,两类补偿皆相关
+gr-194,补偿是给钱还是给券,complaint,补偿发放方式;补偿金额计算,ambiguous,人工构造,KEEP,,方式与金额皆相关
+gr-195,这情况能赔多少，怎么算的,complaint,补偿金额计算;质量问题补偿标准,ambiguous,人工构造,KEEP,,金额与标准皆相关
+gr-196,要求人工介入怎么申请,complaint,人工介入申请;工单提交,ambiguous,ecd,KEEP,,介入与工单皆相关
+gr-197,能不能加急处理，真的很急,complaint,加急处理;升级响应时限,ambiguous,ecd,KEEP,,加急与时限皆相关
+gr-198,监管渠道能投诉你们吗,complaint,监管渠道投诉说明;投诉材料准备,ambiguous,ecd,KEEP,,渠道与材料皆相关
+gr-199,客服不理人，打客服电话也没人接,complaint,线上客服转接慢投诉;客服电话难接通投诉,ambiguous,人工构造,KEEP,,双渠道投诉
+gr-200,处理了半个月还没结果，我要找主管,complaint,投诉处理时限;主管处理通道,ambiguous,人工构造,KEEP,,时限与主管皆相关
+gr-201,外观瑕疵和功能问题能一起赔偿吗,complaint,外观瑕疵投诉;质量问题补偿标准,ambiguous,人工构造,KEEP,,瑕疵与补偿皆相关
+gr-202,7 天无理由退款怎么申请,billing,7天无理由退款,easy,人工构造,KEEP,,字面命中
+gr-203,发票能开公司抬头吗,billing,发票抬头修改,easy,人工构造,KEEP,,字面命中
+gr-204,分期付款有什么要求,billing,分期付款,easy,人工构造,KEEP,,字面命中
+gr-205,满 199 减 30 怎么用,billing,满减活动规则,easy,ecd,KEEP,,活动问法口语
+gr-206,昨天刚买今天就降价了，能退差价吗,billing,价格保护政策,hard,ecd,KEEP,,场景描述
+gr-207,退货的运费谁出,billing,退货运费承担,hard,ecd,KEEP,,口语问法
+gr-208,买东西送的券能变现吗,billing,红包提现说明,hard,ecd,KEEP,,口语问法
+gr-209,退款一般多久到账,billing,退款到账时效;超时自动退款,ambiguous,ecd,KEEP,,时效与自动退款皆相关
+gr-210,优惠券下单后退款，券还回来吗,billing,优惠券退款处理;优惠券有效期,ambiguous,ecd,KEEP,,退款处理与有效期皆相关
+gr-211,能开发票吗，要报销用,billing,电子发票开具;发票内容明细,ambiguous,ecd,KEEP,,开票与明细皆相关
+gr-212,买贵了能退吗，怎么退,billing,买贵退差;价格保护政策,ambiguous,ecd,KEEP,,退差与保价皆相关
+gr-213,分期退款的利息怎么算,billing,分期订单退款;分期付款,ambiguous,ecd,KEEP,,退款与分期皆相关
+gr-214,发票开错了能改吗,billing,发票抬头修改;发票重开,ambiguous,ecd,KEEP,,抬头与重开皆相关
+gr-215,退款被拒了怎么办,billing,退款申请被拒原因;退款被拒申诉,ambiguous,ecd,KEEP,,原因与申诉皆相关
+gr-216,用花呗买的退款退到哪,billing,退款原路返回;组合支付退款拆分,ambiguous,ecd,KEEP,,原路与拆分皆相关
+gr-217,换货和退货哪个划算,billing,换货与新购区别;7天无理由退款,ambiguous,人工构造,KEEP,,换货与退货对比

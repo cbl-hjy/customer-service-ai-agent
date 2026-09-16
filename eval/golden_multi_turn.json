@@ -1,0 +1,849 @@
+{
+ "name": "multi_turn_golden_v4",
+ "version": "4.1.1",
+ "description": "多轮对话金标集 v4（真实语料扩容版）：在 v3（16 case/35 轮）基础上，按 W5 P0 扩样清单新增 4 个真实语料模式（收藏送礼/满赠规则/补发重拍/换货），并补 general 满赠规则条目修复 mt-206 缺口。仍基于 E-commerce Dialogue Corpus (COLING 2018, cooelf/DeepUtteranceAggregation) 真实人-人客服对话抽取，保留真实多轮结构、口语指代、跳域、连续追问等模式，映射到本项目 knowledge_base.json 可检索域。每个 case 的 source 标注原始数据出处（split/idx），可独立查证。 v4.1.0（2026-08-17）：追加 4 个跨域复合查询 case（mt-401~404），作为 A5 查询分解的测量前置（before 基线）。",
+ "isolated": true,
+ "corpus": {
+  "name": "E-commerce Dialogue Corpus",
+  "origin": "cooelf/DeepUtteranceAggregation (COLING 2018)",
+  "license_note": "真实淘宝人-人客服对话，用于检索式对话研究；本项目仅抽取对话结构并重写领域实体，不复制原始文本",
+  "mapping_note": "原始域(茶具/坚果/母婴/刀纸)→本项目域(手机/电脑/耳机/平板/退款/发票/故障)；保留对话结构、多轮意图、指代与跳域模式"
+ },
+ "cases": [
+  {
+   "id": "mt-201",
+   "persona": "退货退款闭环（质量+邮费+退款）",
+   "objective": "真实售后多轮：质量问题→退货→邮费→退款，跨轮意图保持",
+   "source": "ECD train idx=32（24轮真实退货对话结构）",
+   "turns": [
+    {
+     "user": "刚买的耳机有一边突然没声音了，能退吗",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "质量问题退货诉求 → 退货申请归 billing（退款流程），答退货条件/运费承担"
+    },
+    {
+     "user": "那退货运费谁出？",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "质量问题退货运费商家承担，知识库有",
+     "answer_checks": {
+      "must_contain": [
+       "运费",
+       "承担"
+      ]
+     }
+    },
+    {
+     "user": "我退回去的邮费你们也承担吗",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "质量问题退货买家垫付商家承担，继续退货话题",
+     "answer_checks": {
+      "must_contain": [
+       "承担"
+      ]
+     }
+    },
+    {
+     "user": "那退款一般几天到账？",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "退款流程知识库 3-5 工作日到账",
+     "answer_checks": {
+      "must_contain": [
+       "工作日",
+       "到账"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-202",
+   "persona": "改地址+发货时间+加急（跨域追问）",
+   "objective": "用户连续追问发货/加急，多轮意图保持",
+   "source": "ECD train idx=26（10轮 地址选错+发货急 结构）",
+   "turns": [
+    {
+     "user": "我刚拍的耳机地址选错了，能改吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "订单/地址修改咨询 → 常见服务/订单查询"
+    },
+    {
+     "user": "什么时候发货啊",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "物流/发货时间 → 常见服务",
+     "answer_checks": {
+      "must_contain": [
+       "发货"
+      ]
+     }
+    },
+    {
+     "user": "能早点发吗，我下周就要用",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "加急需求，知识库有紧急处理条款。must_contain 纳入语义等价同义词（复现5次：LLM 用 最快/尽早/优先/加急 替代 尽快）",
+     "answer_checks": {
+      "must_contain_any": [
+       "尽快",
+       "加急",
+       "尽早",
+       "优先",
+       "最快"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-203",
+   "persona": "快递公司选择（轻微不满）",
+   "objective": "用户对快递选择不满，需安抚并给可执行答复",
+   "source": "ECD test idx=0 + idx=40（4/12轮 快递选择 结构）",
+   "turns": [
+    {
+     "user": "能发顺丰吗？我上次等太久了",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "快递选择咨询 → 物流/常见服务",
+     "answer_checks": {
+      "must_contain": [
+       "快递"
+      ]
+     }
+    },
+    {
+     "user": "那到底是发什么快递？",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "物流跟踪规则，可答（2026-08-16 修正：原 must_contain=[物流] 检查词选错——用户问哪家快递，答案以快递公司名作答为正确行为，W4 两轮均假阴性）",
+     "answer_checks": {
+      "must_contain_any": [
+       "快递",
+       "中通",
+       "圆通",
+       "韵达",
+       "顺丰",
+       "EMS"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-204",
+   "persona": "发票+店铺活动跳域",
+   "objective": "发票咨询中跳优惠券/活动，跨域意图保持",
+   "source": "ECD train idx=22（22轮 发票+优惠 结构）",
+   "turns": [
+    {
+     "user": "可以开发票吗？我要公司抬头",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "发票咨询 → billing(发票抬头)",
+     "answer_checks": {
+      "must_contain": [
+       "发票"
+      ]
+     }
+    },
+    {
+     "user": "顺便问下现在有什么优惠券吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "优惠咨询 → 会员/常见服务",
+     "answer_checks": {
+      "must_contain": [
+       "优惠"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-205",
+   "persona": "产品选型（帮人选）+ 指代",
+   "objective": "用户帮他人选购，需澄清需求并推荐",
+   "source": "ECD train idx=72（12轮 产品选型 结构）",
+   "turns": [
+    {
+     "user": "想给家里老人买台手机，帮我推荐下",
+     "expect_decision": "answer",
+     "label_hint": "product_info",
+     "rationale": "产品选购 → product_info",
+     "answer_checks": {
+      "must_contain": [
+       "X",
+       "Lite"
+      ]
+     }
+    },
+    {
+     "user": "就平时打电话刷视频用，哪款合适？",
+     "expect_decision": "answer",
+     "label_hint": "product_info",
+     "rationale": "需求收敛，仍产品咨询。2026-08-17 修订：检查词 X 与意图脱节（假阴性）——轮2 检索 top5 均为指南/推荐类条目（老人机选购指南/游戏手机推荐/拍照手机推荐…）不含型号，06-08 基于检索内容给出系列级推荐（模型行为与检索一致），强求平台型号 X 无信息依据；改为 must_contain_any[X/型号/系列] 检验'给出具体方向'",
+     "answer_checks": {
+      "must_contain_any": [
+       "X",
+       "型号",
+       "系列"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-206",
+   "persona": "满赠/优惠规则+物流慢",
+   "objective": "活动规则咨询穿插对物流不满，需区分意图",
+   "source": "ECD train idx=40（12轮 满赠+物流慢 结构）",
+   "turns": [
+    {
+     "user": "买耳机送什么？是拍一个还是拍两个？",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "活动规则咨询 → 常见服务/满赠规则",
+     "answer_checks": {
+      "must_contain": [
+       "赠品"
+      ]
+     }
+    },
+    {
+     "user": "上次发的快递太慢了，这次能换个快递吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "物流不满+快递选择 → 物流",
+     "answer_checks": {
+      "must_contain": [
+       "快递"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-207",
+   "persona": "查订单/补货（指代）",
+   "objective": "多轮查订单+补货追问",
+   "source": "ECD train idx=30（12轮 查订单 结构）",
+   "turns": [
+    {
+     "user": "帮我看看这个订单耳机一共订了几个",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "订单查询 → 常见服务",
+     "answer_checks": {
+      "must_contain": [
+       "订单"
+      ]
+     }
+    },
+    {
+     "user": "那现在下单能明天发货吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "发货时间 → 物流"
+    }
+   ]
+  },
+  {
+   "id": "mt-208",
+   "persona": "投诉升级（态度差）",
+   "objective": "明确投诉 → 升级人工",
+   "source": "ECD 真实投诉模式（人工客服不满）",
+   "turns": [
+    {
+     "user": "你们客服太敷衍了，气死我了，我要投诉！",
+     "expect_decision": "escalate",
+     "label_hint": "complaint",
+     "rationale": "明确投诉 → 升级人工",
+     "answer_checks": {
+      "must_not_contain": [
+       "系统错误"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-209",
+   "persona": "退款改口（先退后留）",
+   "objective": "用户前后改口，以最新意图为准",
+   "source": "ECD 真实改口对话（真实客服常见）",
+   "turns": [
+    {
+     "user": "这个平板我要退了",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "退货 → billing",
+     "answer_checks": {
+      "must_contain": [
+       "退"
+      ]
+     }
+    },
+    {
+     "user": "算了，还是留着吧，就是屏幕有点花",
+     "expect_decision": "answer",
+     "label_hint": "technical_support",
+     "rationale": "改口为屏幕问题 → 技术支持",
+     "answer_checks": {
+      "must_contain": [
+       "屏幕"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-210",
+   "persona": "设备故障逐步排查（真实多轮）",
+   "objective": "技术支持多轮定位（真实故障对话结构）",
+   "source": "ECD 真实helpdesk模式（连续追问定位）",
+   "turns": [
+    {
+     "user": "电脑开不了机怎么回事",
+     "expect_decision": "answer",
+     "label_hint": "technical_support",
+     "rationale": "无法开机 → 技术支持",
+     "answer_checks": {
+      "must_contain": [
+       "电源"
+      ]
+     }
+    },
+    {
+     "user": "按你说的做了，还是黑屏",
+     "expect_decision": "answer",
+     "label_hint": "technical_support",
+     "rationale": "追加深层排查(屏幕/硬件)",
+     "answer_checks": {
+      "must_contain": [
+       "屏幕"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-211",
+   "persona": "OOD 护栏（越界）",
+   "objective": "越界请求拒绝 + 业务回归",
+   "source": "ECD 真实闲聊越界（真实客服被要求闲聊）",
+   "turns": [
+    {
+     "user": "你会写诗吗，给我写一首",
+     "expect_decision": "refuse",
+     "label_hint": "out_of_scope",
+     "rationale": "创作越界 → 拒答不升级"
+    },
+    {
+     "user": "好吧，那耳机没声音了怎么办",
+     "expect_decision": "answer",
+     "label_hint": "technical_support",
+     "rationale": "故障回归 → 技术支持",
+     "answer_checks": {
+      "must_contain": [
+       "声音"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-212",
+   "persona": "发票纸质+邮寄费（跳域细分）",
+   "objective": "发票多轮细分咨询",
+   "source": "ECD 真实发票对话结构（发票域细分）",
+   "turns": [
+    {
+     "user": "能开纸质发票吗",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "纸质发票可开，知识库有",
+     "answer_checks": {
+      "must_contain": [
+       "纸质",
+       "发票"
+      ]
+     }
+    },
+    {
+     "user": "纸质发票邮寄费谁出？",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "邮寄费用客户承担，知识库有",
+     "answer_checks": {
+      "must_contain": [
+       "邮寄",
+       "承担"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-213",
+   "persona": "退货中途转人工",
+   "objective": "先正常咨询，中途明确要求人工 → 强升级",
+   "source": "ECD 真实升级模式（用户不耐烦转人工）",
+   "turns": [
+    {
+     "user": "我要退货，运费谁出",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "正常退货咨询"
+    },
+    {
+     "user": "别啰嗦了，直接给我转人工客服！",
+     "expect_decision": "escalate",
+     "label_hint": "complaint",
+     "rationale": "明确要求人工 → 强制升级"
+    }
+   ]
+  },
+  {
+   "id": "mt-214",
+   "persona": "跨轮指代（那款耳机）",
+   "objective": "产品→退款跳域指代消解",
+   "source": "ECD 真实指代模式（那款/这个）",
+   "turns": [
+    {
+     "user": "朋友买的那款降噪耳机好用吗",
+     "expect_decision": "answer",
+     "label_hint": "product_info",
+     "rationale": "产品咨询（口语无型号）"
+    },
+    {
+     "user": "那款能七天无理由退货吗",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "指代上轮耳机，问退货 → billing",
+     "answer_checks": {
+      "must_contain": [
+       "7",
+       "天"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-215",
+   "persona": "三期分期+到账（支付域）",
+   "objective": "支付方式多轮咨询",
+   "source": "ECD 真实支付咨询结构",
+   "turns": [
+    {
+     "user": "支持分期付款吗",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "分期付款知识库有",
+     "answer_checks": {
+      "must_contain": [
+       "分期"
+      ]
+     }
+    },
+    {
+     "user": "分期手续费怎么算的",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "手续费率 2.5%-5% 知识库有",
+     "answer_checks": {
+      "must_contain": [
+       "手续费"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-216",
+   "persona": "强难：连续3次模糊指代跨域（压测）",
+   "objective": "挑战项：连续模糊指代跨 产品→退款→发票，预期可能失败，如实记录",
+   "source": "ECD 真实口语（这个/它/那）压测",
+   "turns": [
+    {
+     "user": "那个平板多少钱来着",
+     "expect_decision": "answer",
+     "label_hint": "product_info",
+     "rationale": "价格(1999-5999)知识库可答"
+    },
+    {
+     "user": "那它退货运费谁出",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "'它'指平板，问退货 → billing"
+    },
+    {
+     "user": "那退的这个能开票吗",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "退货开票 → billing(发票)"
+    }
+   ]
+  },
+  {
+   "id": "mt-301",
+   "persona": "收藏/关注送礼（真实满赠前置）",
+   "objective": "收藏送礼规则咨询 → 确认已关注 → 赠品条件追问，跨轮保持",
+   "source": "ECD train idx=2 + idx=58（12/22轮 收藏送礼 结构）",
+   "turns": [
+    {
+     "user": "收藏你们店铺有送什么吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "收藏送礼规则咨询 → 常见服务/收藏送礼",
+     "answer_checks": {
+      "must_contain": [
+       "收藏"
+      ]
+     }
+    },
+    {
+     "user": "我已经关注了，赠品需要备注吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "关注后赠品条件追问，活动规则可答",
+     "answer_checks": {
+      "must_contain": [
+       "赠品"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-302",
+   "persona": "满赠/买赠规则（活动排除）",
+   "objective": "满赠规则咨询 + 排除规则区分（哪个参与哪个不参与）",
+   "source": "ECD train idx=0（4轮 买二送一排除 结构）+ idx=58（随单送）",
+   "turns": [
+    {
+     "user": "现在买手机有满赠活动吗，送什么",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "满赠规则咨询 → 常见服务/满赠规则",
+     "answer_checks": {
+      "must_contain": [
+       "赠品"
+      ]
+     }
+    },
+    {
+     "user": "优惠耳机也参与满赠活动吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "活动排除规则，区分参与与否，可答（2026-08-17 修订：检查词[赠品]为轮1'送什么'意图复用，与轮2'参与与否'意图脱节致假阴性；改为[满赠]）",
+     "answer_checks": {
+      "must_contain": [
+       "满赠"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-303",
+   "persona": "补发/重拍（漏发售后）",
+   "objective": "漏发 → 补发处理 + 运费承担，安抚可执行承诺",
+   "source": "ECD train idx=4（14轮 重拍 结构）+ idx=10（30轮 补发货 结构）",
+   "turns": [
+    {
+     "user": "收到的耳机少了一个配件，能补发吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "漏发补发属常见服务（商品补发/运费承担），可一线按政策解答，不升级",
+     "answer_checks": {
+      "must_contain": [
+       "补发"
+      ]
+     }
+    },
+    {
+     "user": "补发的运费谁出？",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "补发运费商家承担，知识库有",
+     "answer_checks": {
+      "must_contain": [
+       "运费",
+       "承担"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-304",
+   "persona": "换货（质量问题换货流程）",
+   "objective": "质量问题换货 → 换货流程，跨轮保持换货意图",
+   "source": "ECD 质量问题售后结构（30天质量问题换货条款）",
+   "turns": [
+    {
+     "user": "耳机左边没声音，能换货吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "质量问题换货 → 常见服务/售后服务（30天质量问题换货）",
+     "answer_checks": {
+      "must_contain": [
+       "换货"
+      ]
+     }
+    },
+    {
+     "user": "那换货一般要多久能到？",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "换货流程咨询，售后条款可答",
+     "answer_checks": {
+      "must_contain": [
+       "换货"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-305",
+   "persona": "折扣排除规则（活动细则）",
+   "objective": "活动参与/排除规则咨询，区分哪个参与哪个不参与",
+   "source": "ECD train idx=0（牛肉干95折不参与买二送一 结构）",
+   "turns": [
+    {
+     "user": "耳机不参与买二送一活动吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "活动参与规则咨询 → 常见服务/活动规则",
+     "answer_checks": {
+      "must_contain_any": [
+       "不参与",
+       "排除",
+       "活动",
+       "参与"
+      ]
+     }
+    },
+    {
+     "user": "那哪些产品参与呢",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "追问参与范围，知识库有活动参与规则",
+     "answer_checks": {
+      "must_contain_any": [
+       "标注",
+       "参与",
+       "详情页",
+       "商品"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-306",
+   "persona": "缺货补货咨询",
+   "objective": "缺货 → 补货时机 + 到货通知",
+   "source": "ECD test idx=335（没货→备注优先发货 结构）",
+   "turns": [
+    {
+     "user": "耳机什么时候能补货",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "缺货补货咨询 → 常见服务",
+     "answer_checks": {
+      "must_contain_any": [
+       "补货",
+       "到货",
+       "库存",
+       "通知"
+      ]
+     }
+    },
+    {
+     "user": "有货了能通知我吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "到货通知订阅，知识库有缺货补货通知条目",
+     "answer_checks": {
+      "must_contain_any": [
+       "通知",
+       "提醒",
+       "到货",
+       "订阅"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-307",
+   "persona": "地址修改约束（活动期间）",
+   "objective": "改地址约束 → 区分可改/不可改 → 解决方案",
+   "source": "ECD train idx=4（忘改地址→活动期间不改→重拍 结构）",
+   "turns": [
+    {
+     "user": "订单地址填错了能改吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "地址修改咨询 → 常见服务",
+     "answer_checks": {
+      "must_contain_any": [
+       "地址",
+       "修改",
+       "改",
+       "发货"
+      ]
+     }
+    },
+    {
+     "user": "活动期间不能改吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "追问活动期间约束，知识库有地址修改规则",
+     "answer_checks": {
+      "must_contain_any": [
+       "活动",
+       "不改",
+       "重拍",
+       "取消",
+       "不支持"
+      ]
+     }
+    },
+    {
+     "user": "那怎么办，重拍吗",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "追问解决方案，知识库有重拍指引",
+     "answer_checks": {
+      "must_contain_any": [
+       "重拍",
+       "取消",
+       "重新",
+       "重新下单"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-308",
+   "persona": "售后补偿（瑕疵→补偿）",
+   "objective": "产品瑕疵要求补偿 → 升级人工 + 补偿标准",
+   "source": "ECD train idx=32（有杂质→退3元差价→协商 结构）",
+   "turns": [
+    {
+     "user": "收到的耳机有瑕疵，要求补偿",
+     "expect_decision": "escalate",
+     "label_hint": "complaint",
+     "rationale": "产品瑕疵+要求补偿 = 明确不满 → complaint → 升级人工",
+     "answer_checks": {
+      "must_not_contain": [
+       "系统错误"
+      ]
+     }
+    },
+    {
+     "user": "你们的补偿标准是什么",
+     "expect_decision": "answer",
+     "label_hint": "complaint",
+     "rationale": "直接询问补偿标准=客观咨询（2026-08-16 更新：KB 601 扩容新增补偿标准条目后 answer 合理；轮1瑕疵个案补偿诉求仍期望 escalate 人工裁量不变）",
+     "answer_checks": {
+      "must_contain_any": [
+       "补偿",
+       "标准"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-401",
+   "persona": "复合售后三连（退货+运费+发票）",
+   "objective": "跨域复合：退货申请(billing)+运费承担(billing)+发票(billing)，考察单域检索是否覆盖全部诉求",
+   "source": "复合诉求合成（真实语料多诉求句合并，2026-08-17 测量前置）",
+   "turns": [
+    {
+     "user": "耳机有质量问题想退货，运费谁出？退货后发票还能补开吗？",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "复合三诉求：退货申请/运费承担/发票补开。质量问题退货运费商家承担（KB 有）；发票未开票前可改、已开可重开（KB 有）。考察回答是否三诉求全覆盖",
+     "answer_checks": {
+      "must_contain": [
+       "运费",
+       "发票"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-402",
+   "persona": "复合售后：换货+补偿",
+   "objective": "跨域复合：换货(general)+补偿(complaint)，考察是否覆盖双诉求",
+   "source": "复合诉求合成（2026-08-17 测量前置）",
+   "turns": [
+    {
+     "user": "收到的手机屏幕碎了，能换货吗？能给点补偿吗？",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "复合双诉求：换货流程(general)+补偿(complaint 补偿标准)。KB 有换货服务与补偿标准条目。考察回答是否双诉求全覆盖",
+     "answer_checks": {
+      "must_contain": [
+       "换货",
+       "补偿"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-403",
+   "persona": "复合支付：分期+发票",
+   "objective": "跨域复合：分期付款(billing)+发票(billing)，billing 域内部双诉求",
+   "source": "复合诉求合成（2026-08-17 测量前置）",
+   "turns": [
+    {
+     "user": "这台电脑能分期付款吗？分期的话发票怎么开？",
+     "expect_decision": "answer",
+     "label_hint": "billing",
+     "rationale": "复合双诉求：分期付款（KB 支付方式有）+发票开具（KB 发票服务有）。考察回答是否双诉求全覆盖",
+     "answer_checks": {
+      "must_contain": [
+       "分期",
+       "发票"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mt-404",
+   "persona": "复合订单：发货时效+缺货退款",
+   "objective": "跨域复合：发货时效(general)+缺货退款(general/billing)，general 域双诉求",
+   "source": "复合诉求合成（2026-08-17 测量前置）",
+   "turns": [
+    {
+     "user": "预售的耳机多久发货？要是等太久能退款吗？",
+     "expect_decision": "answer",
+     "label_hint": "general_inquiry",
+     "rationale": "复合双诉求：预售发货时效（KB 物流时效有）+缺货超期退款（KB 缺货与补货有）。考察回答是否双诉求全覆盖",
+     "answer_checks": {
+      "must_contain": [
+       "发货",
+       "退款"
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

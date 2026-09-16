@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>待人工处理工单 · 多智能体客服系统</title>
+    <style>
+        :root {
+            --bg-page: #ffffff;
+            --bg-sidebar: #f7f7f7;
+            --bg-card: #ffffff;
+            --bg-hover: #ececec;
+            --bg-chip: #f5f5f5;
+            --bg-accent: #e8f0fe;
+            --text: #333333;
+            --text-muted: #666666;
+            --text-faint: #999999;
+            --border: #e8e8e8;
+            --radius: 12px;
+            --radius-lg: 16px;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+                "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 15px;
+            color: var(--text);
+            background: var(--bg-page);
+            -webkit-font-smoothing: antialiased;
+            padding: 32px 24px;
+        }
+
+        .wrap {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .sub {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            margin-left: 16px;
+        }
+
+        .nav a:hover {
+            color: var(--text);
+        }
+
+        .count-badge {
+            display: inline-block;
+            background: var(--bg-accent);
+            color: #1a56db;
+            border-radius: 999px;
+            padding: 2px 10px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .ticket {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 18px 20px;
+            margin-bottom: 14px;
+        }
+
+        .ticket-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .ticket-id {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .ticket-time {
+            font-size: 12px;
+            color: var(--text-faint);
+        }
+
+        .ticket-q {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .row {
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .row .label {
+            color: var(--text-muted);
+            margin-right: 6px;
+        }
+
+        .reason {
+            display: inline-block;
+            background: #fdecec;
+            color: #b42318;
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .summary {
+            background: var(--bg-chip);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .badge {
+            display: inline-block;
+            border-radius: 999px;
+            padding: 2px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge.pending {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        .badge.processing {
+            background: #e8f0fe;
+            color: #1a56db;
+        }
+
+        .badge.resolved {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .meta-line {
+            font-size: 12px;
+            color: var(--text-faint);
+            margin-top: 4px;
+        }
+
+        .actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .actions button {
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text);
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .actions button:hover {
+            background: var(--bg-hover);
+        }
+
+        .actions button.primary {
+            background: #1a56db;
+            border-color: #1a56db;
+            color: #fff;
+        }
+
+        .actions button.danger {
+            background: #b42318;
+            border-color: #b42318;
+            color: #fff;
+        }
+
+        .empty {
+            text-align: center;
+            color: var(--text-faint);
+            padding: 60px 0;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <div>
+                <h1>待人工处理工单<span class="count-badge">{{ tickets | length }}</span></h1>
+                <div class="sub">由系统升级路由标记（escalated=True）的工单，人工客服在此集中处理</div>
+            </div>
+            <div class="nav">
+                <a href="/">← 返回客服界面</a>
+            </div>
+        </header>
+
+        {% if tickets %}
+            {% for t in tickets %}
+                <div class="ticket">
+                    <div class="ticket-head">
+                        <span class="ticket-id">工单 #{{ t.thread_id[:8] }}</span>
+                        <span>
+                            <span class="badge {{ t.status }}">{{ {'pending': '待处理', 'processing': '处理中', 'resolved': '已解决'}[t.status] }}</span>
+                            <span class="ticket-time">{{ t.ticket_created_at }}</span>
+                        </span>
+                    </div>
+                    <div class="ticket-q">{{ t.last_user_question or t.customer_query or '（无问题内容）' }}</div>
+                    <div class="row"><span class="label">升级原因：</span><span class="reason">{{ t.escalation_reason }}</span></div>
+                    <div class="row"><span class="label">消息数：</span>{{ t.message_count }}</div>
+                    {% if t.assigned_at %}<div class="meta-line">认领于 {{ t.assigned_at }}</div>{% endif %}
+                    {% if t.resolved_at %}<div class="meta-line">解决于 {{ t.resolved_at }}</div>{% endif %}
+                    {% if t.escalation_summary %}
+                        <div class="summary">{{ t.escalation_summary }}</div>
+                    {% endif %}
+                    <div class="actions" data-thread="{{ t.thread_id }}">
+                        {% if t.status == 'pending' %}
+                            <button data-action="claim" class="primary">认领</button>
+                            <button data-action="resolve">标记解决</button>
+                        {% elif t.status == 'processing' %}
+                            <button data-action="resolve" class="primary">标记解决</button>
+                        {% elif t.status == 'resolved' %}
+                            <button data-action="reopen">重开</button>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty">暂无待处理工单（无升级记录）</div>
+        {% endif %}
+    </div>
+
+    <script>
+        // V10：工单状态流转（认领/解决/重开）——fetch POST + 刷新
+        document.querySelectorAll('.actions button[data-action]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var action = btn.getAttribute('data-action');
+                var actions = btn.closest('.actions');
+                var thread = actions ? actions.getAttribute('data-thread') : '';
+                if (!thread) return;
+                btn.disabled = true;
+                fetch('/api/tickets/' + encodeURIComponent(thread) + '/' + action, { method: 'POST' })
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        if (!data.ok) { alert(data.message || '操作失败'); }
+                        location.reload();
+                    })
+                    .catch(function () { alert('网络错误'); location.reload(); });
+            });
+        });
+    </script>
+</body>
+
+</html>

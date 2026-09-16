@@ -1,0 +1,389 @@
+{
+ "mapping": {
+  "7天无理由退款": {
+   "v2_title": "7天无理由退款",
+   "method": "exact",
+   "domain": "billing"
+  },
+  "退货运费": {
+   "v2_title": "退货运费承担",
+   "method": "fuzzy",
+   "domain": "billing",
+   "score": 0.6,
+   "kw_match": false
+  },
+  "质量问题退款": {
+   "v2_title": "质量问题退款",
+   "method": "exact",
+   "domain": "billing"
+  },
+  "电子发票": {
+   "v2_title": "电子发票开具",
+   "method": "fuzzy",
+   "domain": "billing",
+   "score": 0.6,
+   "kw_match": false
+  },
+  "纸质发票": {
+   "v2_title": "纸质发票开具",
+   "method": "fuzzy",
+   "domain": "billing",
+   "score": 0.6,
+   "kw_match": false
+  },
+  "发票抬头": {
+   "v2_title": "发票抬头修改",
+   "method": "fuzzy",
+   "domain": "billing",
+   "score": 0.6,
+   "kw_match": false
+  },
+  "在线支付": {
+   "v2_title": "在线支付方式",
+   "method": "fuzzy",
+   "domain": "billing",
+   "score": 0.6,
+   "kw_match": false
+  },
+  "分期付款": {
+   "v2_title": "分期付款",
+   "method": "exact",
+   "domain": "billing"
+  },
+  "企业采购": {
+   "v2_title": "企业采购价",
+   "method": "fuzzy",
+   "domain": "billing",
+   "score": 0.75,
+   "kw_match": false
+  },
+  "无法开机": {
+   "v2_title": "平板无法开机",
+   "method": "fuzzy",
+   "domain": "tech",
+   "score": 0.6,
+   "kw_match": true
+  },
+  "保修条款": {
+   "v2_title": "产品保修期",
+   "method": "fuzzy",
+   "domain": "tech",
+   "score": 0.33,
+   "kw_match": true
+  },
+  "在线客服": {
+   "v2_title": "在线客服入口",
+   "method": "fuzzy",
+   "domain": "general",
+   "score": 0.6,
+   "kw_match": false
+  },
+  "门店服务": {
+   "v2_title": "门店服务",
+   "method": "exact",
+   "domain": "general"
+  },
+  "客服热线": {
+   "v2_title": "客服热线",
+   "method": "exact",
+   "domain": "general"
+  },
+  "邮箱支持": {
+   "v2_title": "邮箱支持",
+   "method": "exact",
+   "domain": "general"
+  },
+  "微信客服": {
+   "v2_title": "微信客服",
+   "method": "exact",
+   "domain": "general"
+  },
+  "订单查询": {
+   "v2_title": "订单查询",
+   "method": "exact",
+   "domain": "general"
+  },
+  "以旧换新": {
+   "v2_title": "以旧换新",
+   "method": "exact",
+   "domain": "general"
+  },
+  "自提柜与签收": {
+   "v2_title": "包裹签收要求",
+   "method": "fuzzy",
+   "domain": "general",
+   "score": 0.4,
+   "kw_match": true
+  },
+  "售后服务": {
+   "v2_title": "售后服务范围",
+   "method": "fuzzy",
+   "domain": "general",
+   "score": 0.6,
+   "kw_match": false
+  },
+  "补发/少件": {
+   "v2_title": "少件处理",
+   "method": "fuzzy",
+   "domain": "general",
+   "score": 0.25,
+   "kw_match": true
+  },
+  "收藏送礼": {
+   "v2_title": "收藏送礼活动",
+   "method": "fuzzy",
+   "domain": "general",
+   "score": 0.6,
+   "kw_match": false
+  },
+  "满赠规则": {
+   "v2_title": "满赠活动规则",
+   "method": "fuzzy",
+   "domain": "general",
+   "score": 0.4,
+   "kw_match": true
+  },
+  "活动参与规则": {
+   "v2_title": "满赠活动规则",
+   "method": "fuzzy",
+   "domain": "general",
+   "score": 0.4,
+   "kw_match": false
+  },
+  "缺货补货通知": {
+   "v2_title": "缺货通知",
+   "method": "fuzzy",
+   "domain": "general",
+   "score": 0.6,
+   "kw_match": true
+  },
+  "地址修改规则": {
+   "v2_title": "发货后修改地址",
+   "method": "fuzzy",
+   "domain": "general",
+   "score": 0.33,
+   "kw_match": true
+  },
+  "处理流程": {
+   "v2_title": "处理流程繁琐投诉",
+   "method": "fuzzy",
+   "domain": "complaint",
+   "score": 0.43,
+   "kw_match": false
+  },
+  "功能缺陷": {
+   "v2_title": "功能缺陷投诉",
+   "method": "fuzzy",
+   "domain": "complaint",
+   "score": 0.6,
+   "kw_match": false
+  },
+  "外观瑕疵": {
+   "v2_title": "外观瑕疵投诉",
+   "method": "fuzzy",
+   "domain": "complaint",
+   "score": 0.6,
+   "kw_match": true
+  },
+  "性能不达标": {
+   "v2_title": "性能不达标投诉",
+   "method": "fuzzy",
+   "domain": "complaint",
+   "score": 0.67,
+   "kw_match": false
+  },
+  "补偿标准": {
+   "v2_title": "补偿标准说明",
+   "method": "fuzzy",
+   "domain": "complaint",
+   "score": 0.6,
+   "kw_match": false
+  },
+  "配送延迟": {
+   "v2_title": "配送延迟投诉",
+   "method": "fuzzy",
+   "domain": "complaint",
+   "score": 0.6,
+   "kw_match": true
+  },
+  "包装破损": {
+   "v2_title": "包装破损投诉",
+   "method": "fuzzy",
+   "domain": "complaint",
+   "score": 0.6,
+   "kw_match": false
+  },
+  "配送错误": {
+   "v2_title": "配送错误投诉",
+   "method": "fuzzy",
+   "domain": "complaint",
+   "score": 0.6,
+   "kw_match": false
+  },
+  "紧急处理": {
+   "v2_title": "加急处理",
+   "method": "fuzzy",
+   "domain": "complaint",
+   "score": 0.67,
+   "kw_match": false
+  }
+ },
+ "unmatched": [
+  {
+   "v1_title": "手机",
+   "domain": "product",
+   "best_fuzzy": "拍照手机推荐",
+   "best_score": 0.2
+  },
+  {
+   "v1_title": "电脑",
+   "domain": "product",
+   "best_fuzzy": null,
+   "best_score": 0.0
+  },
+  {
+   "v1_title": "耳机",
+   "domain": "product",
+   "best_fuzzy": "降噪耳机推荐",
+   "best_score": 0.2
+  },
+  {
+   "v1_title": "平板",
+   "domain": "product",
+   "best_fuzzy": "星环 平板保护套",
+   "best_score": 0.17
+  },
+  {
+   "v1_title": "退款流程",
+   "domain": "billing",
+   "best_fuzzy": "拒收后退款",
+   "best_score": 0.25
+  },
+  {
+   "v1_title": "所需材料",
+   "domain": "billing",
+   "best_fuzzy": null,
+   "best_score": 0.0
+  },
+  {
+   "v1_title": "开具时间",
+   "domain": "billing",
+   "best_fuzzy": "开票时间",
+   "best_score": 0.33
+  },
+  {
+   "v1_title": "支付安全",
+   "domain": "billing",
+   "best_fuzzy": "白条支付",
+   "best_score": 0.33
+  },
+  {
+   "v1_title": "系统卡顿",
+   "domain": "tech",
+   "best_fuzzy": "平板卡顿",
+   "best_score": 0.33
+  },
+  {
+   "v1_title": "网络连接",
+   "domain": "tech",
+   "best_fuzzy": "耳机无法连接手机",
+   "best_score": 0.14
+  },
+  {
+   "v1_title": "软件崩溃",
+   "domain": "tech",
+   "best_fuzzy": "电脑系统崩溃",
+   "best_score": 0.2
+  },
+  {
+   "v1_title": "性能提升",
+   "domain": "tech",
+   "best_fuzzy": null,
+   "best_score": 0.0
+  },
+  {
+   "v1_title": "存储管理",
+   "domain": "tech",
+   "best_fuzzy": "平板存储不足",
+   "best_score": 0.2
+  },
+  {
+   "v1_title": "安全设置",
+   "domain": "tech",
+   "best_fuzzy": null,
+   "best_score": 0.0
+  },
+  {
+   "v1_title": "电池优化",
+   "domain": "tech",
+   "best_fuzzy": "手机电池续航差",
+   "best_score": 0.17
+  },
+  {
+   "v1_title": "屏幕问题",
+   "domain": "tech",
+   "best_fuzzy": "手机屏幕碎裂",
+   "best_score": 0.2
+  },
+  {
+   "v1_title": "声音问题",
+   "domain": "tech",
+   "best_fuzzy": "耳机麦克风没声音",
+   "best_score": 0.14
+  },
+  {
+   "v1_title": "散热问题",
+   "domain": "tech",
+   "best_fuzzy": null,
+   "best_score": 0.0
+  },
+  {
+   "v1_title": "接口故障",
+   "domain": "tech",
+   "best_fuzzy": "电脑USB接口不识别",
+   "best_score": 0.11
+  },
+  {
+   "v1_title": "电话客服",
+   "domain": "general",
+   "best_fuzzy": "客服热线",
+   "best_score": 0.33
+  },
+  {
+   "v1_title": "节假日安排",
+   "domain": "general",
+   "best_fuzzy": null,
+   "best_score": 0.0
+  },
+  {
+   "v1_title": "物流跟踪",
+   "domain": "general",
+   "best_fuzzy": "物流单号查询",
+   "best_score": 0.2
+  },
+  {
+   "v1_title": "会员服务",
+   "domain": "general",
+   "best_fuzzy": "会员退会",
+   "best_score": 0.33
+  },
+  {
+   "v1_title": "响应速度慢",
+   "domain": "complaint",
+   "best_fuzzy": "升级响应时限",
+   "best_score": 0.2
+  },
+  {
+   "v1_title": "服务态度差",
+   "domain": "complaint",
+   "best_fuzzy": "客服态度差投诉",
+   "best_score": 0.33
+  },
+  {
+   "v1_title": "专业能力不足",
+   "domain": "complaint",
+   "best_fuzzy": "客服专业不足投诉",
+   "best_score": 0.29
+  }
+ ]
+}

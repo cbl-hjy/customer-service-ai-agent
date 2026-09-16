@@ -1,0 +1,19 @@
+[
+  {
+    "version": "4.0.0",
+    "name": "multi_turn_golden_v4",
+    "run_at": "2026-08-13 23:16:23",
+    "cases": 24,
+    "turns_total": 52,
+    "all_cases_pass": false,
+    "decision_rate": 1.0,
+    "answer_rate": 0.9762,
+    "retrieval_hit_rate": 0.9796,
+    "escalation_precision": 1.0,
+    "escalation_recall": 1.0,
+    "latency_p50_s": 10.11,
+    "latency_p95_s": 19.74,
+    "token_total": 87522,
+    "cost_yuan": 0.0378
+  }
+]

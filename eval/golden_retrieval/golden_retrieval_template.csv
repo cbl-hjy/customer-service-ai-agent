@@ -1,0 +1,11 @@
+id,query,domain,expected_titles,difficulty,source,note
+gr-001,7天无理由退款要满足什么条件,billing,7天无理由退款,easy,ECD train idx=32 改写,字面命中条目标题
+gr-002,耳机买回来没声音想退掉,billing,7天无理由退款;退货运费;质量问题退款,hard,ECD train idx=32 改写,口语表述 无字面重叠 需语义召回
+gr-003,退货的邮费谁出,billing,退货运费,easy,ECD train idx=32 改写,字面命中 keywords
+gr-004,质量问题退回去的快递费你们报吗,billing,退货运费;质量问题退款,hard,ECD train idx=32 改写,快递费/报=同义 词不匹配
+gr-005,手机开不了机怎么办,tech,无法开机,easy,人工构造,字面命中条目标题
+gr-006,手机黑屏按什么键都没反应,tech,无法开机;屏幕问题,hard,人工构造,症状描述 无标题词
+gr-007,电脑越用越卡有什么办法,tech,系统卡顿;性能提升,hard,人工构造,口语化 语义等价
+gr-008,你们客服几点上班,general,电话客服;在线客服;客服热线,ambiguous,人工构造,多条目相关 需重排
+gr-009,能开发票吗,billing,电子发票;发票抬头,ambiguous,ECD 常见问法,多条目候选 需精排
+gr-010,这个耳机适合送人吗,product,耳机,hard,人工构造,选型意图 需语义召回

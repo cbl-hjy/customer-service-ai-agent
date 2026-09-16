@@ -1,0 +1,10 @@
+[tool.pytest.ini_options]
+# 测试分层（第二波本地 CI 门禁，2026-09-16）：
+#   默认（无标记）= sealed：mock 密封 + 轻量真实 KB（BM25/jieba，秒级，无 GPU 模型/无 LLM API）
+#   api   = 真实 LLM API 调用（需 .env key，联网，有 token 成本）
+#   model = 真实本地大模型加载（bge-m3/reranker，数十秒）
+# 门禁用法：scripts/gate.py fast = pytest -m "not api and not model"（push 前拦截层）
+markers = [
+    "api: 真实 LLM API 调用（联网+token 成本，fast 门禁排除）",
+    "model: 真实本地大模型加载（GPU/数十秒，fast 门禁排除）",
+]

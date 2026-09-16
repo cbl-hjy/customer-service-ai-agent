@@ -1,0 +1,51 @@
+# Example environment variables for the multi-agent customer service system
+# Copy this file to .env and edit as needed
+
+# ===== DeepSeek (OpenAI-compatible, 2026-09-15 switched from Bailian) =====
+# 百炼 glm-5.2 免费额度耗尽 → DeepSeek 官方端点（api-docs.deepseek.com）
+OPENAI_API_KEY=your_deepseek_api_key_here
+OPENAI_BASE_URL=https://api.deepseek.com
+OPENAI_MODEL=deepseek-flash
+
+# ===== HTTP client =====
+HTTP_TIMEOUT=30
+HTTP_MAX_RETRIES=3
+
+# ===== Logging =====
+LOG_LEVEL=INFO
+
+# ===== Local model snapshots (bge-m3 dense / bge-reranker-v2-m3, paths NOT committed) =====
+# Missing/invalid paths degrade gracefully: dense search and rerank fall back to BM25-only.
+BGE_M3_PATH=/path/to/models--BAAI--bge-m3/snapshots/<hash>
+BGE_RERANKER_PATH=/path/to/BAAI--bge-reranker-v2-m3/snapshots/master
+
+# ===== Warmup (second wave: cold-start elimination, see warmup.py) =====
+WARMUP_ON_START=true
+
+# ===== Flask web app (web_app.py) =====
+FLASK_PORT=5000
+FLASK_DEBUG=False
+FLASK_SECRET_KEY=your-secret-key-here
+
+# LangGraph HTTP API (see chat_web_service.py)
+# LANGGRAPH_API_URL=http://127.0.0.1:2024
+# LANGGRAPH_GRAPH_NAME=customer_service
+
+# ===== Notes =====
+
+# 1. API key
+# DeepSeek 申请：https://platform.deepseek.com/ → API Keys 创建
+
+# 2. Model choice（DeepSeek 系列）
+# Examples:
+# - deepseek-flash (recommended, 与 eval 基线一致, 2026-09-15 切换;
+#   = DeepSeek-V4.1-Flash, 官方更新日志确认旧名自动路由至此)
+# - deepseek-v4-pro (更强, 成本更高)
+
+# 3. Optional overrides
+# To change timeout or retries, edit e.g.:
+# HTTP_TIMEOUT=60
+# HTTP_MAX_RETRIES=5
+
+# Windows: if `langgraph dev` fails loading .env with UnicodeDecodeError, keep comments
+# ASCII-only (as here) or save .env as UTF-8 with BOM.

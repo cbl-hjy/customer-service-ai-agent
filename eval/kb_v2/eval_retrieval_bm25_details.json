@@ -1,0 +1,3692 @@
+[
+ {
+  "query": "2拍下什么时候发货",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "发货时效"
+  ],
+  "retrieved_top5": [
+   "发货时效",
+   "预售订单发货"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "534597270770拍了很多东西",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "满赠活动规则"
+  ],
+  "retrieved_top5": [
+   "少件处理",
+   "晒单返现流程"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "三号可以到吗大概",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "物流单号查询"
+  ],
+  "retrieved_top5": [
+   "返现到账时间",
+   "指定日期送达",
+   "满赠活动规则",
+   "关注店铺奖励",
+   "海外配送"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "上次发的快递太慢了，这次能换个快递吗",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "快递选择"
+  ],
+  "retrieved_top5": [
+   "物流延误补偿"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "买耳机送什么？是拍一个还是拍两个？",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "满赠活动规则"
+  ],
+  "retrieved_top5": [
+   "延保购买时机",
+   "晒单返现流程",
+   "延保购买",
+   "收藏夹管理",
+   "环保回收计划"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "什么时候发货啊",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "发货时效"
+  ],
+  "retrieved_top5": [
+   "发货时效",
+   "预售订单发货"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "今天不到退了什么鬼快递",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "物流信息更新延迟"
+  ],
+  "retrieved_top5": [
+   "快递员联系不上",
+   "丢件处理",
+   "物流延误补偿",
+   "运费计算规则",
+   "包裹签收要求"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "今天做活动的是这种吗",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "节日大促规则"
+  ],
+  "retrieved_top5": [
+   "收藏送礼活动",
+   "活动价与日常价说明",
+   "收藏店铺活动",
+   "节日大促规则",
+   "满赠活动规则"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.25
+ },
+ {
+  "query": "优惠耳机也参与满赠活动吗",
+  "domain": "general",
+  "diff": "ambiguous",
+  "expected": [
+   "满赠活动规则",
+   "节日大促规则"
+  ],
+  "retrieved_top5": [
+   "合并订单优惠",
+   "满赠活动规则"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.5,
+  "mrr": 0.5
+ },
+ {
+  "query": "会送东西吗",
+  "domain": "general",
+  "diff": "ambiguous",
+  "expected": [
+   "满赠活动规则",
+   "收藏送礼活动"
+  ],
+  "retrieved_top5": [
+   "指定日期送达",
+   "少件处理",
+   "评价有礼规则",
+   "评价有礼",
+   "自提服务网点"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "你们地址发我退还你们怎么",
+  "domain": "billing",
+  "diff": "hard",
+  "expected": [
+   "退货运费承担"
+  ],
+  "retrieved_top5": [
+   "企业采购交付方式",
+   "换货物流单查询",
+   "以旧换新补贴",
+   "部分退款规则",
+   "优惠券退款处理"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "你们客服太敷衍了，气死我了，我要投诉！",
+  "domain": "complaint",
+  "diff": "easy",
+  "expected": [
+   "客服态度差投诉"
+  ],
+  "retrieved_top5": [
+   "客服态度差投诉",
+   "处理流程繁琐投诉",
+   "反复转接投诉",
+   "线上客服转接慢投诉",
+   "客服电话难接通投诉"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "你们家在聚划算还什么时候做活动呢",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "节日大促规则"
+  ],
+  "retrieved_top5": [
+   "延保购买时机",
+   "会员积分清零规则",
+   "收藏送礼规则细则",
+   "投诉处理进度查询",
+   "返现到账时间"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "你们的补偿标准是什么",
+  "domain": "complaint",
+  "diff": "easy",
+  "expected": [
+   "补偿标准说明"
+  ],
+  "retrieved_top5": [
+   "补偿标准说明"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "几天可以到",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "物流单号查询"
+  ],
+  "retrieved_top5": [
+   "发货时效",
+   "物流轨迹停滞处理",
+   "返现到账时间",
+   "指定日期送达",
+   "满赠活动规则"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "分期手续费怎么算的",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "分期付款"
+  ],
+  "retrieved_top5": [
+   "分期付款"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "刚买的耳机有一边突然没声音了，能退吗",
+  "domain": "billing",
+  "diff": "hard",
+  "expected": [
+   "质量问题退款",
+   "7天无理由退款"
+  ],
+  "retrieved_top5": [
+   "拼团失败退款",
+   "限时秒杀规则",
+   "新人专享价",
+   "补开发票",
+   "发票税率说明"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "别啰嗦了，直接给我转人工客服！",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "在线客服入口"
+  ],
+  "retrieved_top5": [
+   "在线客服入口"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "发前一个地址",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "发货后修改地址"
+  ],
+  "retrieved_top5": [
+   "订单合并",
+   "补发流程",
+   "收藏夹管理",
+   "未发货改地址",
+   "发货后修改地址"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.2
+ },
+ {
+  "query": "可以78号在发货吗",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "发货时效"
+  ],
+  "retrieved_top5": [
+   "物流单号查询",
+   "微信客服",
+   "订单合并",
+   "订单拆分",
+   "维修进度查询"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "可以开发票吗？我要公司抬头",
+  "domain": "billing",
+  "diff": "ambiguous",
+  "expected": [
+   "发票抬头修改",
+   "电子发票开具"
+  ],
+  "retrieved_top5": [
+   "电子发票开具"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "后天能到吗",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "物流单号查询"
+  ],
+  "retrieved_top5": [
+   "返现到账时间",
+   "指定日期送达",
+   "满赠活动规则",
+   "关注店铺奖励",
+   "海外配送"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "哦哦今天消费69不能送了是么",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "满赠活动规则"
+  ],
+  "retrieved_top5": [
+   "会员升级条件",
+   "会员等级体系",
+   "老客回馈",
+   "会员升级加速",
+   "邀请好友奖励"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "因为是江西但是我要寄到江苏的江西的运费要贵点呢",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "退货运费承担"
+  ],
+  "retrieved_top5": [
+   "赠品换货处理",
+   "换货周期",
+   "纸质发票开具",
+   "赠品退货处理",
+   "发票税号填写"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "地址我可以改的您把地址给我下吧",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "修改订单信息"
+  ],
+  "retrieved_top5": [
+   "未发货改地址",
+   "发货后修改地址",
+   "改地址时效限制",
+   "修改订单信息",
+   "订单备注修改"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.25
+ },
+ {
+  "query": "好吧，那耳机没声音了怎么办",
+  "domain": "tech",
+  "diff": "easy",
+  "expected": [
+   "耳机单侧无声"
+  ],
+  "retrieved_top5": [
+   "耳机麦克风没声音",
+   "耳机单侧无声",
+   "手机扬声器无声",
+   "耳机左右声音不一样",
+   "手机麦克风失灵"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "好的石家庄几天到",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "物流单号查询"
+  ],
+  "retrieved_top5": [
+   "发货时效",
+   "物流轨迹停滞处理",
+   "返现到账时间",
+   "指定日期送达",
+   "满赠活动规则"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "就平时打电话刷视频用，哪款合适？",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "星环 X1 标准版手机规格"
+  ],
+  "retrieved_top5": [
+   "X1 Lite 老人适用吗",
+   "平板选购-追剧用",
+   "拍照手机推荐",
+   "Fold1 外屏使用场景",
+   "商务手机推荐"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "帮我看看这个订单耳机一共订了几个",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "订单查询"
+  ],
+  "retrieved_top5": [
+   "门店服务",
+   "维修进度查询",
+   "上门取件维修",
+   "售后服务范围",
+   "延保购买"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "怎么说第一次有漏发吗",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "少件处理"
+  ],
+  "retrieved_top5": [
+   "少件处理"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "怎么还没物流信息你这是要拖到快递放假再来给我发吗",
+  "domain": "general",
+  "diff": "ambiguous",
+  "expected": [
+   "物流信息更新延迟"
+  ],
+  "retrieved_top5": [
+   "物流单号查询"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "怎么还要运费",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "退货运费承担"
+  ],
+  "retrieved_top5": [
+   "运费险说明",
+   "运费券退款处理",
+   "退货运费承担",
+   "换货运费承担",
+   "拒收后退款"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.333
+ },
+ {
+  "query": "想给家里老人买台手机，帮我推荐下",
+  "domain": "product",
+  "diff": "easy",
+  "expected": [
+   "星环 X1 Lite 入门手机规格"
+  ],
+  "retrieved_top5": [
+   "X1 Lite 老人适用吗",
+   "老人机选购指南",
+   "学生党性价比方案",
+   "礼物推荐-送女友",
+   "X1 Pro AI 功能"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "我不想发邮政能换别的么",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "快递选择"
+  ],
+  "retrieved_top5": [
+   "快递选择",
+   "赠品选择规则",
+   "偏远地区运费",
+   "拆单发货运费",
+   "缺货替代方案"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "我买了两份送一份怎么就给我发了一盒什么情况",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "少件处理",
+   "满赠活动规则"
+  ],
+  "retrieved_top5": [
+   "收藏店铺活动",
+   "延保购买",
+   "延保购买时机",
+   "物流延误补偿",
+   "评价有礼规则"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "我刚拍的耳机地址选错了，能改吗",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "未发货改地址"
+  ],
+  "retrieved_top5": [
+   "未发货改地址",
+   "发货后修改地址",
+   "改地址时效限制",
+   "修改订单信息",
+   "订单备注修改"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "我去不早说发韵达能到我家那儿我就能拿到",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "快递选择"
+  ],
+  "retrieved_top5": [
+   "物流延误补偿",
+   "顺丰加急",
+   "返现到账时间",
+   "指定日期送达",
+   "满赠活动规则"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "我已经关注了，赠品需要备注吗",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "收藏送礼活动"
+  ],
+  "retrieved_top5": [
+   "满赠活动规则"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "我打算让淘宝来介入我是也卖家淘宝的规则我懂我看你怎么收场我做淘宝11年了只有十分钟等你答复妈的B不发飚当老娘好欺负吗",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "处理流程繁琐投诉"
+  ],
+  "retrieved_top5": [
+   "重复来电投诉处理",
+   "客服专业不足投诉",
+   "人工介入申请",
+   "监管渠道投诉说明",
+   "承诺未兑现投诉"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "我要退货，运费谁出",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "退货运费承担"
+  ],
+  "retrieved_top5": [
+   "退货运费承担"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "我退回去的邮费你们也承担吗",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "退货运费承担"
+  ],
+  "retrieved_top5": [
+   "换货运费承担",
+   "退货运费承担",
+   "发票作废",
+   "订单未支付取消",
+   "红字发票处理"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "拍十份可以吗不同地址",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "修改订单信息"
+  ],
+  "retrieved_top5": [
+   "订单拆分"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "按你说的做了，还是黑屏",
+  "domain": "tech",
+  "diff": "easy",
+  "expected": [
+   "手机黑屏"
+  ],
+  "retrieved_top5": [
+   "手机黑屏",
+   "电脑黑屏",
+   "平板无法开机"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "支持分期付款吗",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "分期付款"
+  ],
+  "retrieved_top5": [
+   "分期付款"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "收到的耳机少了一个配件，能补发吗",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "补发流程"
+  ],
+  "retrieved_top5": [
+   "补发流程"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "收到的耳机有瑕疵，要求补偿",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "外观瑕疵投诉",
+   "补偿标准说明"
+  ],
+  "retrieved_top5": [
+   "外观瑕疵投诉",
+   "质量问题补偿标准",
+   "二手充新投诉",
+   "快递员服务投诉",
+   "处理流程繁琐投诉"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "收藏你们店铺有送什么吗",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "收藏送礼活动"
+  ],
+  "retrieved_top5": [
+   "收藏店铺活动",
+   "收藏送礼规则细则",
+   "收藏送礼活动",
+   "收藏夹管理",
+   "关注店铺奖励"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.333
+ },
+ {
+  "query": "有货了能通知我吗",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "缺货通知"
+  ],
+  "retrieved_top5": [
+   "缺货商品通知",
+   "收藏商品到货通知",
+   "到货提醒订阅",
+   "缺货通知",
+   "代收点取件"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.25
+ },
+ {
+  "query": "有送什么吗",
+  "domain": "general",
+  "diff": "ambiguous",
+  "expected": [
+   "满赠活动规则",
+   "收藏送礼活动"
+  ],
+  "retrieved_top5": [
+   "评价有礼规则",
+   "评价有礼",
+   "自提服务网点",
+   "满赠门槛计算",
+   "收藏店铺活动"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "朋友买的那款降噪耳机好用吗",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "星环 AirBuds 3 Pro 降噪耳机规格"
+  ],
+  "retrieved_top5": [
+   "千元降噪耳机推荐"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "活动期间不能改吗",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "发货后修改地址"
+  ],
+  "retrieved_top5": [
+   "未发货改地址",
+   "发货后修改地址",
+   "改地址时效限制",
+   "修改订单信息",
+   "大促期间发货延迟"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "淘宝为什么没有传照片功能",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "功能缺陷投诉"
+  ],
+  "retrieved_top5": [
+   "功能缺陷投诉",
+   "承诺未兑现投诉",
+   "外观瑕疵投诉",
+   "物流信息造假投诉",
+   "宣传与实物不符投诉"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "满199可以减十元是吧还送啥",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "满赠活动规则"
+  ],
+  "retrieved_top5": [
+   "直播专属优惠",
+   "满赠门槛计算",
+   "直播优惠券使用",
+   "会员权益说明",
+   "会员升级条件"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "然后你送一盒",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "满赠活动规则"
+  ],
+  "retrieved_top5": [
+   "评价有礼规则",
+   "评价有礼",
+   "自提服务网点",
+   "满赠门槛计算",
+   "收藏店铺活动"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "现在买手机有满赠活动吗，送什么",
+  "domain": "general",
+  "diff": "ambiguous",
+  "expected": [
+   "满赠活动规则",
+   "节日大促规则"
+  ],
+  "retrieved_top5": [
+   "合并订单优惠",
+   "满赠活动规则"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.5,
+  "mrr": 0.5
+ },
+ {
+  "query": "电脑开不了机怎么回事",
+  "domain": "tech",
+  "diff": "easy",
+  "expected": [
+   "电脑无法开机"
+  ],
+  "retrieved_top5": [
+   "手机无法开机",
+   "电脑无法开机",
+   "耳机无法开机",
+   "平板无法开机"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "真不知道这样快递搞什么小区有自取箱不给我放非给放私人那",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "自提柜取件"
+  ],
+  "retrieved_top5": [
+   "自提柜取件",
+   "邀请好友奖励",
+   "赠品漏发处理",
+   "赠品补发申请",
+   "代收点取件"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "算了，还是留着吧，就是屏幕有点花",
+  "domain": "tech",
+  "diff": "easy",
+  "expected": [
+   "手机屏幕碎裂"
+  ],
+  "retrieved_top5": [
+   "手机屏幕碎裂",
+   "电脑黑屏",
+   "平板屏幕触控失灵",
+   "手机屏幕闪烁",
+   "手机黑屏"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "纸质发票邮寄费谁出？",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "纸质发票开具"
+  ],
+  "retrieved_top5": [
+   "纸质发票开具",
+   "电子发票换开纸质"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "耳机不参与买二送一活动吗",
+  "domain": "general",
+  "diff": "ambiguous",
+  "expected": [
+   "满赠活动规则",
+   "节日大促规则"
+  ],
+  "retrieved_top5": [
+   "上门取件维修",
+   "门店服务",
+   "延保购买",
+   "企业会员服务",
+   "海外配送"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "耳机什么时候能补货",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "缺货通知"
+  ],
+  "retrieved_top5": [
+   "缺货通知"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "耳机左边没声音，能换货吗",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "耳机单侧无声"
+  ],
+  "retrieved_top5": [
+   "耳机麦克风没声音",
+   "耳机单侧无声",
+   "耳机左右声音不一样",
+   "耳机音质差",
+   "手机扬声器无声"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "能开纸质发票吗",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "纸质发票开具"
+  ],
+  "retrieved_top5": [
+   "纸质发票开具",
+   "电子发票换开纸质"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "能改下运费吗",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "退货运费承担"
+  ],
+  "retrieved_top5": [
+   "运费险说明",
+   "运费券退款处理",
+   "退货运费承担",
+   "换货运费承担",
+   "拒收后退款"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.333
+ },
+ {
+  "query": "能早点发吗，我下周就要用",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "发货时效"
+  ],
+  "retrieved_top5": [
+   "快递选择",
+   "收藏送礼规则细则",
+   "维修备机服务",
+   "积分使用规则",
+   "大件商品配送"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "补发的运费谁出？",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "补发流程"
+  ],
+  "retrieved_top5": [
+   "运费计算规则",
+   "补发流程"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "订单地址填错了能改吗",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "未发货改地址"
+  ],
+  "retrieved_top5": [
+   "未发货改地址"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "还另外送湿巾吗",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "满赠活动规则"
+  ],
+  "retrieved_top5": [
+   "延保购买时机",
+   "评价有礼规则",
+   "投诉处理进度查询",
+   "评价有礼",
+   "会员积分清零规则"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "还是一次付款吧可以领5元优惠券呢",
+  "domain": "billing",
+  "diff": "hard",
+  "expected": [
+   "在线支付方式"
+  ],
+  "retrieved_top5": [
+   "优惠券使用规则"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "这个平板我要退了",
+  "domain": "billing",
+  "diff": "hard",
+  "expected": [
+   "7天无理由退款"
+  ],
+  "retrieved_top5": [
+   "学生优惠",
+   "发票税率说明",
+   "退款原路返回",
+   "退货运费承担",
+   "赠品退货处理"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "送的那罐一起拍下系统自动减价的哦",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "满赠活动规则"
+  ],
+  "retrieved_top5": [
+   "评价有礼规则",
+   "评价有礼",
+   "赠品选择规则",
+   "收藏店铺活动",
+   "收藏送礼规则细则"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "那个平板多少钱来着",
+  "domain": "product",
+  "diff": "easy",
+  "expected": [
+   "星环 Pad 11 平板规格"
+  ],
+  "retrieved_top5": [
+   "耳机佩戴检测说明",
+   "平板选购-绘画用",
+   "Pad 多屏协同",
+   "平板选购-学习用",
+   "平板选购-追剧用"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "那几天能到呢",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "物流单号查询"
+  ],
+  "retrieved_top5": [
+   "发货时效"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "那到底是发什么快递？",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "快递选择"
+  ],
+  "retrieved_top5": [
+   "快递选择"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "那哪些产品参与呢",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "节日大促规则"
+  ],
+  "retrieved_top5": [
+   "延保购买",
+   "晒单返现",
+   "售后服务范围",
+   "门店服务",
+   "会员专属客服"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "那大概最快能多久啊因为我比较着急",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "物流单号查询"
+  ],
+  "retrieved_top5": [
+   "活动价与日常价说明",
+   "补货时间预估",
+   "返现到账时间",
+   "售后时效承诺",
+   "发货时效"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "那它退货运费谁出",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "退货运费承担"
+  ],
+  "retrieved_top5": [
+   "退货运费承担"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "那换货一般要多久能到？",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "退换货总流程"
+  ],
+  "retrieved_top5": [
+   "售后时效承诺",
+   "补货时间预估",
+   "返现到账时间",
+   "投诉处理进度查询",
+   "发货时效"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "那款能七天无理由退货吗",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "7天无理由退款"
+  ],
+  "retrieved_top5": [
+   "7天无理由退款"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "那现在下单能明天发货吗",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "发货时效"
+  ],
+  "retrieved_top5": [
+   "晒单返现流程",
+   "订单备注修改",
+   "下单流程",
+   "快递选择",
+   "发货时效"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.2
+ },
+ {
+  "query": "那退款一般几天到账？",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "退款到账时效"
+  ],
+  "retrieved_top5": [
+   "企业对公转账",
+   "退款到账时效",
+   "开票时间",
+   "退货运费承担",
+   "组合支付退款拆分"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "那退的这个能开票吗",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "电子发票开具"
+  ],
+  "retrieved_top5": [
+   "开票时间",
+   "企业专票开具",
+   "国际订单开票",
+   "发票税号填写",
+   "补开发票"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "那退货运费谁出？",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "退货运费承担"
+  ],
+  "retrieved_top5": [
+   "退货运费承担"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "为什么有运费",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "运费计算规则"
+  ],
+  "retrieved_top5": [
+   "预售与缺货区别",
+   "运费计算规则",
+   "偏远地区运费",
+   "拆单发货运费",
+   "港澳台配送"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "买多少斤包邮",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "包邮条件"
+  ],
+  "retrieved_top5": [
+   "包邮条件"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "价格可以有优惠吗",
+  "domain": "billing",
+  "diff": "hard",
+  "expected": [
+   "会员价规则"
+  ],
+  "retrieved_top5": [
+   "批量采购折扣",
+   "学生优惠",
+   "价格保护政策",
+   "新人专享价",
+   "学生认证流程"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "发中通圆通吗",
+  "domain": "general",
+  "diff": "easy",
+  "expected": [
+   "快递选择"
+  ],
+  "retrieved_top5": [
+   "大件商品配送",
+   "补发流程",
+   "大促期间发货延迟",
+   "拆单发货运费",
+   "快递选择"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.2
+ },
+ {
+  "query": "取消重新加双袜子重新拍你说不用",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "订单取消"
+  ],
+  "retrieved_top5": [
+   "待付款自动取消",
+   "会员退会",
+   "会员退会规则",
+   "订单锁定与解锁",
+   "物流异常件处理"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "我买5个单套合一个三层套合有优惠吗",
+  "domain": "billing",
+  "diff": "hard",
+  "expected": [
+   "批量采购折扣"
+  ],
+  "retrieved_top5": [
+   "学生优惠",
+   "新人专享价",
+   "批量采购折扣",
+   "换货与新购区别",
+   "批量采购折扣"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.333
+ },
+ {
+  "query": "我买的有点多有没有什么优惠",
+  "domain": "billing",
+  "diff": "hard",
+  "expected": [
+   "批量采购折扣"
+  ],
+  "retrieved_top5": [
+   "批量采购折扣",
+   "学生优惠",
+   "新人专享价",
+   "企业采购交付方式",
+   "换货与新购区别"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "我前几天加入购物车了今天看失效了",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "订单查询"
+  ],
+  "retrieved_top5": [
+   "到货提醒订阅",
+   "下单流程",
+   "收藏商品到货通知",
+   "订单查询",
+   "发货时效"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.25
+ },
+ {
+  "query": "能发顺丰吗？我上次等太久了",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "快递选择",
+   "顺丰加急"
+  ],
+  "retrieved_top5": [
+   "快递选择",
+   "顺丰加急"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "行退多少",
+  "domain": "billing",
+  "diff": "hard",
+  "expected": [
+   "退款金额计算"
+  ],
+  "retrieved_top5": [
+   "运费险说明",
+   "满减活动规则",
+   "以旧换新补贴叠加"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "那老客户还是原价",
+  "domain": "general",
+  "diff": "hard",
+  "expected": [
+   "老客回馈"
+  ],
+  "retrieved_top5": [
+   "老客回馈"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "顺便问下现在有什么优惠券吗",
+  "domain": "billing",
+  "diff": "hard",
+  "expected": [
+   "优惠券使用规则"
+  ],
+  "retrieved_top5": [
+   "优惠券使用规则"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "X1 Pro 拍照怎么样",
+  "domain": "product",
+  "diff": "easy",
+  "expected": [
+   "X1 Pro 摄像头配置"
+  ],
+  "retrieved_top5": [
+   "X1 Pro 摄像头配置"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "玩游戏选哪个手机好",
+  "domain": "product",
+  "diff": "easy",
+  "expected": [
+   "游戏手机推荐"
+  ],
+  "retrieved_top5": [
+   "AirBuds 3 Pro 与 HeadBuds 5 怎么选"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "AirBuds 3 和 Pro 有什么不一样",
+  "domain": "product",
+  "diff": "easy",
+  "expected": [
+   "AirBuds 3 与 Pro 区别"
+  ],
+  "retrieved_top5": [
+   "AirBuds 3 与 Pro 区别",
+   "AirBuds 3 Pro 与 HeadBuds 5 怎么选",
+   "AirBuds 3 Pro LDAC 开启",
+   "耳机双设备切换",
+   "AirBuds 3 Pro 通话降噪"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "有没有适合学生用的笔记本",
+  "domain": "product",
+  "diff": "easy",
+  "expected": [
+   "笔记本选购-学生用"
+  ],
+  "retrieved_top5": [
+   "笔记本选购-学生用",
+   "Book Air 学生推荐理由",
+   "笔记本硬盘容量推荐",
+   "笔记本内存怎么选",
+   "Pad 学生模式"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "Pad 支持手写笔吗",
+  "domain": "product",
+  "diff": "easy",
+  "expected": [
+   "Pad 手写笔兼容"
+  ],
+  "retrieved_top5": [
+   "星环 触控笔"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "100W 移动电源是哪个",
+  "domain": "product",
+  "diff": "easy",
+  "expected": [
+   "星环 100W 移动电源"
+  ],
+  "retrieved_top5": [
+   "星环 100W 移动电源",
+   "星环 充电器选购对比",
+   "Fold1 无线充电",
+   "Book Pro 与 GameBook 怎么选",
+   "游戏党装备推荐"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "我就想找个待机时间长的，别一天三充",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "长续航手机推荐"
+  ],
+  "retrieved_top5": [
+   "长续航手机推荐",
+   "露营户外装备推荐",
+   "Pad 儿童模式",
+   "X1 Pro AI 功能",
+   "X1 重量尺寸"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "上班要经常带电脑跑客户，选哪个合适",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "笔记本选购-办公用"
+  ],
+  "retrieved_top5": [
+   "AirBuds 3 Pro 与 HeadBuds 5 怎么选"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "给爸妈买台省心的，字大声音大",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "老人机选购指南"
+  ],
+  "retrieved_top5": [
+   "半入耳与入耳式区别",
+   "礼物推荐-送父母",
+   "耳机延迟表现",
+   "学生党性价比方案",
+   "礼物推荐-送女友"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "想送女朋友一个惊喜，不知道送啥数码好",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "礼物推荐-送女友"
+  ],
+  "retrieved_top5": [
+   "礼物推荐-送女友"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "戴耳机跑步会不会掉",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "运动耳机推荐"
+  ],
+  "retrieved_top5": [
+   "Fold1 铰链耐用性",
+   "运动耳机推荐",
+   "耳机查找功能",
+   "AirBuds 3 运动佩戴",
+   "AirBuds 3 Pro LDAC 开启"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "坐地铁通勤想安静点，有没有隔音好的",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "降噪耳机推荐"
+  ],
+  "retrieved_top5": [
+   "半入耳与入耳式区别",
+   "降噪耳机推荐",
+   "AirBuds 3 与 Pro 区别",
+   "千元降噪耳机推荐",
+   "拍照手机推荐"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "小孩上网课用，别伤眼睛",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "Pad 护眼认证"
+  ],
+  "retrieved_top5": [
+   "Pad 儿童模式",
+   "X1 双卡双待",
+   "Pad 11 与 Pad Pro 怎么选",
+   "X1 系列卡槽说明",
+   "轻薄手机推荐"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "画插画用哪个平板合适",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "平板选购-绘画用"
+  ],
+  "retrieved_top5": [
+   "平板选购-绘画用",
+   "Pad Pro 绘画体验",
+   "Pad Mini 便携场景",
+   "降噪耳机推荐",
+   "平板选购-学习用"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "做设计的电脑配置要高点",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "笔记本选购-设计师用"
+  ],
+  "retrieved_top5": [
+   "笔记本选购-设计师用",
+   "平板选购-学习用",
+   "考研学习装备推荐",
+   "笔记本散热设计",
+   "Book Plus 设计师适配"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "两台手机有啥差别，就屏幕大小吗",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "X1 与 X1 Pro 区别"
+  ],
+  "retrieved_top5": [
+   "耳机双设备切换",
+   "X1 重量尺寸",
+   "X1 与 X1 Pro 区别",
+   "露营户外装备推荐",
+   "AirBuds 系列 APP 功能"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.333
+ },
+ {
+  "query": "这耳机戴久了耳朵疼，有没有舒服点的",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "头戴耳机推荐"
+  ],
+  "retrieved_top5": [
+   "HeadBuds 5 佩戴舒适度",
+   "Book 系列接口配置",
+   "降噪耳机推荐",
+   "耳机蓝牙版本",
+   "耳机查找功能"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "想看直播带货用的全套设备",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "直播开播装备推荐"
+  ],
+  "retrieved_top5": [
+   "直播开播装备推荐",
+   "Fold1 分屏多任务",
+   "耳机延迟表现",
+   "平板选购-追剧用",
+   "大屏手机推荐"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "学生党预算不多，怎么配最划算",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "学生党性价比方案"
+  ],
+  "retrieved_top5": [
+   "学生党性价比方案"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "白天开会晚上加班，买台电脑主要写报表做PPT",
+  "domain": "product",
+  "diff": "hard",
+  "expected": [
+   "笔记本选购-办公用"
+  ],
+  "retrieved_top5": [
+   "考研学习装备推荐",
+   "笔记本选购-办公用",
+   "笔记本选购-学生用",
+   "笔记本选购-程序员用",
+   "笔记本选购-设计师用"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "3000 块钱能买到啥好手机",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "3000元内手机推荐",
+   "星环 X1 Lite 入门手机规格"
+  ],
+  "retrieved_top5": [
+   "3000元内手机推荐",
+   "X1 Pro 与 Fold1 怎么选",
+   "Fold1 分屏多任务",
+   "Pad 与 Pad Pro 区别",
+   "拍照手机推荐"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "打电话多还要续航久，选哪个",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "长续航手机推荐",
+   "商务手机推荐"
+  ],
+  "retrieved_top5": [
+   "AirBuds 3 Pro 与 HeadBuds 5 怎么选"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "X1 和 Fold1 怎么选，都想要",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "X1 Pro 与 Fold1 怎么选",
+   "X1 与 X1 Pro 区别"
+  ],
+  "retrieved_top5": [
+   "X1 Pro 与 Fold1 怎么选",
+   "X1 系列壳膜推荐",
+   "X1 与 X1 Lite 区别",
+   "AirBuds 3 与 Pro 区别",
+   "X1 红外遥控"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "想换台电脑，办公和游戏都想要",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "笔记本选购-办公用",
+   "星环 GameBook 15 游戏本规格"
+  ],
+  "retrieved_top5": [
+   "Book Pro 适用人群",
+   "Book Pro 与 GameBook 怎么选",
+   "笔记本重量对比",
+   "GameBook 散热评测说明",
+   "Book Air 学生推荐理由"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "屏幕好点的笔记本有推荐吗",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "笔记本屏幕分辨率",
+   "星环 Book Pro 14 笔记本规格"
+  ],
+  "retrieved_top5": [
+   "笔记本选购-设计师用",
+   "笔记本选购-办公用",
+   "笔记本选购-程序员用",
+   "Book Air 学生推荐理由",
+   "笔记本选购-学生用"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "给小孩买平板，学习还是娱乐",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "平板选购-学习用",
+   "Pad 儿童模式"
+  ],
+  "retrieved_top5": [
+   "Pad 适用人群",
+   "Pad 学生模式",
+   "平板选购-学习用",
+   "Pad 11 与 Pad Pro 怎么选",
+   "Pad 儿童模式"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.5,
+  "mrr": 0.333
+ },
+ {
+  "query": "AirBuds 和 HeadBuds 哪个好",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "AirBuds 3 Pro 与 HeadBuds 5 怎么选",
+   "头戴耳机推荐"
+  ],
+  "retrieved_top5": [
+   "AirBuds 3 Pro 与 HeadBuds 5 怎么选",
+   "AirBuds 3 与 Pro 区别",
+   "降噪耳机推荐",
+   "X1 与 X1 Lite 区别",
+   "X1 与 X1 Pro 区别"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "耳机要不要买带降噪的",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "降噪耳机推荐",
+   "半入耳与入耳式区别"
+  ],
+  "retrieved_top5": [
+   "降噪耳机推荐",
+   "AirBuds 3 Pro 降噪深度",
+   "星环 AirBuds 3 Pro 降噪耳机规格",
+   "千元降噪耳机推荐",
+   "AirBuds 3 Pro 通话降噪"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "充电器和充电宝都要，出门省事",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "星环 65W 氮化镓充电器",
+   "星环 磁吸充电宝"
+  ],
+  "retrieved_top5": [
+   "Fold1 无线充电",
+   "星环 磁吸充电宝",
+   "星环 100W 移动电源",
+   "X1 Pro 快充协议",
+   "露营户外装备推荐"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.5,
+  "mrr": 0.5
+ },
+ {
+  "query": "手机电脑一起买有优惠吗",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "办公全家桶推荐",
+   "学生党性价比方案"
+  ],
+  "retrieved_top5": [
+   "笔记本选购-学生用",
+   "Book Pro 适用人群",
+   "Book Air 学生推荐理由",
+   "X1 系列壳膜推荐",
+   "笔记本选购-设计师用"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "安卓平板还是专用学习机好",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "Pad 适用人群",
+   "平板选购-学习用"
+  ],
+  "retrieved_top5": [
+   "半入耳与入耳式区别",
+   "平板车用支架",
+   "笔记本屏幕分辨率",
+   "AirBuds 3 Pro LDAC 开启",
+   "X1 Pro 与 Fold1 怎么选"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "给老人买手机还是平板",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "老人机选购指南",
+   "Pad Mini 便携场景"
+  ],
+  "retrieved_top5": [
+   "X1 Lite 老人适用吗",
+   "老人机选购指南",
+   "学生党性价比方案",
+   "笔记本屏幕分辨率",
+   "礼物推荐-送女友"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.5,
+  "mrr": 0.5
+ },
+ {
+  "query": "拍照好看和打游戏爽能兼得吗",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "拍照手机推荐",
+   "游戏手机推荐"
+  ],
+  "retrieved_top5": [
+   "拍照手机推荐",
+   "耳机游戏模式延迟",
+   "3000元内手机推荐",
+   "X1 Pro 游戏表现",
+   "游戏手机推荐"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "轻薄本和游戏本到底买哪个",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "Book Air 与 Book Pro 区别",
+   "星环 GameBook 15 游戏本规格"
+  ],
+  "retrieved_top5": [
+   "笔记本重量对比",
+   "Book Pro 与 GameBook 怎么选",
+   "Book Air 学生推荐理由",
+   "游戏党装备推荐",
+   "星环 Book Air 13 轻薄本规格"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "平板拿来画画和追剧选哪个尺寸",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "平板选购-绘画用",
+   "平板选购-追剧用"
+  ],
+  "retrieved_top5": [
+   "AirBuds 3 Pro 与 HeadBuds 5 怎么选"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "无线充和有线充哪个快",
+  "domain": "product",
+  "diff": "ambiguous",
+  "expected": [
+   "星环 30W 无线充电器",
+   "星环 65W 氮化镓充电器"
+  ],
+  "retrieved_top5": [
+   "降噪耳机推荐",
+   "Fold1 无线充电",
+   "AirBuds 3 Pro 与 HeadBuds 5 怎么选",
+   "星环 键鼠套装",
+   "星环 车载无线充"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "手机黑屏了怎么办",
+  "domain": "tech",
+  "diff": "easy",
+  "expected": [
+   "手机黑屏"
+  ],
+  "retrieved_top5": [
+   "手机黑屏",
+   "电脑黑屏",
+   "平板无法开机"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "电脑蓝屏怎么处理",
+  "domain": "tech",
+  "diff": "easy",
+  "expected": [
+   "电脑蓝屏"
+  ],
+  "retrieved_top5": [
+   "电脑蓝屏"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "耳机一边没声音",
+  "domain": "tech",
+  "diff": "easy",
+  "expected": [
+   "耳机单侧无声"
+  ],
+  "retrieved_top5": [
+   "耳机单侧无声"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "平板触屏没反应",
+  "domain": "tech",
+  "diff": "easy",
+  "expected": [
+   "平板屏幕触控失灵"
+  ],
+  "retrieved_top5": [
+   "平板手写笔没反应",
+   "电脑触摸屏失灵",
+   "平板无法开机",
+   "平板屏幕触控失灵",
+   "Pad 键盘失灵"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.25
+ },
+ {
+  "query": "手机怎么备份数据",
+  "domain": "tech",
+  "diff": "easy",
+  "expected": [
+   "手机数据备份"
+  ],
+  "retrieved_top5": [
+   "手机数据备份",
+   "维修前注意事项"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "换新机怎么把旧手机数据弄过来",
+  "domain": "tech",
+  "diff": "easy",
+  "expected": [
+   "数据迁移到新手机"
+  ],
+  "retrieved_top5": [
+   "以旧换新流程",
+   "手机数据备份",
+   "数据迁移到新手机",
+   "星环账号注册",
+   "换机克隆操作"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.333
+ },
+ {
+  "query": "手机摔了一下，屏幕花了",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "手机屏幕碎裂"
+  ],
+  "retrieved_top5": [
+   "手机屏幕碎裂",
+   "手机屏幕闪烁",
+   "手机黑屏",
+   "电脑黑屏",
+   "平板屏幕触控失灵"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "用着用着就卡死了，半天没反应",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "手机死机无响应"
+  ],
+  "retrieved_top5": [
+   "手机死机无响应",
+   "平板卡顿"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "充了一个小时还是百分之二",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "手机充不进电"
+  ],
+  "retrieved_top5": [
+   "星环账号注册",
+   "平板儿童模式退出",
+   "耳机续航短",
+   "维修取件验收",
+   "换机克隆操作"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "听筒有杂音，说话对方听不清",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "手机麦克风失灵"
+  ],
+  "retrieved_top5": [
+   "手机通话质量差",
+   "耳机底噪大"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "电池半天就没电，一天两充",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "手机电池续航差"
+  ],
+  "retrieved_top5": [
+   "手机电池续航差",
+   "平板App闪退",
+   "Book 续航变差优化",
+   "耳机续航短",
+   "电脑电池充不进电"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "开机一直转圈进不去桌面",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "电脑系统崩溃"
+  ],
+  "retrieved_top5": [
+   "电脑无法开机",
+   "换机克隆操作",
+   "平板无法开机",
+   "手机无法开机",
+   "耳机无法开机"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "游戏打着打着就闪退",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "电脑软件闪退"
+  ],
+  "retrieved_top5": [
+   "平板App闪退",
+   "电脑软件闪退",
+   "平板分屏异常",
+   "手机相机打不开",
+   "手机应用双开异常"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "耳机连上手机一会就断了",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "耳机连接频繁断开"
+  ],
+  "retrieved_top5": [
+   "耳机多设备切换卡顿",
+   "耳机丢失找回",
+   "耳机连接频繁断开",
+   "手机蓝牙连不上",
+   "耳机佩戴检测失效"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.333
+ },
+ {
+  "query": "耳机沙沙响有电流声",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "耳机底噪大"
+  ],
+  "retrieved_top5": [
+   "耳机底噪大"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "平板画画笔没反应了",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "平板手写笔没反应"
+  ],
+  "retrieved_top5": [
+   "平板手写笔没反应",
+   "平板无法开机",
+   "平板屏幕触控失灵",
+   "Pad 键盘失灵",
+   "电脑USB接口不识别"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "手机昨天还能用今天打不开了",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "手机无法开机"
+  ],
+  "retrieved_top5": [
+   "手机指纹解锁失效",
+   "电脑摄像头打不开",
+   "手机相机打不开",
+   "手机 NFC 失效",
+   "手机应用双开异常"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "电脑触摸板点了没反应",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "电脑触控板无响应"
+  ],
+  "retrieved_top5": [
+   "电脑触控板无响应",
+   "电脑USB接口不识别",
+   "电脑电池充不进电",
+   "电脑HDMI外接无信号",
+   "电脑无法开机"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "买的耳机能修吗，还在保修期",
+  "domain": "tech",
+  "diff": "hard",
+  "expected": [
+   "保修期内维修流程"
+  ],
+  "retrieved_top5": [
+   "产品保修期"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "手机老是发热，是不是坏了",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "手机发热严重",
+   "X1 Pro 发热优化建议"
+  ],
+  "retrieved_top5": [
+   "平板发热"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "屏幕碎了能保修吗",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "保修范围",
+   "不在保修范围的场景"
+  ],
+  "retrieved_top5": [
+   "产品保修期"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "手机数据怎么备份到新机",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "手机数据备份",
+   "数据迁移到新手机"
+  ],
+  "retrieved_top5": [
+   "手机数据备份",
+   "以旧换新流程",
+   "系统更新回退",
+   "电脑文件误删恢复",
+   "数据备份方式对比"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "怎么把手机里的照片导到电脑",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "数据迁移服务",
+   "数据备份方式对比"
+  ],
+  "retrieved_top5": [
+   "手机数据备份",
+   "数据备份方式对比",
+   "手机存储空间不足",
+   "手机拍照模糊",
+   "数据迁移到新手机"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.5,
+  "mrr": 0.5
+ },
+ {
+  "query": "WiFi 老自动断，是路由器问题还是手机问题",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "手机WiFi自动断开",
+   "手机无法连接WiFi"
+  ],
+  "retrieved_top5": [
+   "手机WiFi自动断开",
+   "电脑无法连接WiFi",
+   "手机无法连接WiFi",
+   "耳机连接频繁断开",
+   "耳机多设备切换卡顿"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "耳机丢了能单独配一只吗",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "耳机单耳丢失购买",
+   "耳机丢失找回"
+  ],
+  "retrieved_top5": [
+   "耳机丢失找回"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "系统更新以后还能退回去吗",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "系统更新回退",
+   "手机系统更新失败"
+  ],
+  "retrieved_top5": [
+   "系统更新内容查询",
+   "手机系统更新失败",
+   "系统更新回退",
+   "X1 系统降级说明",
+   "平板横竖屏失灵"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "账号被盗了怎么办",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "账号异地登录提醒",
+   "远程锁定与清除"
+  ],
+  "retrieved_top5": [
+   "账号注销流程",
+   "星环账号注册",
+   "账号异地登录提醒",
+   "查找我的设备",
+   "平板儿童模式退出"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.5,
+  "mrr": 0.333
+ },
+ {
+  "query": "重装系统会不会丢东西",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "电脑系统重装",
+   "电脑文件误删恢复"
+  ],
+  "retrieved_top5": [
+   "电脑系统重装"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "手机可以自己拆开修吗，还是寄回去",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "寄修流程",
+   "官方维修与第三方对比"
+  ],
+  "retrieved_top5": [
+   "维修进度短信通知",
+   "维修取件验收",
+   "延保期内维修流程",
+   "耳机无法连接手机",
+   "手机屏幕碎裂"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "保修期怎么算，延保值得买吗",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "产品保修期",
+   "延保服务"
+  ],
+  "retrieved_top5": [
+   "产品保修期",
+   "延保服务",
+   "延保期内维修流程"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "修手机要多久，能不能加急",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "维修周期",
+   "维修进度短信通知"
+  ],
+  "retrieved_top5": [
+   "维修周期",
+   "产品保修期",
+   "电脑USB接口不识别",
+   "电脑触控板无响应",
+   "电脑键盘失灵"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "旧手机能抵钱吗",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "以旧换新流程",
+   "数据迁移服务"
+  ],
+  "retrieved_top5": [
+   "以旧换新流程",
+   "数据迁移到新手机",
+   "手机面部识别失败",
+   "换机克隆操作",
+   "电脑驱动安装失败"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "清理手机垃圾用什么办法",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "手机存储空间不足",
+   "手机恢复出厂设置"
+  ],
+  "retrieved_top5": [
+   "手机充电慢",
+   "电脑风扇异响",
+   "平板充电慢",
+   "电脑过热",
+   "Fold1 折叠屏保养"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "指纹和面容哪个安全",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "手机指纹解锁失效",
+   "手机面部识别失败"
+  ],
+  "retrieved_top5": [
+   "电脑指纹识别不灵",
+   "手机指纹录不上",
+   "手机指纹解锁失效",
+   "电脑病毒查杀",
+   "手机自动重启"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.5,
+  "mrr": 0.333
+ },
+ {
+  "query": "平板总闪退是系统问题吗",
+  "domain": "tech",
+  "diff": "ambiguous",
+  "expected": [
+   "平板App闪退",
+   "平板存储不足"
+  ],
+  "retrieved_top5": [
+   "系统更新内容查询",
+   "平板儿童模式退出",
+   "保修范围",
+   "Pad 手写笔断连",
+   "平板手写笔没反应"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "客服半天不回消息，我要投诉",
+  "domain": "complaint",
+  "diff": "easy",
+  "expected": [
+   "客服响应慢投诉"
+  ],
+  "retrieved_top5": [
+   "线上客服转接慢投诉",
+   "投诉处理结果反馈",
+   "客服态度差投诉",
+   "客服承诺不认账投诉",
+   "客服电话难接通投诉"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "收到的手机屏幕有划痕",
+  "domain": "complaint",
+  "diff": "easy",
+  "expected": [
+   "外观瑕疵投诉"
+  ],
+  "retrieved_top5": [
+   "外观瑕疵投诉"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "赠品是坏的，我要投诉",
+  "domain": "complaint",
+  "diff": "easy",
+  "expected": [
+   "赠品质量问题投诉"
+  ],
+  "retrieved_top5": [
+   "赠品质量问题投诉",
+   "赠品缺失补偿标准",
+   "功能缺陷投诉",
+   "包装破损投诉",
+   "宣传与实物不符投诉"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "快递给我送错地方了，气死",
+  "domain": "complaint",
+  "diff": "easy",
+  "expected": [
+   "配送错误投诉"
+  ],
+  "retrieved_top5": [
+   "赠品质量问题投诉",
+   "擅自放驿站投诉",
+   "快递丢件投诉",
+   "物流信息造假投诉",
+   "新机开机异常投诉"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "你们赔偿标准是什么",
+  "domain": "complaint",
+  "diff": "easy",
+  "expected": [
+   "补偿标准说明"
+  ],
+  "retrieved_top5": [],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "态度恶劣，爱答不理的",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "客服态度差投诉"
+  ],
+  "retrieved_top5": [
+   "客服态度差投诉"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "问啥啥不懂，换个客服又问一遍",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "客服专业不足投诉"
+  ],
+  "retrieved_top5": [
+   "客服专业不足投诉",
+   "质量问题重复出现投诉",
+   "不适用补偿场景",
+   "客服电话难接通投诉",
+   "线上客服转接慢投诉"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "就退个货来回折腾了三次还没搞定",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "处理流程繁琐投诉"
+  ],
+  "retrieved_top5": [
+   "延迟补偿标准",
+   "配送错误投诉",
+   "错发补偿标准",
+   "承诺未兑现投诉",
+   "客服承诺不认账投诉"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "打了三次电话每次都说稍等，结果就没下文",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "反复转接投诉"
+  ],
+  "retrieved_top5": [
+   "客服电话难接通投诉",
+   "多次配送失败投诉",
+   "延迟补偿标准",
+   "客服承诺不认账投诉",
+   "客服响应慢投诉"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "买的时候说七天到，现在十天了影子都没有",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "配送延迟投诉"
+  ],
+  "retrieved_top5": [
+   "物流信息造假投诉",
+   "承诺未兑现投诉",
+   "客服专业不足投诉",
+   "宣传与实物不符投诉",
+   "补偿时效"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "收到的盒子都瘪了，里面的东西还能好？",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "包装破损投诉"
+  ],
+  "retrieved_top5": [
+   "重复来电投诉处理",
+   "二手充新投诉",
+   "配送错误投诉",
+   "投诉处理结果反馈",
+   "赠品缺失补偿标准"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "明明没收到说签收了，骗谁呢",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "物流信息造假投诉"
+  ],
+  "retrieved_top5": [
+   "赠品缺失补偿标准",
+   "物流信息造假投诉",
+   "补偿时效",
+   "补偿与退款关系",
+   "快递损坏拒赔投诉"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "不经同意就扔驿站，我腿脚不方便咋取",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "擅自放驿站投诉"
+  ],
+  "retrieved_top5": [
+   "擅自放驿站投诉",
+   "投诉处理结果不满意",
+   "快递员服务投诉",
+   "补偿与退款关系",
+   "延迟补偿标准"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "宣传说 5000 万像素，拍出来糊得跟马赛克似的",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "宣传与实物不符投诉"
+  ],
+  "retrieved_top5": [
+   "宣传参数不符投诉",
+   "宣传与实物不符投诉",
+   "处理流程繁琐投诉",
+   "赠品质量问题投诉",
+   "擅自放驿站投诉"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "换了一台还是有问题，是不是卖次品",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "质量问题重复出现投诉"
+  ],
+  "retrieved_top5": [
+   "二手充新投诉",
+   "配送错误投诉",
+   "新机开机异常投诉",
+   "赠品质量问题投诉",
+   "质量问题重复出现投诉"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.2
+ },
+ {
+  "query": "说好今天回复我，结果又放鸽子",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "承诺未兑现投诉"
+  ],
+  "retrieved_top5": [
+   "客服响应慢投诉",
+   "质量问题重复出现投诉",
+   "升级响应时限",
+   "投诉处理结果反馈",
+   "投诉处理结果不满意"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "你们的人工怎么老是排队等半天",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "客服电话难接通投诉"
+  ],
+  "retrieved_top5": [
+   "人工介入申请",
+   "客服响应慢投诉",
+   "客服电话难接通投诉",
+   "线上客服转接慢投诉",
+   "加急处理"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.333
+ },
+ {
+  "query": "快递破损了你们不赔，就一句按流程",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "快递损坏拒赔投诉"
+  ],
+  "retrieved_top5": [
+   "包装破损投诉"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "延迟发货到底赔不赔，赔多少",
+  "domain": "complaint",
+  "diff": "hard",
+  "expected": [
+   "延迟补偿标准"
+  ],
+  "retrieved_top5": [
+   "延迟补偿标准",
+   "补偿金额计算",
+   "配送延迟投诉",
+   "不适用补偿场景",
+   "物流信息造假投诉"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "客服答应的事转头就不认，算谁的问题",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "客服承诺不认账投诉",
+   "承诺未兑现投诉"
+  ],
+  "retrieved_top5": [
+   "承诺未兑现投诉",
+   "客服承诺不认账投诉",
+   "投诉处理结果不满意",
+   "延迟补偿标准",
+   "多次配送失败投诉"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "开箱发现是别人用过的，是不是翻新机",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "二手充新投诉",
+   "新机开机异常投诉"
+  ],
+  "retrieved_top5": [
+   "二手充新投诉",
+   "投诉后回访说明",
+   "外观瑕疵投诉",
+   "新机开机异常投诉",
+   "补偿标准说明"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "东西有毛病，是想退货还是让赔钱",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "质量问题补偿标准",
+   "质量问题重复出现投诉"
+  ],
+  "retrieved_top5": [
+   "配送错误投诉",
+   "新机开机异常投诉",
+   "宣传与实物不符投诉",
+   "错发补偿标准",
+   "功能缺陷投诉"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "这手机发热烫手，用起来卡，投诉有用吗",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "性能不达标投诉",
+   "功能缺陷投诉"
+  ],
+  "retrieved_top5": [
+   "新机开机异常投诉",
+   "赠品质量问题投诉",
+   "监管渠道投诉说明",
+   "投诉处理结果反馈",
+   "投诉处理结果不满意"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "投诉了多久能给答复",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "投诉处理时限",
+   "投诉处理结果反馈"
+  ],
+  "retrieved_top5": [
+   "投诉处理时限",
+   "补偿时效",
+   "监管渠道投诉说明",
+   "投诉材料准备",
+   "投诉处理结果不满意"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "处理结果我不满意还能再投诉吗",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "投诉处理结果不满意",
+   "投诉升级条件"
+  ],
+  "retrieved_top5": [
+   "投诉处理结果不满意",
+   "投诉处理结果反馈",
+   "投诉后回访说明",
+   "投诉升级条件",
+   "主管处理通道"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "快递员态度差还扔件，找谁投诉",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "快递员服务投诉",
+   "配送错误投诉"
+  ],
+  "retrieved_top5": [
+   "快递员服务投诉"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "少发了一个赠品，是补发还是补偿",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "赠品缺失补偿标准",
+   "漏发补偿标准"
+  ],
+  "retrieved_top5": [
+   "漏发补偿标准"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "补偿是给钱还是给券",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "补偿发放方式",
+   "补偿金额计算"
+  ],
+  "retrieved_top5": [
+   "配送错误投诉",
+   "不适用补偿场景",
+   "补偿与退款关系",
+   "补偿标准说明",
+   "补偿金额计算"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.2
+ },
+ {
+  "query": "这情况能赔多少，怎么算的",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "补偿金额计算",
+   "质量问题补偿标准"
+  ],
+  "retrieved_top5": [
+   "补偿金额计算",
+   "延迟补偿标准",
+   "客服电话难接通投诉",
+   "快递损坏拒赔投诉",
+   "包装破损投诉"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "要求人工介入怎么申请",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "人工介入申请",
+   "工单提交"
+  ],
+  "retrieved_top5": [
+   "人工介入申请"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "能不能加急处理，真的很急",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "加急处理",
+   "升级响应时限"
+  ],
+  "retrieved_top5": [
+   "加急处理"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "监管渠道能投诉你们吗",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "监管渠道投诉说明",
+   "投诉材料准备"
+  ],
+  "retrieved_top5": [
+   "监管渠道投诉说明",
+   "投诉材料准备",
+   "投诉处理时限",
+   "投诉处理结果不满意",
+   "快递员服务投诉"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "客服不理人，打客服电话也没人接",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "线上客服转接慢投诉",
+   "客服电话难接通投诉"
+  ],
+  "retrieved_top5": [
+   "客服电话难接通投诉",
+   "客服响应慢投诉",
+   "重复来电投诉处理",
+   "客服承诺不认账投诉",
+   "多次配送失败投诉"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "处理了半个月还没结果，我要找主管",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "投诉处理时限",
+   "主管处理通道"
+  ],
+  "retrieved_top5": [
+   "投诉升级条件"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "外观瑕疵和功能问题能一起赔偿吗",
+  "domain": "complaint",
+  "diff": "ambiguous",
+  "expected": [
+   "外观瑕疵投诉",
+   "质量问题补偿标准"
+  ],
+  "retrieved_top5": [
+   "外观瑕疵投诉"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "7 天无理由退款怎么申请",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "7天无理由退款"
+  ],
+  "retrieved_top5": [
+   "7天无理由退款"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "发票能开公司抬头吗",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "发票抬头修改"
+  ],
+  "retrieved_top5": [
+   "个人发票与企业发票区别",
+   "企业专票开具",
+   "发票重开",
+   "发票内容明细",
+   "发票抬头修改"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.2
+ },
+ {
+  "query": "分期付款有什么要求",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "分期付款"
+  ],
+  "retrieved_top5": [
+   "分期付款"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "满 199 减 30 怎么用",
+  "domain": "billing",
+  "diff": "easy",
+  "expected": [
+   "满减活动规则"
+  ],
+  "retrieved_top5": [
+   "满减活动规则",
+   "优惠券退款处理",
+   "优惠券叠加规则",
+   "学生认证流程",
+   "优惠券有效期"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "昨天刚买今天就降价了，能退差价吗",
+  "domain": "billing",
+  "diff": "hard",
+  "expected": [
+   "价格保护政策"
+  ],
+  "retrieved_top5": [
+   "价保与退款关系",
+   "价格保护政策",
+   "买贵退差",
+   "价保申请流程"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 1.0,
+  "mrr": 0.5
+ },
+ {
+  "query": "退货的运费谁出",
+  "domain": "billing",
+  "diff": "hard",
+  "expected": [
+   "退货运费承担"
+  ],
+  "retrieved_top5": [
+   "退货运费承担"
+  ],
+  "recall@1": 1.0,
+  "recall@3": 1.0,
+  "mrr": 1.0
+ },
+ {
+  "query": "买东西送的券能变现吗",
+  "domain": "billing",
+  "diff": "hard",
+  "expected": [
+   "红包提现说明"
+  ],
+  "retrieved_top5": [
+   "优惠券转赠",
+   "换货与新购区别",
+   "红包退款处理",
+   "运费券退款处理",
+   "分期付款"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "退款一般多久到账",
+  "domain": "billing",
+  "diff": "ambiguous",
+  "expected": [
+   "退款到账时效",
+   "超时自动退款"
+  ],
+  "retrieved_top5": [
+   "退款到账时效",
+   "企业对公转账",
+   "拼团失败退款",
+   "退货运费承担",
+   "组合支付退款拆分"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "优惠券下单后退款，券还回来吗",
+  "domain": "billing",
+  "diff": "ambiguous",
+  "expected": [
+   "优惠券退款处理",
+   "优惠券有效期"
+  ],
+  "retrieved_top5": [
+   "优惠券使用规则"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "能开发票吗，要报销用",
+  "domain": "billing",
+  "diff": "ambiguous",
+  "expected": [
+   "电子发票开具",
+   "发票内容明细"
+  ],
+  "retrieved_top5": [
+   "电子发票开具"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "买贵了能退吗，怎么退",
+  "domain": "billing",
+  "diff": "ambiguous",
+  "expected": [
+   "买贵退差",
+   "价格保护政策"
+  ],
+  "retrieved_top5": [
+   "价格保护政策",
+   "价保申请流程"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "分期退款的利息怎么算",
+  "domain": "billing",
+  "diff": "ambiguous",
+  "expected": [
+   "分期订单退款",
+   "分期付款"
+  ],
+  "retrieved_top5": [
+   "分期订单退款"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "发票开错了能改吗",
+  "domain": "billing",
+  "diff": "ambiguous",
+  "expected": [
+   "发票抬头修改",
+   "发票重开"
+  ],
+  "retrieved_top5": [
+   "红字发票处理"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "退款被拒了怎么办",
+  "domain": "billing",
+  "diff": "ambiguous",
+  "expected": [
+   "退款申请被拒原因",
+   "退款被拒申诉"
+  ],
+  "retrieved_top5": [
+   "退款被拒申诉"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ },
+ {
+  "query": "用花呗买的退款退到哪",
+  "domain": "billing",
+  "diff": "ambiguous",
+  "expected": [
+   "退款原路返回",
+   "组合支付退款拆分"
+  ],
+  "retrieved_top5": [
+   "花呗分期",
+   "分期付款",
+   "换货进度查询",
+   "分期订单退款",
+   "换货与新购区别"
+  ],
+  "recall@1": 0.0,
+  "recall@3": 0.0,
+  "mrr": 0.0
+ },
+ {
+  "query": "换货和退货哪个划算",
+  "domain": "billing",
+  "diff": "ambiguous",
+  "expected": [
+   "换货与新购区别",
+   "7天无理由退款"
+  ],
+  "retrieved_top5": [
+   "换货与新购区别",
+   "换货型号无货处理",
+   "换货进度查询",
+   "退款原路返回",
+   "换货取消"
+  ],
+  "recall@1": 0.5,
+  "recall@3": 0.5,
+  "mrr": 1.0
+ }
+]

@@ -1,0 +1,114 @@
+[
+ {
+  "query": "534597270770拍了很多东西",
+  "domain": "general",
+  "difficulty": "hard",
+  "expected": [
+   "满赠活动规则"
+  ]
+ },
+ {
+  "query": "三号可以到吗大概",
+  "domain": "general",
+  "difficulty": "hard",
+  "expected": [
+   "物流单号查询"
+  ]
+ },
+ {
+  "query": "买耳机送什么？是拍一个还是拍两个？",
+  "domain": "general",
+  "difficulty": "easy",
+  "expected": [
+   "满赠活动规则"
+  ]
+ },
+ {
+  "query": "你们地址发我退还你们怎么",
+  "domain": "billing",
+  "difficulty": "hard",
+  "expected": [
+   "退货运费承担"
+  ]
+ },
+ {
+  "query": "几天可以到",
+  "domain": "general",
+  "difficulty": "hard",
+  "expected": [
+   "物流单号查询"
+  ]
+ },
+ {
+  "query": "后天能到吗",
+  "domain": "general",
+  "difficulty": "hard",
+  "expected": [
+   "物流单号查询"
+  ]
+ },
+ {
+  "query": "好的石家庄几天到",
+  "domain": "general",
+  "difficulty": "hard",
+  "expected": [
+   "物流单号查询"
+  ]
+ },
+ {
+  "query": "就平时打电话刷视频用，哪款合适？",
+  "domain": "product",
+  "difficulty": "hard",
+  "expected": [
+   "星环 X1 标准版手机规格"
+  ]
+ },
+ {
+  "query": "想给家里老人买台手机，帮我推荐下",
+  "domain": "product",
+  "difficulty": "easy",
+  "expected": [
+   "星环 X1 Lite 入门手机规格"
+  ]
+ },
+ {
+  "query": "满199可以减十元是吧还送啥",
+  "domain": "general",
+  "difficulty": "easy",
+  "expected": [
+   "满赠活动规则"
+  ]
+ },
+ {
+  "query": "然后你送一盒",
+  "domain": "general",
+  "difficulty": "hard",
+  "expected": [
+   "满赠活动规则"
+  ]
+ },
+ {
+  "query": "还是一次付款吧可以领5元优惠券呢",
+  "domain": "billing",
+  "difficulty": "hard",
+  "expected": [
+   "在线支付方式"
+  ]
+ },
+ {
+  "query": "那几天能到呢",
+  "domain": "general",
+  "difficulty": "hard",
+  "expected": [
+   "物流单号查询"
+  ]
+ },
+ {
+  "query": "那大概最快能多久啊因为我比较着急",
+  "domain": "general",
+  "difficulty": "hard",
+  "expected": [
+   "物流单号查询"
+  ]
+ }
+]

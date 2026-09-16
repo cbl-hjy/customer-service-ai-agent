@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>决策链详情 · 全链路追踪</title>
+    <style>
+        body { font-family: -apple-system, "Microsoft YaHei", sans-serif; margin: 0; background: #f5f6fa; color: #2d3436; }
+        .header { background: #2c3e50; color: #fff; padding: 16px 24px; }
+        .header h1 { margin: 0; font-size: 20px; }
+        .header a { color: #74b9ff; text-decoration: none; margin-left: 16px; font-size: 14px; }
+        .container { max-width: 1000px; margin: 24px auto; padding: 0 16px; }
+        .meta { background: #fff; border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+        .meta h2 { margin: 0 0 10px; font-size: 16px; }
+        .meta-row { font-size: 13px; color: #636e72; margin: 4px 0; }
+        .meta-row b { color: #2d3436; }
+        .badge { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; margin-left: 8px; }
+        .badge-ok { background: #d4edda; color: #155724; }
+        .badge-escalated { background: #fff3cd; color: #856404; }
+        .chain { position: relative; padding-left: 28px; }
+        .chain::before { content: ''; position: absolute; left: 10px; top: 8px; bottom: 8px; width: 2px; background: #dfe6e9; }
+        .step { position: relative; background: #fff; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+        .step::before { content: ''; position: absolute; left: -24px; top: 16px; width: 12px; height: 12px; border-radius: 50%; background: #74b9ff; border: 2px solid #fff; box-shadow: 0 0 0 2px #74b9ff; }
+        .step.error::before { background: #e74c3c; box-shadow: 0 0 0 2px #e74c3c; }
+        .step-head { display: flex; justify-content: space-between; align-items: baseline; }
+        .step-name { font-weight: 600; font-size: 14px; }
+        .step-time { font-size: 12px; color: #636e72; }
+        .step-detail { font-size: 13px; color: #636e72; margin-top: 6px; line-height: 1.6; }
+        .step-detail .k { color: #2d3436; font-weight: 600; }
+        .error-text { color: #e74c3c; }
+        .mono { font-family: Consolas, monospace; font-size: 12px; }
+        a.back { color: #74b9ff; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>决策链详情 <span style="font-weight:400;font-size:13px;">{{ run.run_id }}</span>
+            <a href="/trace">← 返回列表</a><a href="/">对话</a>
+        </h1>
+    </div>
+    <div class="container">
+        <div class="meta">
+            <h2>{{ run.user_query }}</h2>
+            <div class="meta-row">时间：<b class="mono">{{ run.ts }}</b>　线程：<b class="mono">{{ run.thread_id }}</b></div>
+            <div class="meta-row">总耗时：<b>{{ '%.0f'|format(run.total_ms or 0) }}ms</b>　
+                Token：<b class="mono">{{ (run.prompt_tokens or 0) + (run.completion_tokens or 0) }}</b>
+                （prompt {{ run.prompt_tokens or 0 }} + completion {{ run.completion_tokens or 0 }}）　
+                决策：
+                {% if run.decision.get('escalated') %}
+                <span class="badge badge-escalated">升级人工{% if run.decision.get('escalation_reason') %}（{{ run.decision.escalation_reason }}）{% endif %}</span>
+                {% else %}
+                <span class="badge badge-ok">直接回复</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="chain">
+            {% for s in run.steps %}
+            <div class="step {% if s.detail.get('error') %}error{% endif %}">
+                <div class="step-head">
+                    <span class="step-name">{{ s.node_name }}</span>
+                    <span class="step-time">耗时 {{ '%.1f'|format(s.duration_ms or 0) }}ms · token +{{ s.token_delta or 0 }}</span>
+                </div>
+                <div class="step-detail">
+                    {% if s.detail.get('error') %}
+                    <span class="error-text">⚠ {{ s.detail.error }}</span>
+                    {% else %}
+                    <span class="k">分类</span> {{ s.detail.get('query_type', '-') }}
+                    <span class="k">置信度</span> {{ '%.2f'|format(s.detail.get('confidence', 0)) }}
+                    <span class="k">Agent</span> {{ s.detail.get('agent', '-') }}
+                    {% if s.detail.get('escalated') %}
+                    · <span class="k">升级</span> {{ s.detail.get('escalation_reason', '') }}
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

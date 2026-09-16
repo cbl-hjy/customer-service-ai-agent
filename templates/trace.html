@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全链路追踪 · 客服 Agent</title>
+    <style>
+        body { font-family: -apple-system, "Microsoft YaHei", sans-serif; margin: 0; background: #f5f6fa; color: #2d3436; }
+        .header { background: #2c3e50; color: #fff; padding: 16px 24px; }
+        .header h1 { margin: 0; font-size: 20px; }
+        .header a { color: #74b9ff; text-decoration: none; margin-left: 16px; font-size: 14px; }
+        .container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+        th, td { padding: 10px 14px; text-align: left; font-size: 13px; border-bottom: 1px solid #eee; }
+        th { background: #ecf0f1; font-weight: 600; white-space: nowrap; }
+        tr:hover td { background: #f8f9fb; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+        .badge-ok { background: #d4edda; color: #155724; }
+        .badge-escalated { background: #fff3cd; color: #856404; }
+        .badge-error { background: #f8d7da; color: #721c24; }
+        .mono { font-family: Consolas, monospace; font-size: 12px; }
+        .empty { text-align: center; color: #95a5a6; padding: 40px; }
+        a.run-link { color: #2c3e50; text-decoration: none; }
+        a.run-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>全链路追踪 <span style="font-weight:400;font-size:13px;">（自研 trace 面板 · 最近 {{ runs|length }} 次工单）</span>
+            <a href="/">对话</a><a href="/tickets">工单队列</a>
+        </h1>
+    </div>
+    <div class="container">
+        {% if runs %}
+        <table>
+            <tr>
+                <th>时间</th><th>用户问题</th><th>分类</th><th>置信度</th><th>路由/Agent</th>
+                <th>决策</th><th>耗时</th><th>Token</th>
+            </tr>
+            {% for r in runs %}
+            <tr>
+                <td class="mono">{{ r.ts }}</td>
+                <td><a class="run-link" href="/trace/{{ r.run_id }}">{{ r.user_query[:40] }}{% if r.user_query|length > 40 %}…{% endif %}</a></td>
+                <td>{{ r.decision.get('query_type', '-') }}</td>
+                <td>{{ '%.2f'|format(r.decision.get('confidence', 0)) }}</td>
+                <td>{{ r.decision.get('agent', '-') }}</td>
+                <td>
+                    {% if r.decision.get('escalated') %}
+                    <span class="badge badge-escalated">升级人工</span>
+                    {% else %}
+                    <span class="badge badge-ok">直接回复</span>
+                    {% endif %}
+                </td>
+                <td class="mono">{{ '%.0f'|format(r.total_ms or 0) }}ms</td>
+                <td class="mono">{{ (r.prompt_tokens or 0) + (r.completion_tokens or 0) }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <div class="empty">暂无 trace 数据 —— 发一条工单后自动记录完整决策链</div>
+        {% endif %}
+    </div>
+</body>
+</html>

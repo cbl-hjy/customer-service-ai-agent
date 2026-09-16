@@ -1,0 +1,91 @@
+=== ECD miss 归因：43 条 ===
+  COVERAGE_GAP: 31（72.1%）
+  THRESHOLD: 0（0.0%）
+  ALGO_MISS: 12（27.9%）
+
+[COVERAGE_GAP] (general) 538872953711是纸皮核桃吗
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 东西是小事信誉是大事夹子
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[ALGO_MISS] (general) 我前几天加入购物车了今天看失效了
+    top: billing:退款流程(2.051) | product:手机(0.0) | product:电脑(0.0)
+[COVERAGE_GAP] (general) 525873142019
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 你们家的张张连抽
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 这个纸是2袋是嘛
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 这个湿巾可以擦了乳头直接给宝宝喂奶吗
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 好都可以吧
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[ALGO_MISS] (general) 我的核桃怎么还没寄呢
+    top: tech:声音问题(1.556) | tech:无法开机(1.426) | product:手机(0.0)
+[ALGO_MISS] (billing) 价格可以有优惠吗
+    top: general:会员服务(4.273) | product:耳机(0.064) | product:平板(0.061)
+[ALGO_MISS] (general) 买多少斤包邮
+    top: complaint:补偿标准(2.07) | product:手机(0.0) | product:电脑(0.0)
+[COVERAGE_GAP] (general) 偶尔会有点的呢
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[ALGO_MISS] (general) 买五袋多少
+    top: complaint:补偿标准(2.07) | product:手机(0.0) | product:电脑(0.0)
+[COVERAGE_GAP] (general) 528105689823
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 为什么小的更贵
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 哪种可味好
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 什么味的比较好吃啊
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 545425216440
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 是货到了吗
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[ALGO_MISS] (general) 好的盒子难包装吗
+    top: complaint:包装破损(3.164) | billing:7天无理由退款(1.753) | product:手机(0.0)
+[COVERAGE_GAP] (general) 有什么可以帮你的
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 你说的下周就是明天吗
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 99的那种是单独的哈尺寸大小的话就跟我们平时用的那种一样的嘛520401029636这种一包是几张的
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (billing) 这款是干的吗
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[ALGO_MISS] (billing) 行退多少
+    top: complaint:补偿标准(2.07) | product:手机(0.0) | product:电脑(0.0)
+[COVERAGE_GAP] (general) 发中通圆通吗
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 之后的行动呢
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[ALGO_MISS] (general) 淘宝为什么没有传照片功能
+    top: tech:电池优化(2.244) | complaint:功能缺陷(2.122) | product:手机(0.0)
+[ALGO_MISS] (billing) 这款现在有盖子吗
+    top: general:活动参与规则(2.858) | product:手机(0.0) | product:电脑(0.0)
+[COVERAGE_GAP] (general) 不是799一包吗
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[ALGO_MISS] (general) 那大概最快能多久啊因为我比较着急
+    top: tech:保修条款(2.038) | billing:开具时间(1.734) | billing:退款流程(1.476)
+[COVERAGE_GAP] (general) 对的谢谢啦
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 538872953711
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[ALGO_MISS] (billing) 你们地址发我退还你们怎么
+    top: general:地址修改规则(4.973) | complaint:配送错误(3.462) | general:物流跟踪(2.199)
+[COVERAGE_GAP] (general) 没事儿的呢
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 可以帮我发百世汇通
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 有厚一点的吗
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 还有什么
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 真的是99一包吗
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 那老客户还是原价
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[ALGO_MISS] (tech) 怎么说第一次有漏发吗
+    top: general:补发/少件(2.908) | complaint:配送错误(1.731) | product:手机(0.0)
+[COVERAGE_GAP] (general) 小二家的坚果都是新货呢
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)
+[COVERAGE_GAP] (general) 好麻烦了啊
+    top: product:手机(0.0) | product:电脑(0.0) | product:耳机(0.0)

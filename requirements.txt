@@ -1,0 +1,26 @@
+# ===== 运行依赖（核心闭环必需）=====
+langgraph>=1.0.0
+langchain-core>=1.3.0
+langgraph-checkpoint-sqlite>=3.1.0   # SqliteSaver 持久化（官方独立包，C1 必需）
+python-dotenv>=1.0.0
+requests>=2.31.0
+pydantic>=2.7.4
+flask>=2.3.0                          # web_app.py（原仓库自带，V2 web 界面用）
+
+# ===== 开发/测试依赖 =====
+pytest>=8.0.0                        # 单测/集成测试（tests/）
+
+# ===== 评估依赖（可选，仅 eval 脚本用）=====
+datasets>=2.0.0                      # HuggingFace 数据加载（国内不可达，已用 ModelScope 替代）
+modelscope>=1.10.0                   # banking77 数据下载（国内可达）
+addict>=2.4.0                        # modelscope 依赖
+
+# ===== 混合检索依赖（可选，kb-v2 混合检索/重排用；无 GPU 机器可跳过，自动回落纯 BM25）=====
+# 2026-08-16 落地：kb_retriever 的 ENABLE_HYBRID 需以下依赖；缺失时 get_hybrid 返回 None，
+# 检索链自动回落 BM25-only，线上不挂。模型权重走本地快照（见 hybrid_retriever.py 路径）。
+numpy>=1.24.0
+sentence-transformers>=2.7.0          # bge-m3 稠密编码 + bge-reranker-v2-m3 CrossEncoder
+torch>=2.0.0                          # 推理后端（CUDA 版按本机环境单独装）
+
+# ===== 安装（国内镜像）=====
+# python -m pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple
