@@ -133,29 +133,45 @@ _JUDGE_PROMPT = """你是客服质检员。核对【客服回答】中的事实�
 4. fail：回答与知识库**明确矛盾**（同一场景给出冲突的事实/数字/政策）
 5. fail：回答**虚构了知识库明确否定**的关键事实（如知识库说"不支持"，回答说"支持"）
 
-注意：知识库未覆盖 ≠ 幻觉。只有"明确矛盾"或"虚构知识库明确否定的事实"才算 fail。
+判定纪律（2026-09-16，persona-correct 误判教训）：
+- 知识库未覆盖 ≠ 幻觉。知识库内容里**找不到**某事实时，只能判 pass——不得
+  从知识库其他场景的条目推断出限定（如"该规则仅适用于 X 场景"）再据此判矛盾。
+- fail 的唯一依据 = 知识库内容中**明确存在**与回答冲突的表述。引用你判 fail
+  所依据的知识库原文；说不出对应原文 = 必须 pass。
 
-只输出一个 JSON 对象：{"verdict": "pass" 或 "fail", "reason": "一句话理由"}。"""
+只输出一个 JSON 对象：{"verdict": "pass" 或 "fail", "reason": "一句话理由（fail 必须引用知识库原文依据）"}。"""
 
 
 def _kb_context_for_judge(domain: str, query: str, cited_titles: list) -> str:
-    """judge 核对基座 = agent 实际注入的域检索全文（纯检索口径，与 agent 主路径一致）。
+    """judge 核对基座 = agent 实际注入的域检索全文 ∪ 引用脚注条目（2026-09-16 union 化）。
 
     比"仅引用脚注条目"更完整：agent 回答可能合理使用了检索到的多条目知识
     （引用脚注只标 top-3，发票/快递等条目可能未入引用但已注入 agent 上下文）。
-    检索为空（A4 改写重检路径）时回落引用 titles 的条目 content。
+    引用条目同样并入（而非仅作检索失败回落）：多轮场景模型可能跨轮沿用前序轮
+    事实，或引用跨域条目——只给检索全文时 judge 拿不到这些事实，会误判虚构
+    （persona-correct 实证：价保事实在 billing 域，本轮 general 检索不含，
+    judge 凭空引入"仅预售"限定误判 fail）。检索为空（A4 改写重检路径）时
+    引用条目即基座主体。
     """
+    parts = []
     if domain:
         from kb_retriever import retrieve as _kb_retrieve
         try:
             text = _kb_retrieve(domain, query)
             if text and text.strip():
-                return text[:_JUDGE_MAX_KB_CHARS]
-        except Exception:  # noqa: BLE001  检索失败回落引用基座
+                parts.append(text)
+        except Exception:  # noqa: BLE001  检索失败继续走引用基座
             pass
     if cited_titles:
-        return _kb_context_from_titles(cited_titles, _JUDGE_MAX_KB_CHARS)
-    return ""
+        cited_ctx = _kb_context_from_titles(cited_titles, _JUDGE_MAX_KB_CHARS)
+        # 引用条目内容未出现在检索全文中的部分才追加（去重，控基座体积）
+        for line in cited_ctx.splitlines():
+            s = line.strip()
+            if s and s not in "\n".join(parts):
+                parts.append(line)
+    if not parts:
+        return ""
+    return "\n".join(parts)[:_JUDGE_MAX_KB_CHARS]
 
 
 def _compound_kb_context_for_judge(subs: list, cited_titles: list) -> str:

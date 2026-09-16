@@ -8,6 +8,9 @@
   S1 web 层 session_id 注入           —— invoke 输入缺 session_id → trace thread_id
                                          fallback query 前缀 + 上下文回退 "default" 池串话
   D1 多轮池过滤+提取                  —— 前缀 thread/垃圾轮/重复型（压测同句）误入多轮池
+  J1 judge 基座 union 化              —— 多轮/跨域事实不在本轮域检索时 judge 拿不到
+                                         → 误判虚构（persona-correct 实证）；引用条目
+                                         必须并入基座且去重
 """
 
 import json
@@ -198,3 +201,42 @@ def test_d1_multi_turn_pool_filter_and_extract(tmp_path):
     assert pool[0]["thread_id"] == "web-mt-e"      # turns 多在前
     assert pool[0]["turns"] == ["退耳机", "运费谁出", "发票能补开吗"]
     assert pool[1]["turns"] == ["手机多少钱", "那电脑呢"]
+
+
+def test_j1_judge_base_union(monkeypatch):
+    """judge 基座 = 域检索全文 ∪ 引用条目（去重追加）。
+
+    风险：多轮/跨域事实不在本轮域检索文本中时 judge 拿不到事实来源 → 误判虚构
+    （persona-correct 实证：价保事实在 billing 域，本轮 general 检索不含）。
+    """
+    import eval_multi_turn as emt
+    import kb_retriever as kr_mod
+
+    # mock 域检索：general 域返回固定文本（不含价保条目）
+    def fake_retrieve(domain, query):
+        return "【订单服务】发货时效 48 小时。" if domain == "general" else ""
+
+    monkeypatch.setattr(kr_mod, "retrieve", fake_retrieve)
+
+    # mock 引用条目取回：价保条目（跨域事实来源）
+    kb = {"billing": [{"title": "价保申请流程", "content": "签收后 7 天内同商品同店铺降价可退差价。"}]}
+    monkeypatch.setattr(emt, "_kb_context_from_titles",
+                        lambda titles, max_chars=4000: "\n".join(
+                            f"【{kb['billing'][0]['title']}】{kb['billing'][0]['content']}" if t == "价保申请流程" else f"【{t}】..."
+                            for t in titles) if titles else "")
+
+    # 引用条目并入后基座应含价保事实（原行为：检索非空则引用条目完全不进基座）
+    ctx = emt._kb_context_for_judge("general", "不是，我根本还没买", ["价保申请流程"])
+    assert "发货时效 48 小时" in ctx          # 域检索全文保留
+    assert "签收后 7 天内" in ctx            # 引用条目内容并入（union）
+
+    # 去重：引用条目与检索文本重复行不重复追加
+    ctx2 = emt._kb_context_for_judge("general", "q", ["重复条目"])
+    assert ctx2.count("发货时效 48 小时") == 1
+
+    # 无检索无引用 → 空基座（不误造）
+    assert emt._kb_context_for_judge("", "q", []) == ""
+
+    # judge prompt 判定纪律在场（未覆盖只能 pass / fail 须引原文）
+    assert "知识库未覆盖 ≠ 幻觉" in emt._JUDGE_PROMPT
+    assert "说不出对应原文 = 必须 pass" in emt._JUDGE_PROMPT

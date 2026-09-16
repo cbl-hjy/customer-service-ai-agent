@@ -66,5 +66,56 @@
   "kb_hit": false,
   "response_excerpt": "根据您的反馈，之前建议的强制重启等操作仍未解决黑屏问题，说明问题很可能已经超出软件层面，需要进一步判断硬件状态。下面按设备类型给出后续排查方向——如果您方便的话，也可以告诉我具体是哪一类设备（手机 / 电脑 / 平板），我可以给更精准的步骤。\n\n---\n\n**一、先做一个关键判断：背光故障还是屏幕完全无显示**\n\n- 在较暗环境下，用手电筒斜照屏幕，仔细观察是否有**微弱的图像或文字轮廓**。\n ",
   "collected_at": "2026-09-16 19:50:12"
+ },
+ {
+  "query": "耳机呢",
+  "mode": "multi_turn",
+  "reasons": [
+   "judge_fail: judge=fail: 回答中AirBuds 3和AirBuds 3 Pro的价格分别写成约199元和约399元，但知识库明确AirBuds 3约299元、AirBuds 3 Pro约499元（同一场景冲突），且AirBuds Lite价格149元与运动推荐中129元不一致，存在明确矛盾。"
+  ],
+  "hist_labels": {},
+  "replay_label": "product_info",
+  "kb_hit": true,
+  "response_excerpt": "# 星环耳机选购指南\n\n感谢您继续咨询！结合您前面关注的**手机和电脑**，我按**价位段**帮您把星环耳机家族梳理一遍，方便您对照选择：\n\n## 🔹 按价位推荐\n\n| 机型 | 参考价格 | 核心卖点 | 适合人群 |\n|------|---------|---------|---------|\n| **星环 AirBuds Lite** | 约 149 元 | 8mm 动圈、蓝牙 5.2、单次",
+  "collected_at": "2026-09-16 20:47:16",
+  "thread_id": "c1-test",
+  "turn_idx": 3,
+  "audit_status": "human_reviewed",
+  "audit_note": "真缺陷已修复：KB 价格矩阵跨条目矛盾（Lite 149/129、AirBuds 3 199/299、Pro 499/399/599 四组）——2026-09-16 统一 149/199/499，c1-test 三轮重放 judge 转 pass；audit_kb_pro 矛盾检测第四次漏网（价格类模式）；保留为多轮指代金标素材",
+  "audited_at": "2026-09-16 21:05"
+ },
+ {
+  "query": "不是，我根本还没买，就是先问问",
+  "mode": "multi_turn",
+  "reasons": [
+   "judge_fail: judge=fail: 回答称“价保需签收后7天内提出”，但知识库中该7天价保规则仅针对定金预售尾款支付后情形，未覆盖普通订单，回答将特定场景规则虚构为X2 Max一般价保政策。"
+  ],
+  "hist_labels": {},
+  "replay_label": "general_inquiry",
+  "kb_hit": true,
+  "response_excerpt": "您好，完全理解～还没下单只是想先了解清楚，这样问是很好的，避免买完才发现不符合预期。我帮您把 X2 Max 的价保问题按\"还没买\"的情况重新说明一下：\n\n**先说结论：现在还不涉及退差价，但您下单后可以留意这几点，方便日后判断能不能保价。**\n\n如果您之后下单了 X2 Max，想享受价保（退差价），需要满足：\n\n1. **时间**：在**签收后 7 天内（含签收日）**提出申请，超过就不再受理。\n",
+  "collected_at": "2026-09-16 20:47:16",
+  "thread_id": "persona-correct",
+  "turn_idx": 3,
+  "audit_status": "human_reviewed",
+  "audit_note": "judge 误判（非模型缺陷）：judge 基座仅含引用条目、不含「价保申请流程」，凭空引入'仅限定金预售'限定——独立验证 KB 无预售价保条目，「价保申请流程」为一般规则且「会员专属价商品」印证签收后 7 天价保；暴露 judge 基座构造盲区（模型答对但引用不含来源条目时误判），挂账多轮 judge 口径；persona 纠偏轮本身可作多轮金标素材",
+  "audited_at": "2026-09-16 21:05"
+ },
+ {
+  "query": "????,??????????,????????,??????????????",
+  "mode": "multi_turn",
+  "reasons": [
+   "kb_miss: 当前 KB 检索未覆盖该真实 query（覆盖缺口）"
+  ],
+  "hist_labels": {},
+  "replay_label": "general_inquiry",
+  "kb_hit": false,
+  "response_excerpt": "您的工单已升级至人工客服处理（原因：复合诉求中部分内容知识库未覆盖，转人工核实）。人工客服将尽快跟进，请您保持关注。",
+  "collected_at": "2026-09-16 20:47:16",
+  "thread_id": "e2e-ticket-0813",
+  "turn_idx": 2,
+  "audit_status": "human_reviewed",
+  "audit_note": "噪音：乱码 query，系统正确升级人工（行为正确非缺陷）；不入金标",
+  "audited_at": "2026-09-16 21:05"
  }
 ]

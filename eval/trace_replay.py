@@ -180,8 +180,13 @@ def main():
 
     judge_on = not args.no_judge
 
-    def _audit_one(rec, q, state, hist_slot):
-        """单轮审计（单轮/多轮共用）：KB 覆盖 + 确定性检查 + 决策一致性 + judge。"""
+    def _audit_one(rec, q, state, hist_slot, prior_cited=None):
+        """单轮审计（单轮/多轮共用）：KB 覆盖 + 确定性检查 + 决策一致性 + judge。
+
+        prior_cited：多轮模式下该 thread 前序轮的引用条目 titles——多轮事实来源
+        可跨轮（模型沿用上轮注入的事实），judge 基座须并入（judge 基座盲区修复，
+        2026-09-16）。单轮模式不传。
+        """
         response = str(state.get("response") or "")
         tools_used = list(state.get("tools_used") or [])
         label = state.get("query_type", "")
@@ -211,12 +216,18 @@ def main():
         if hist_slot and hist_slot["labels"]:
             dominant = hist_slot["labels"].most_common(1)[0][0]
             rec["decision_drift"] = (label != dominant)
-        # judge（当前 KB 基座；tool 轮拼订单快照）
+        # judge（当前 KB 基座；tool 轮拼订单快照；多轮并入前序轮引用条目）
         rec["judge"] = None
         if judge_on and label != "out_of_scope" and not state.get("escalated"):
             domain = _LABEL2DOMAIN.get(label, "general")
             cited = _emt._parse_citations(response)
             kb_ctx = _emt._kb_context_for_judge(domain, q, cited)
+            if prior_cited:
+                prior_ctx = _emt._kb_context_from_titles(prior_cited, _emt._JUDGE_MAX_KB_CHARS)
+                extra = [l for l in prior_ctx.splitlines()
+                         if l.strip() and l.strip() not in kb_ctx]
+                if extra:
+                    kb_ctx = "\n".join([kb_ctx] + extra)[:_emt._JUDGE_MAX_KB_CHARS]
             if any(t in _ORDER_TOOL_NAMES for t in tools_used):
                 from tools.orders import query_order as _qo
                 oids = _ORDER_ID_RE.findall(q) or _ORDER_ID_RE.findall(response)
@@ -254,6 +265,7 @@ def main():
                 get_checkpointer().delete_thread(rtid)
             except Exception:
                 pass
+            prior_cited = []  # thread 内前序轮引用条目（judge 基座跨轮事实来源）
             for turn_idx, q in enumerate(th["turns"], 1):
                 rec = {"mode": "multi_turn", "thread_id": th["thread_id"],
                        "replay_thread": rtid, "turn_idx": turn_idx, "turns_total": len(th["turns"]),
@@ -262,12 +274,15 @@ def main():
                     # session_id 注入（与 web 层修复同构）：多轮上下文延续 + trace 聚合键
                     state = app.invoke({"customer_query": q, "session_id": rtid},
                                        {"configurable": {"thread_id": rtid}})
-                    _audit_one(rec, q, state, hist_pool.get(q))
+                    _audit_one(rec, q, state, hist_pool.get(q), prior_cited=prior_cited)
                 except Exception as e:  # noqa: BLE001
                     rec.update({"replay_error": str(e)[:200]})
                     results.append(rec)
                     print(f"  [{i}/{len(pool)}] T{turn_idx} ERROR {q[:40]}: {e}")
                     continue
+                # 累积本轮引用条目（供后续轮 judge 基座）
+                prior_cited.extend(t for t in _emt._parse_citations(
+                    str(state.get("response") or "")) if t not in prior_cited)
                 # 多轮特有：上下文丢失信号——非首轮被 OOD 拒答，但该 query 历史主导非 OOD
                 rec["context_lost"] = None
                 if turn_idx > 1 and rec.get("replay_label") == "out_of_scope":
